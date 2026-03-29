@@ -50,6 +50,7 @@
             text-transform: uppercase;
         }
 
+        /* NAVEGACIÓN CORREGIDA (NOMBRES COMPLETOS) */
         .nav-secciones {
             text-align: center;
             padding: 15px;
@@ -58,16 +59,26 @@
             position: sticky;
             top: 75px;
             z-index: 900;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Para que no se corte en móviles */
+            gap: 10px;
         }
 
         .nav-secciones a {
-            margin: 0 10px;
             text-decoration: none;
             color: var(--color-mirlo);
             font-weight: bold;
             font-size: 0.85rem;
             padding: 8px 15px;
             border-radius: 20px;
+            background-color: #f9f9f9;
+            transition: 0.3s;
+        }
+
+        .nav-secciones a:hover { 
+            background: var(--color-pico); 
+            color: white; 
         }
 
         .seccion-galeria {
@@ -93,7 +104,7 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-            background: #eee; /* Fondo gris por si la imagen falla */
+            background: #f0f0f0; 
             height: 280px;
         }
 
@@ -123,12 +134,12 @@
 <nav class="nav-secciones">
     <a href="#animacion">🎪 Animación</a>
     <a href="#decoracion">🎈 Decoración</a>
-    <a href="#personalizacion">🎨 Perso</a>
-    <a href="#bellypainting">🤰 Belly</a>
+    <a href="#personalizacion">🎨 Personalización</a>
+    <a href="#bellypainting">🤰 Bellypainting</a>
 </nav>
 
 <section id="animacion" class="seccion-galeria">
-    <h2>🎪 Animación</h2>
+    <h2>🎪 Animación y Muñecotes</h2>
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/bluey.png" alt="bluey"></div>
         <div class="grid-item"><img src="./img/marshall.png" alt="marshall"></div>
@@ -137,8 +148,22 @@
     </div>
 </section>
 
+<section id="decoracion" class="seccion-galeria">
+    <h2>🎈 Decoración y Mesas Dulces</h2>
+    <div class="pitusa-grid">
+        <div class="grid-item"><img src="./img/logo.png" alt="ejemplo decoracion"></div>
+    </div>
+</section>
+
+<section id="personalizacion" class="seccion-galeria">
+    <h2>🎨 Personalización Única</h2>
+    <div class="pitusa-grid">
+        <div class="grid-item"><img src="./img/logo.png" alt="ejemplo personalizacion"></div>
+    </div>
+</section>
+
 <section id="bellypainting" class="seccion-galeria">
-    <h2 style="border-bottom-color: var(--color-belly);">🤰 Bellypainting</h2>
+    <h2 style="border-bottom-color: var(--color-belly);">🤰 Bellypainting y Premamá</h2>
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/aaron.jpg" alt="aaron"></div>
         <div class="grid-item"><img src="./img/adriel.jpg" alt="adriel"></div>
@@ -154,7 +179,7 @@
 </section>
 
 <footer>
-    &copy; 2026 El Evento de Pitusa
+    &copy; 2026 El Evento de Pitusa | Gran Canaria
 </footer>
 
 </body>
