@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Evento de Pitusa | Gestión Integral Gran Canaria</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="img/logo.png">
     
     <style>
         :root {
@@ -24,7 +24,6 @@
             line-height: 1.6;
         }
 
-        /* HEADER */
         header {
             background-color: var(--color-card);
             padding: 60px 20px;
@@ -33,47 +32,28 @@
             position: relative;
         }
 
-        .nav-buttons {
+        .btn-galeria {
             position: absolute;
             top: 20px;
             right: 20px;
-        }
-
-        .btn-galeria {
             background-color: var(--color-mirlo);
             color: white;
             text-decoration: none;
             padding: 12px 25px;
             border-radius: 30px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             text-transform: uppercase;
             transition: all 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .btn-galeria:hover {
-            transform: translateY(-2px);
-            background-color: #444;
-        }
+        .btn-galeria:hover { transform: translateY(-2px); background-color: #444; }
 
-        .logo-container {
-            max-width: 300px;
-            margin: 0 auto;
-        }
+        .logo-container { max-width: 300px; margin: 0 auto; }
+        .logo-container img { width: 100%; height: auto; display: block; }
 
-        .logo-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* CONTENEDOR */
-        .container {
-            max-width: 850px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 850px; margin: 40px auto; padding: 0 20px; }
 
         .card {
             background-color: var(--color-card);
@@ -99,14 +79,8 @@
             border-radius: 4px;
         }
 
-        .precio-tag {
-            font-size: 0.9rem;
-            color: #888;
-            font-weight: normal;
-            margin-left: 10px;
-        }
+        .precio-tag { font-size: 0.9rem; color: #888; font-weight: normal; margin-left: 10px; }
 
-        /* FORMULARIO */
         .grid-campos {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -116,12 +90,7 @@
 
         .campo { display: flex; flex-direction: column; margin-bottom: 15px; }
         
-        label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-            color: #555;
-        }
+        label { font-weight: 600; margin-bottom: 8px; font-size: 0.85rem; color: #555; }
 
         input, select, textarea {
             padding: 15px;
@@ -131,9 +100,15 @@
             outline: none;
         }
 
-        input:focus { border-color: var(--color-globo); }
+        input:focus, textarea:focus { border-color: var(--color-globo); }
 
-        /* SERVICIOS */
+        .input-otros {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px dashed var(--color-globo);
+            width: 90%;
+        }
+
         .servicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -141,24 +116,12 @@
             padding: 20px;
             background: #fafafa;
             border-radius: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
+        .checkbox-item { display: flex; align-items: center; font-size: 0.9rem; cursor: pointer; }
+        .checkbox-item input { margin-right: 10px; width: 18px; height: 18px; accent-color: var(--color-globo); }
 
-        .checkbox-item input {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
-            accent-color: var(--color-globo);
-        }
-
-        /* SECCIONES ESPECIALES */
         .pack-especial {
             background-color: #fff9e6;
             border: 2px dashed #fceabb;
@@ -180,45 +143,50 @@
             margin-top: 30px;
         }
 
-        .btn-enviar:hover {
-            transform: scale(1.02);
-            background-color: #000;
-        }
+        .btn-enviar:hover { transform: scale(1.02); background-color: #000; }
 
         @media (max-width: 600px) {
             .grid-campos { grid-template-columns: 1fr; }
-            .nav-buttons { position: static; margin-bottom: 20px; }
+            .btn-galeria { position: static; display: block; margin: 0 auto 20px; width: fit-content; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="nav-buttons">
-        <a href="galeria.html" class="btn-galeria">Ver Galería 📷</a>
-    </div>
+    <a href="galeria.html" class="btn-galeria">Ver Galería 📷</a>
     <div class="logo-container">
-        <img src="logo.png" alt="Logo El Evento de Pitusa">
+        <img src="img/logo.png" alt="Logo El Evento de Pitusa">
     </div>
-    <p>Gestión integral de eventos infantiles, decoración y personalización única.</p>
+    <p>Gestión integral de eventos infantiles en Gran Canaria.</p>
 </header>
 
 <div class="container">
     <form action="https://formsubmit.co/eleventodepitusa@gmail.com" method="POST" enctype="multipart/form-data">
         
-        <input type="hidden" name="_subject" value="🐣 Nueva Solicitud de Evento">
+        <input type="hidden" name="_subject" value="🐣 Nueva Solicitud Masticada - 2026">
         <input type="hidden" name="_template" value="table">
 
         <section class="card">
-            <h2>Datos del Evento</h2>
+            <h2>Datos del Cliente y Evento</h2>
             <div class="grid-campos">
                 <div class="campo">
-                    <label>Nombre del Responsable</label>
+                    <label>Nombre Completo</label>
                     <input type="text" name="Nombre" required>
                 </div>
                 <div class="campo">
-                    <label>Fecha (Calendario)</label>
+                    <label>Fecha del Evento</label>
                     <input type="date" name="Fecha" required>
+                </div>
+            </div>
+            <div class="grid-campos">
+                <div class="campo">
+                    <label>Tu Correo Electrónico</label>
+                    <input type="email" name="Email" required placeholder="ejemplo@correo.com">
+                </div>
+                <div class="campo">
+                    <label>Teléfono de Contacto</label>
+                    <input type="tel" name="Telefono" required placeholder="600 000 000">
                 </div>
             </div>
             <div class="grid-campos">
@@ -233,7 +201,7 @@
             </div>
             <div class="campo">
                 <label>Ubicación (Municipio o Isla)</label>
-                <input type="text" name="Ubicacion" placeholder="Ej: Las Palmas, Telde, Lanzarote...">
+                <input type="text" name="Ubicacion" placeholder="Ej: Las Palmas, Telde, Maspalomas...">
             </div>
         </section>
 
@@ -245,8 +213,11 @@
                 <label class="checkbox-item"><input type="checkbox" name="Animacion[]" value="Pintacaras"> Pintacaras</label>
                 <label class="checkbox-item"><input type="checkbox" name="Animacion[]" value="Globoflexia"> Globoflexia</label>
                 <label class="checkbox-item"><input type="checkbox" name="Animacion[]" value="Burbujas"> Burbujas Gigantes</label>
-                <label class="checkbox-item"><input type="checkbox" name="Animacion[]" value="Rositerapia"> Rositerapia</label>
                 <label class="checkbox-item"><input type="checkbox" name="Animacion[]" value="Mago"> Mago</label>
+            </div>
+            <div class="campo">
+                <label>¿Buscas otra animación? Cuéntanos:</label>
+                <input type="text" name="Animacion_Otros" class="input-otros" placeholder="Ej: Payasos, cuentacuentos...">
             </div>
 
             <h2>Decoración y Repostería <span class="precio-tag">(Desde 85€)</span></h2>
@@ -254,48 +225,55 @@
                 <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Mesa Dulces"> Mesa de Dulces</label>
                 <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Arcos Globos"> Arcos de Globos</label>
                 <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Invitaciones"> Invitaciones</label>
-                <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Detalles"> Detalles Invitados</label>
-                <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Galletas"> Galletas Artesanas</label>
-                <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Cupcakes"> Cupcakes</label>
-                <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Queques"> Queques</label>
+                <label class="checkbox-item"><input type="checkbox" name="Deco[]" value="Dulces"> Galletas/Cupcakes/Queques</label>
+            </div>
+            <div class="campo">
+                <label>¿Otros detalles decorativos o dulces?</label>
+                <input type="text" name="Deco_Otros" class="input-otros" placeholder="Ej: Photocall personalizado, carrito palomitas...">
             </div>
 
             <h2>Personalización <span class="precio-tag">(Desde 7,50€)</span></h2>
             <div class="servicios-grid">
-                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Ropa"> Ropa personalizada</label>
-                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Tazas"> Tazas</label>
-                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Cojines"> Cojines</label>
-                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Llaveros"> Llaveros</label>
+                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Textil"> Ropa / Cojines</label>
+                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Tazas"> Tazas / Llaveros</label>
                 <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Chupeteros"> Chupeteros</label>
-                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Carteles"> Carteles (1,5x2m)</label>
-                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Carton Pluma"> Cartón Pluma</label>
-                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Piedra"> Imagen en Piedra</label>
+                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Gran Formato"> Carteles (1,5x2m)</label>
+                <label class="checkbox-item"><input type="checkbox" name="Perso[]" value="Rigidos"> Cartón Pluma</label>
+            </div>
+            <div class="campo">
+                <label>¿Qué más te gustaría personalizar?</label>
+                <input type="text" name="Perso_Otros" class="input-otros" placeholder="Ej: Bolsas de tela, botellas, libretas...">
             </div>
 
             <div class="pack-especial">
                 <h2 style="border:none; margin-bottom:10px; color:#d35400;">🤰 Especial Premamá</h2>
                 <label class="checkbox-item"><input type="checkbox" name="Especial[]" value="Bellypainting"> Bellypainting</label>
                 <label class="checkbox-item" style="margin-top:15px; font-weight:bold;">
-                    <input type="checkbox" name="Especial[]" value="Pack Padres Primerizos"> 
+                    <input type="checkbox" name="Especial[]" value="Pack Primerizos"> 
                     🎁 Pack Padres Primerizos (Taza, Babero, Carnet y Llavero)
                 </label>
             </div>
 
-            <div class="campo" style="margin-top:30px;">
-                <label>Adjuntar imagen de referencia (opcional)</label>
+            <div class="campo" style="margin-top:40px;">
+                <label>Cuéntanos tu idea (Descripción detallada de lo que buscas):</label>
+                <textarea name="Descripcion_Proyecto" rows="5" placeholder="Dinos el tema de la fiesta, colores, o cualquier detalle importante..." required></textarea>
+            </div>
+
+            <div class="campo" style="margin-top:20px;">
+                <label>Adjuntar imagen de referencia (opcional):</label>
                 <input type="file" name="Referencia" accept="image/*">
             </div>
 
             <button type="submit" class="btn-enviar">Solicitar Presupuesto Masticado</button>
-            <p style="text-align:center; color:#999; font-size:0.8rem; margin-top:20px;">
-                * Se requiere el 20% de reserva para confirmar. Pago por Bizum o Transferencia.
+            <p style="text-align:center; color:#999; font-size:0.85rem; margin-top:20px;">
+                * Se requiere el 20% de reserva para confirmar fecha tras recibir el presupuesto. Pago por Bizum o Transferencia.
             </p>
         </section>
     </form>
 </div>
 
-<footer style="text-align:center; padding:40px; color:#ccc;">
-    &copy; 2023 El Evento de Pitusa
+<footer style="text-align:center; padding:40px; color:#ccc; font-size: 0.9rem;">
+    &copy; 2026 El Evento de Pitusa | Gran Canaria
 </footer>
 
 </body>
