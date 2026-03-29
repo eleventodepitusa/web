@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Sueños | El Evento de Pitusa</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <style>
+        /* --- VARIABLES DE DISEÑO (Mismos tonos que el Index) --- */
+        :root {
+            --color-mirlo: #2d3436;
+            --color-pico: #f1c40f;
+            --color-globo: #ff9a9e;
+            --color-fondo: #fffdf9;
+            --fuente-principal: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--fuente-principal);
+            background-color: var(--color-fondo);
+            color: var(--color-mirlo);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- HEADER MINIMALISTA PARA GALERÍA --- */
+        header {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; /* Se queda fijo arriba al hacer scroll */
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-small {
+            max-width: 120px;
+        }
+        .logo-small img {
+            width: 100%;
+            height: auto;
+        }
+
+        .btn-volver {
+            background-color: transparent;
+            color: var(--color-mirlo);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--color-mirlo);
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .btn-volver:hover {
+            background-color: var(--color-mirlo);
+            color: white;
+        }
+
+        /* --- TÍTULO DE LA SECCIÓN --- */
+        .titulo-galeria {
+            text-align: center;
+            margin: 50px 0 30px;
+            padding: 0 20px;
+        }
+        .titulo-galeria h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .titulo-galeria h1 span {
+            color: var(--color-globo); /* Tono rosa del globo */
+        }
+        .titulo-galeria p {
+            color: #777;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- GRID TIPO PINTEREST (MASONRY) --- */
+        .pitusa-grid {
+            /* MÁGIA MASONRY: Columnas que se adaptan */
+            column-count: 4; /* Número de columnas en PC */
+            column-gap: 15px; /* Espacio entre columnas */
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 50px;
+        }
+
+        .grid-item {
+            /* Evita que la imagen se corte entre columnas */
+            break-inside: avoid;
+            margin-bottom: 15px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden; /* Para que el zoom no se salga */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* EFECTO ENGAGEMENT: Hover potente */
+        .grid-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto; /* Mantener proporción original */
+            display: block;
+            transition: filter 0.3s;
+        }
+
+        /* Superposición suave al hacer hover (opcional) */
+        .grid-item::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(255, 154, 158, 0.1); /* Tono rosa globo muy suave */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .grid-item:hover::after {
+            opacity: 1;
+        }
+
+        /* --- RESPONSIVE ADAPTATION --- */
+        @media (max-width: 1100px) {
+            .pitusa-grid { column-count: 3; } /* Tablets grandes */
+        }
+        @media (max-width: 800px) {
+            .pitusa-grid { column-count: 2; } /* Móviles grandes/Tablets */
+            .titulo-galeria h1 { font-size: 2rem; }
+        }
+        @media (max-width: 500px) {
+            .pitusa-grid { column-count: 2; column-gap: 10px; } /* Móviles pequeños (2 columnas es mejor) */
+            .grid-item { margin-bottom: 10px; }
+            header { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-small">
+        <img src="logo.png" alt="Logo El Evento de Pitusa">
+    </div>
+    <a href="index.html" class="btn-volver">⬅ Volver a Inicio</a>
+</header>
+
+<div class="titulo-galeria">
+    <h1>Galería de <span>Sueños</span></h1>
+    <p>Momentos mágicos y detalles únicos que hemos creado para las familias de Gran Canaria.</p>
+</div>
+
+<div class="pitusa-grid">
+
+    <div class="grid-item">
+        <img src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?q=80&w=600" alt="Decoración con Globos Pitusa">
+    </div>
+
+    <div class="grid-item">
+        <img src="https://images.unsplash.com/photo-1517032134267-85b597c415e6?q=80&w=600" alt="Mesa de Dulces">
+    </div>
+
+    <div class="grid-item">
+        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=600" alt="Fiesta Infantil">
+    </div>
+
+    <div class="grid-item">
+        <img src="https://images.unsplash.com/photo-1521478413868-1bbd982fa4a5?q=80&w=600" alt="Animación Pitusa">
+    </div>
+
+    <div class="grid-item">
+        <img src="https://images.unsplash.com/photo-1561912774-79769a0a0a7a?q=80&w=600" alt="Personalización Detalles">
+    </div>
+    
+    <div class="grid-item">
+        <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600" alt="Bellypainting Especial">
+    </div>
+
+    </div>
+<footer style="text-align: center; padding: 30px; color: #aaa; font-size: 0.8rem; border-top: 1px solid #eee;">
+    &copy; 2023 El Evento de Pitusa. Todos los momentos cuentan.
+</footer>
+
+</body>
+</html>
