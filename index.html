@@ -3,40 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Evento de Pitusa | Gestión Integral de Eventos Infantiles Gran Canaria</title>
+    <title>El Evento de Pitusa | Gestión de Eventos Infantiles Gran Canaria</title>
     <link rel="icon" type="image/png" href="logo.png">
     
     <style>
-        /* --- VARIABLES DE DISEÑO (Basadas en el nuevo logo) --- */
+        /* --- VARIABLES DE DISEÑO --- */
         :root {
-            --color-mirlo: #2d3436; /* Negro suave para texto principal */
-            --color-pico: #f1c40f;   /* Amarillo brillante para acentos */
-            --color-globo: #ff9a9e;  /* Rosa pastel suave */
-            --color-hilo: #a1c4fd;   /* Azul pastel suave */
-            --color-fondo: #fffdf9;  /* Blanco roto/crema muy suave */
+            --color-mirlo: #2d3436; /* Negro moderno */
+            --color-pico: #f1c40f;   /* Amarillo detalle */
+            --color-globo: #ff9a9e;  /* Rosa pastel */
+            --color-hilo: #a1c4fd;   /* Azul pastel */
+            --color-fondo: #fffdf9;  /* Crema muy suave */
             --color-card: #ffffff;
-            --fuente-principal: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
-        /* --- ESTILOS BASE --- */
         body {
-            font-family: var(--fuente-principal);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--color-fondo);
             color: var(--color-mirlo);
             margin: 0;
             line-height: 1.6;
         }
 
-        /* --- HEADER Y LOGO --- */
+        /* --- HEADER CON NAVEGACIÓN --- */
         header {
             background-color: var(--color-card);
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
             box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .btn-galeria-top {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--color-mirlo);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-galeria-top:hover {
+            background-color: #444;
+            transform: translateY(-2px);
         }
 
         .logo-container {
-            max-width: 250px; /* Ajusta el tamaño del logo */
+            max-width: 280px;
             margin: 0 auto;
         }
 
@@ -47,117 +68,92 @@
         }
 
         header p {
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 1.1rem;
             color: #666;
             font-weight: 300;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* --- CONTENEDOR PRINCIPAL --- */
+        /* --- CONTENEDOR --- */
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        /* --- TARJETAS (SECCIONES) --- */
         .card {
             background-color: var(--color-card);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 45px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
             margin-bottom: 40px;
         }
 
         h2 {
-            color: var(--color-mirlo);
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-top: 0;
-            margin-bottom: 25px;
-            font-weight: 700;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
         }
 
-        /* Pequeño acento de color antes del título */
         h2::before {
             content: '';
-            display: inline-block;
-            width: 10px;
+            width: 8px;
             height: 35px;
             background-color: var(--color-pico);
             margin-right: 15px;
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
         h3 {
-            color: #444;
-            font-size: 1.2rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 35px;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
         }
 
-        /* --- GALERÍA (PLACEHOLDER) --- */
-        .galeria-placeholder {
-            text-align: center;
-            padding: 60px 20px;
-            color: #bbb;
-            border: 2px dashed #eee;
-            border-radius: 15px;
-            background-color: #fafafa;
-        }
-
-        /* --- FORMULARIO STYLES --- */
+        /* --- FORMULARIO --- */
         .grid-campos {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
-        .campo {
-            display: flex;
-            flex-direction: column;
-        }
-
+        .campo { display: flex; flex-direction: column; }
+        
         label {
             font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            color: #555;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #888;
         }
 
-        input[type="text"],
-        input[type="number"],
-        input[type="date"],
-        input[type="file"],
-        select,
-        textarea {
+        input, select, textarea {
             padding: 15px;
-            border: 2px solid #eee;
+            border: 2px solid #f0f0f0;
             border-radius: 12px;
             font-size: 1rem;
             outline: none;
-            transition: all 0.3s;
-            background-color: #fcfcfc;
+            transition: border-color 0.3s;
         }
 
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--color-globo);
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(255, 154, 158, 0.1);
-        }
+        input:focus { border-color: var(--color-globo); }
 
-        /* --- REJILLA DE CHECKBOXES (SERVICIOS) --- */
+        /* --- SERVICIOS GRID --- */
         .servicios-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 12px;
-            background-color: #f9f9f9;
             padding: 20px;
+            background: #fcfcfc;
             border-radius: 15px;
-            border: 1px solid #eee;
         }
 
         .checkbox-item {
@@ -165,196 +161,111 @@
             align-items: center;
             font-size: 0.9rem;
             cursor: pointer;
-            padding: 5px 0;
         }
 
         .checkbox-item input {
-            margin-right: 12px;
+            margin-right: 10px;
             width: 18px;
             height: 18px;
-            cursor: pointer;
-            accent-color: var(--color-globo); /* Color del check */
+            accent-color: var(--color-globo);
         }
 
-        /* --- SECCIÓN ESPECIAL --- */
+        /* --- PACK ESPECIAL --- */
         .pack-especial {
-            background-color: #fff9e6; /* Amarillo muy suave */
-            border: 2px dashed #ffeaa7;
+            background-color: #fff9e6;
+            border: 2px dashed #fceabb;
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 20px;
             margin-top: 25px;
         }
 
-        .pack-especial h3 {
-            color: #d35400; /* Tono naranja oscuro */
-            margin-top: 0;
-        }
+        .pack-especial h3 { border: none; color: #d35400; margin-top: 0; }
 
-        /* --- BOTÓN ENVIAR --- */
+        /* --- BOTONES --- */
         .btn-enviar {
-            background-color: var(--color-mirlo); /* Botón negro/oscuro moderno */
+            background-color: var(--color-mirlo);
             color: white;
             border: none;
-            padding: 20px;
+            padding: 22px;
             width: 100%;
             border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
             margin-top: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .btn-enviar:hover {
-            background-color: #444;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            background-color: #444;
         }
 
-        /* --- NOTAS FINALES --- */
         .footer-nota {
             text-align: center;
-            font-size: 0.85rem;
-            color: #888;
+            font-size: 0.8rem;
+            color: #999;
             margin-top: 30px;
-            padding: 0 20px;
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 600px) {
-            .grid-campos {
-                grid-template-columns: 1fr;
-            }
-            .card {
-                padding: 25px;
-            }
-            h2 {
-                font-size: 1.6rem;
-            }
-            .logo-container {
-                max-width: 180px;
-            }
+            .grid-campos { grid-template-columns: 1fr; }
+            header { padding: 40px 10px; }
+            .btn-galeria-top { top: 10px; right: 10px; font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
+    <a href="galeria.html" class="btn-galeria-top">Ver Galería 📷</a>
     <div class="logo-container">
-        <img src="logo.png" alt="Logo El Evento de Pitusa - Mirlo con Globo">
+        <img src="logo.png" alt="El Evento de Pitusa Logo">
     </div>
-    <p>Gestión Integral de Eventos Infantiles en Gran Canaria</p>
+    <p>Creamos momentos mágicos con gestión integral y personalizada.</p>
 </header>
 
 <div class="container">
-    
-    <section class="card">
-        <h2>Nuestros Trabajos</h2>
-        <div class="galeria-placeholder">
-            <p>📷 Aquí mostraremos las fotos reales de tus eventos.</p>
-            <p style="font-size: 0.8rem;">(Sube tus imágenes a GitHub y reemplaza este bloque)</p>
-        </div>
-    </section>
 
     <section class="card">
-        <h2>Solicitud de Presupuesto</h2>
+        <h2>Solicita tu Presupuesto</h2>
         
         <form action="https://formsubmit.co/eleventodepitusa@gmail.com" method="POST" enctype="multipart/form-data">
             
-            <input type="hidden" name="_subject" value="🐣 ¡Nueva solicitud de evento! - El Evento de Pitusa">
+            <input type="hidden" name="_subject" value="🐣 Nueva Solicitud: El Evento de Pitusa">
             <input type="hidden" name="_template" value="table">
+
             <div class="grid-campos">
                 <div class="campo">
-                    <label>Nombre del responsable</label>
-                    <input type="text" name="Nombre_Responsable" required placeholder="Ej: María García">
+                    <label>Nombre Completo</label>
+                    <input type="text" name="Cliente" required placeholder="Tu nombre">
                 </div>
                 <div class="campo">
                     <label>Fecha del Evento</label>
-                    <input type="date" name="Fecha_Evento" required>
+                    <input type="date" name="Fecha" required>
                 </div>
             </div>
 
             <div class="grid-campos">
                 <div class="campo">
-                    <label>Asistentes (Niños)</label>
-                    <input type="number" name="Asistentes_Niños" min="0" value="0">
+                    <label>Niños</label>
+                    <input type="number" name="N_Niños" min="0" value="0">
                 </div>
                 <div class="campo">
-                    <label>Asistentes (Adultos)</label>
-                    <input type="number" name="Asistentes_Adultos" min="0" value="0">
+                    <label>Adultos</label>
+                    <input type="number" name="N_Adultos" min="0" value="0">
                 </div>
             </div>
 
             <div class="campo">
-                <label>Ubicación / Isla</label>
-                <input type="text" name="Ubicacion_Evento" placeholder="Ej: Las Palmas de G.C., Telde, Fuerteventura...">
+                <label>Lugar / Municipio</label>
+                <input type="text" name="Ubicacion" placeholder="Ej: Las Palmas, Telde, Maspalomas...">
             </div>
-
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
             <h3>🎪 Animación (Desde 90€)</h3>
             <div class="servicios-grid">
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Animacion[]" value="Hinchables"> Castillos Hinchables</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Animacion[]" value="Muñecotes"> Muñecotes</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Animacion[]" value="Pintacaras"> Pintacaras</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Animacion[]" value="Globoflexia"> Globoflexia</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Animacion[]" value="Burbujas"> Burbujas Gigantes</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Animacion[]" value="Rositerapia"> Rositerapia</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Animacion[]" value="Mago"> Mago</label>
-            </div>
-
-            <h3>🎈 Decoración y Repostería (Desde 85€)</h3>
-            <div class="servicios-grid">
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Deco[]" value="Mesa Dulces"> Mesa de Dulces</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Deco[]" value="Arcos Globos"> Arcos de Globos</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Deco[]" value="Invitaciones"> Invitaciones</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Deco[]" value="Detalles"> Detalles Invitados</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Deco[]" value="Galletas"> Galletas/Cupcakes</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Deco[]" value="Queques"> Queques</label>
-            </div>
-
-            <h3>🎨 Personalización (Desde 7,50€)</h3>
-            <div class="servicios-grid">
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Perso[]" value="Ropa"> Ropa</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Perso[]" value="Tazas"> Tazas</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Perso[]" value="Cojines"> Cojines</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Perso[]" value="Llaveros"> Llaveros</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Perso[]" value="Chupeteros"> Chupeteros</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Perso[]" value="Carteles Gigantes"> Carteles 1.5x2m</label>
-                <label class="checkbox-item"><input type="checkbox" name="Servicio_Perso[]" value="Carton Pluma"> Cartón Pluma / Piedra</label>
-            </div>
-
-            <div class="pack-especial">
-                <h3>🤰 Especial Premamá</h3>
-                <div class="checkbox-item"><input type="checkbox" name="Servicio_Especial[]" value="Bellypainting"> Bellypainting</div>
-                <div class="checkbox-item" style="margin-top:12px; font-weight: bold; color: var(--color-mirlo);">
-                    <input type="checkbox" name="Servicio_Especial[]" value="Pack Padres Primerizos"> 
-                    🎁 Pack Padres Primerizos (Taza, Babero, Carnet y Llavero 'en Prácticas')
-                </div>
-            </div>
-
-            <div class="campo" style="margin-top: 30px;">
-                <label>Adjuntar imagen de referencia (opcional)</label>
-                <input type="file" name="Imagen_Referencia" accept="image/*">
-            </div>
-
-            <button type="submit" class="btn-enviar">Solicitar Presupuesto Masticado</button>
-            
-            <p class="footer-nota">
-                * El envío de este formulario no confirma la reserva. <br>
-                * Recibirás un presupuesto detallado por email. <br>
-                * Se requiere el abono del <strong>20% del total</strong> vía Bizum o Transferencia para bloquear la fecha.
-            </p>
-        </form>
-    </section>
-</div>
-
-<footer style="text-align: center; padding: 20px; color: #aaa; font-size: 0.8rem;">
-    &copy; 2023 El Evento de Pitusa. Todos los derechos reservados.
-</footer>
-
-</body>
-</html>
+                <label class="checkbox-item"><input type="checkbox" name="Animacion[]" value="Hinchables"> Castillos Hinchables</label>
+                <label class="checkbox-item"><input type="checkbox" name="Animacion[]"
+                                                 
