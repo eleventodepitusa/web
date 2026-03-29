@@ -50,7 +50,6 @@
             text-transform: uppercase;
         }
 
-        /* NAVEGACIÓN CORREGIDA (NOMBRES COMPLETOS) */
         .nav-secciones {
             text-align: center;
             padding: 15px;
@@ -61,7 +60,7 @@
             z-index: 900;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; /* Para que no se corte en móviles */
+            flex-wrap: wrap;
             gap: 10px;
         }
 
@@ -94,10 +93,19 @@
             margin-bottom: 40px;
         }
 
+        .subtitulo-interno {
+            font-size: 1.5rem;
+            color: var(--color-globo);
+            margin: 30px 0 20px;
+            display: block;
+            width: 100%;
+        }
+
         .pitusa-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
+            margin-bottom: 50px;
         }
 
         .grid-item {
@@ -145,20 +153,41 @@
         <div class="grid-item"><img src="./img/marshall.png" alt="marshall"></div>
         <div class="grid-item"><img src="./img/chase.png" alt="chase"></div>
         <div class="grid-item"><img src="./img/stichangel.png" alt="stitch"></div>
+        <div class="grid-item"><img src="./img/rumi.jpg" alt="rumi"></div>
     </div>
 </section>
 
 <section id="decoracion" class="seccion-galeria">
     <h2>🎈 Decoración y Mesas Dulces</h2>
     <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/logo.png" alt="ejemplo decoracion"></div>
+        <div class="grid-item"><img src="./img/logo.png" alt="decoracion"></div>
     </div>
 </section>
 
 <section id="personalizacion" class="seccion-galeria">
     <h2>🎨 Personalización Única</h2>
+    
+    <span class="subtitulo-interno">Regalos y Detalles</span>
     <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/logo.png" alt="ejemplo personalizacion"></div>
+        <div class="grid-item"><img src="./img/puloverperro.jpg" alt="pulover perro"></div>
+        <div class="grid-item"><img src="./img/camisaarma.jpg" alt="camisa arma"></div>
+        <div class="grid-item"><img src="./img/camisadragon.jpg" alt="camisa dragon"></div>
+        <div class="grid-item"><img src="./img/cojindragon.jpg" alt="cojin dragon"></div>
+        <div class="grid-item"><img src="./img/guerragalaxia.jpg" alt="guerra galaxia"></div>
+        <div class="grid-item"><img src="./img/galletacaja.jpg" alt="galleta caja"></div>
+        <div class="grid-item"><img src="./img/risisgaby.jpg" alt="risis gaby"></div>
+        <div class="grid-item"><img src="./img/papasneyll.jpg" alt="papas neyll"></div>
+        <div class="grid-item"><img src="./img/nocillagaby.jpg" alt="nocilla gaby"></div>
+        <div class="grid-item"><img src="./img/nubegaby.jpg" alt="nube gaby"></div>
+        <div class="grid-item"><img src="./img/nubeaitan.jpg" alt="nube aitan"></div>
+    </div>
+
+    <span class="subtitulo-interno">📸 Photocalls Personalizados</span>
+    <div class="pitusa-grid">
+        <div class="grid-item"><img src="./img/photoaitana.jpg" alt="photocall aitana"></div>
+        <div class="grid-item"><img src="./img/photodakarys.jpg" alt="photocall dakarys"></div>
+        <div class="grid-item"><img src="./img/photoneyll.jpg" alt="photocall neyll"></div>
+        <div class="grid-item"><img src="./img/photoleyre.jpg" alt="photocall leyre"></div>
     </div>
 </section>
 
@@ -179,7 +208,7 @@
 </section>
 
 <footer>
-    &copy; 2026 El Evento de Pitusa | Gran Canaria
+    &copy; 2026 El Evento de Pitusa | Hacemos realidad tus sueños en Gran Canaria
 </footer>
 
 </body>
