@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="img/logo.png">
     
     <style>
-        /* --- VARIABLES DE DISEÑO (Mismos tonos que el Index) --- */
         :root {
             --color-mirlo: #2d3436;
             --color-pico: #f1c40f;
@@ -24,127 +23,97 @@
             padding: 0;
         }
 
-        /* --- HEADER MINIMALISTA PARA GALERÍA --- */
+        /* --- HEADER CON LOGO A LA IZQUIERDA --- */
         header {
             background-color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            padding: 15px 30px;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Logo a la izq, Botón a la der */
             align-items: center;
-            position: sticky; /* Se queda fijo arriba al hacer scroll */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         .logo-small {
-            max-width: 120px;
+            max-width: 150px; /* Tamaño del logo en la galería */
         }
+
         .logo-small img {
             width: 100%;
             height: auto;
+            display: block;
         }
 
         .btn-volver {
-            background-color: transparent;
-            color: var(--color-mirlo);
+            background-color: var(--color-mirlo);
+            color: white;
             text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 2px solid var(--color-mirlo);
+            padding: 10px 20px;
+            border-radius: 25px;
             font-size: 0.8rem;
             font-weight: bold;
             text-transform: uppercase;
             transition: all 0.3s;
         }
+
         .btn-volver:hover {
-            background-color: var(--color-mirlo);
-            color: white;
+            background-color: #444;
+            transform: translateX(-5px);
         }
 
-        /* --- TÍTULO DE LA SECCIÓN --- */
+        /* --- CUERPO DE LA GALERÍA --- */
         .titulo-galeria {
             text-align: center;
             margin: 50px 0 30px;
             padding: 0 20px;
         }
+
         .titulo-galeria h1 {
             font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .titulo-galeria h1 span {
-            color: var(--color-globo); /* Tono rosa del globo */
-        }
-        .titulo-galeria p {
-            color: #777;
-            font-weight: 300;
-            max-width: 600px;
-            margin: 0 auto;
+            color: var(--color-mirlo);
         }
 
-        /* --- GRID TIPO PINTEREST (MASONRY) --- */
+        .titulo-galeria h1 span {
+            color: var(--color-globo);
+        }
+
+        /* --- GRID TIPO PINTEREST --- */
         .pitusa-grid {
-            /* MÁGIA MASONRY: Columnas que se adaptan */
-            column-count: 4; /* Número de columnas en PC */
-            column-gap: 15px; /* Espacio entre columnas */
-            width: 95%;
-            max-width: 1400px;
+            column-count: 4;
+            column-gap: 20px;
+            width: 90%;
+            max-width: 1200px;
             margin: 0 auto 50px;
         }
 
         .grid-item {
-            /* Evita que la imagen se corte entre columnas */
             break-inside: avoid;
-            margin-bottom: 15px;
-            background-color: white;
+            margin-bottom: 20px;
             border-radius: 15px;
-            overflow: hidden; /* Para que el zoom no se salga */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            background: white;
         }
 
-        /* EFECTO ENGAGEMENT: Hover potente */
         .grid-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: scale(1.03);
         }
 
         .grid-item img {
             width: 100%;
-            height: auto; /* Mantener proporción original */
             display: block;
-            transition: filter 0.3s;
         }
 
-        /* Superposición suave al hacer hover (opcional) */
-        .grid-item::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(255, 154, 158, 0.1); /* Tono rosa globo muy suave */
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .grid-item:hover::after {
-            opacity: 1;
-        }
-
-        /* --- RESPONSIVE ADAPTATION --- */
-        @media (max-width: 1100px) {
-            .pitusa-grid { column-count: 3; } /* Tablets grandes */
-        }
-        @media (max-width: 800px) {
-            .pitusa-grid { column-count: 2; } /* Móviles grandes/Tablets */
-            .titulo-galeria h1 { font-size: 2rem; }
-        }
-        @media (max-width: 500px) {
-            .pitusa-grid { column-count: 2; column-gap: 10px; } /* Móviles pequeños (2 columnas es mejor) */
-            .grid-item { margin-bottom: 10px; }
-            header { padding: 15px; }
+        /* RESPONSIVE */
+        @media (max-width: 1000px) { .pitusa-grid { column-count: 3; } }
+        @media (max-width: 700px) { .pitusa-grid { column-count: 2; } }
+        @media (max-width: 450px) { 
+            .pitusa-grid { column-count: 1; } 
+            header { padding: 10px 15px; }
+            .logo-small { max-width: 100px; }
         }
     </style>
 </head>
@@ -154,35 +123,36 @@
     <div class="logo-small">
         <img src="img/logo.png" alt="Logo El Evento de Pitusa">
     </div>
-    <a href="index.html" class="btn-volver">⬅ Volver a Inicio</a>
+    <a href="index.html" class="btn-volver">⬅ Volver al Inicio</a>
 </header>
 
 <div class="titulo-galeria">
     <h1>Galería de <span>Sueños</span></h1>
-    <p>Momentos mágicos y detalles únicos que hemos creado para las familias de Gran Canaria.</p>
+    <p>Nuestros últimos trabajos personalizados para eventos inolvidables.</p>
 </div>
 
 <div class="pitusa-grid">
 
     <div class="grid-item">
-        <img src="img/bluey.png" alt="Decoración temática Bluey - El Evento de Pitusa">
+        <img src="img/bluey.png" alt="Evento Bluey">
     </div>
 
     <div class="grid-item">
-        <img src="img/marshall.png" alt="Decoración temática Marshall Paw Patrol - El Evento de Pitusa">
+        <img src="img/marshall.png" alt="Evento Marshall">
     </div>
 
     <div class="grid-item">
-        <img src="img/chase.png" alt="Decoración temática Chase Paw Patrol - El Evento de Pitusa">
+        <img src="img/chase.png" alt="Evento Chase">
     </div>
 
     <div class="grid-item">
-        <img src="img/stichangel.png" alt="Decoración temática Stitch y Angel - El Evento de Pitusa">
+        <img src="img/stichangel.png" alt="Evento Stitch y Angel">
     </div>
 
     </div>
-<footer style="text-align: center; padding: 30px; color: #aaa; font-size: 0.8rem; border-top: 1px solid #eee;">
-    &copy; 2023 El Evento de Pitusa. Todos los momentos cuentan.
+
+<footer style="text-align: center; padding: 40px; color: #aaa; font-size: 0.8rem; border-top: 1px solid #eee;">
+    &copy; 2023 El Evento de Pitusa. Hecho con amor en Canarias.
 </footer>
 
 </body>
