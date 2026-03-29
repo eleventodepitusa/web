@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Sueños | El Evento de Pitusa</title>
-    <link rel="icon" type="image/png" href="img/logo.png">
+    <title>Catálogo | El Evento de Pitusa</title>
+    <link rel="icon" type="image/png" href="./img/logo.png">
     
     <style>
         :root {
@@ -13,11 +13,10 @@
             --color-globo: #ff9a9e;
             --color-belly: #a1c4fd;
             --color-fondo: #fffdf9;
-            --fuente-principal: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: var(--fuente-principal);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--color-fondo);
             color: var(--color-mirlo);
             margin: 0;
@@ -49,7 +48,6 @@
             font-size: 0.8rem;
             font-weight: bold;
             text-transform: uppercase;
-            transition: 0.3s;
         }
 
         .nav-secciones {
@@ -95,7 +93,7 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-            background: white;
+            background: #eee; /* Fondo gris por si la imagen falla */
             height: 280px;
         }
 
@@ -111,69 +109,52 @@
             color: #aaa;
             border-top: 1px solid #eee;
         }
-
-        @media (max-width: 800px) {
-            .nav-secciones { position: static; }
-            .nav-secciones a { display: inline-block; margin: 5px; font-size: 0.75rem; }
-        }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-small"><img src="img/logo.png" alt="Logo"></div>
-    <a href="index.html" class="btn-volver">⬅ Volver a Inicio</a>
+    <div class="logo-small">
+        <img src="./img/logo.png" alt="Logo">
+    </div>
+    <a href="index.html" class="btn-volver">⬅ Inicio</a>
 </header>
 
 <nav class="nav-secciones">
     <a href="#animacion">🎪 Animación</a>
     <a href="#decoracion">🎈 Decoración</a>
-    <a href="#personalizacion">🎨 Personalización</a>
-    <a href="#bellypainting">🤰 Bellypainting</a>
+    <a href="#personalizacion">🎨 Perso</a>
+    <a href="#bellypainting">🤰 Belly</a>
 </nav>
 
 <section id="animacion" class="seccion-galeria">
-    <h2>🎪 Animación y Muñecotes</h2>
+    <h2>🎪 Animación</h2>
     <div class="pitusa-grid">
-        <div class="grid-item"><img src="img/bluey.png" alt="bluey"></div>
-        <div class="grid-item"><img src="img/marshall.png" alt="marshall"></div>
-        <div class="grid-item"><img src="img/chase.png" alt="chase"></div>
-        <div class="grid-item"><img src="img/stichangel.png" alt="stitch"></div>
-    </div>
-</section>
-
-<section id="decoracion" class="seccion-galeria">
-    <h2>🎈 Decoración y Mesas Dulces</h2>
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="img/logo.png" alt="decoracion"></div>
-    </div>
-</section>
-
-<section id="personalizacion" class="seccion-galeria">
-    <h2>🎨 Personalización Especial</h2>
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="img/logo.png" alt="personalizacion"></div>
+        <div class="grid-item"><img src="./img/bluey.png" alt="bluey"></div>
+        <div class="grid-item"><img src="./img/marshall.png" alt="marshall"></div>
+        <div class="grid-item"><img src="./img/chase.png" alt="chase"></div>
+        <div class="grid-item"><img src="./img/stichangel.png" alt="stitch"></div>
     </div>
 </section>
 
 <section id="bellypainting" class="seccion-galeria">
-    <h2 style="border-bottom-color: var(--color-belly);">🤰 Bellypainting y Premamá</h2>
+    <h2 style="border-bottom-color: var(--color-belly);">🤰 Bellypainting</h2>
     <div class="pitusa-grid">
-        <div class="grid-item"><img src="img/aaron.jpg" alt="bellypainting aaron"></div>
-        <div class="grid-item"><img src="img/adriel.jpg" alt="bellypainting adriel"></div>
-        <div class="grid-item"><img src="img/ainara.jpg" alt="bellypainting ainara"></div>
-        <div class="grid-item"><img src="img/isabella.jpg" alt="bellypainting isabella"></div>
-        <div class="grid-item"><img src="img/jamie.jpg" alt="bellypainting jamie"></div>
-        <div class="grid-item"><img src="img/jason.jpg" alt="bellypainting jason"></div>
-        <div class="grid-item"><img src="img/kennen.jpg" alt="bellypainting kennen"></div>
-        <div class="grid-item"><img src="img/ohana.jpg" alt="bellypainting ohana"></div>
-        <div class="grid-item"><img src="img/sofia.jpg" alt="bellypainting sofia"></div>
-        <div class="grid-item"><img src="img/yaron.jpg" alt="bellypainting yaron"></div>
+        <div class="grid-item"><img src="./img/aaron.jpg" alt="aaron"></div>
+        <div class="grid-item"><img src="./img/adriel.jpg" alt="adriel"></div>
+        <div class="grid-item"><img src="./img/ainara.jpg" alt="ainara"></div>
+        <div class="grid-item"><img src="./img/isabella.jpg" alt="isabella"></div>
+        <div class="grid-item"><img src="./img/jamie.jpg" alt="jamie"></div>
+        <div class="grid-item"><img src="./img/jason.jpg" alt="jason"></div>
+        <div class="grid-item"><img src="./img/kennen.jpg" alt="kennen"></div>
+        <div class="grid-item"><img src="./img/ohana.jpg" alt="ohana"></div>
+        <div class="grid-item"><img src="./img/sofia.jpg" alt="sofia"></div>
+        <div class="grid-item"><img src="./img/yaron.jpg" alt="yaron"></div>
     </div>
 </section>
 
 <footer>
-    &copy; 2026 El Evento de Pitusa | Gran Canaria
+    &copy; 2026 El Evento de Pitusa
 </footer>
 
 </body>
