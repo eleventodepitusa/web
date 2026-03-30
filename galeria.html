@@ -10,7 +10,7 @@
         :root {
             --color-mirlo: #2d3436;
             --color-pico: #f1c40f;
-            --color-globo: #ff9a9e;
+            --color-globo: #ff9a9e; /* Rosa del logo */
             --color-belly: #a1c4fd;
             --color-fondo: #fffdf9;
         }
@@ -89,15 +89,6 @@
             margin-bottom: 40px;
         }
 
-        .subtitulo-interno {
-            font-size: 1.5rem;
-            color: var(--color-globo);
-            margin: 30px 0 20px;
-            display: block;
-            width: 100%;
-            font-weight: bold;
-        }
-
         .pitusa-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -110,13 +101,28 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.06);
             background: #f0f0f0; 
-            height: 280px;
+            height: 320px; /* Aumentado un poco para que quepa el texto */
+            display: flex;
+            flex-direction: column;
         }
 
         .grid-item img {
             width: 100%;
-            height: 100%;
+            height: 280px; /* Altura fija para la imagen */
             object-fit: cover;
+        }
+
+        /* ESTILO PARA LA ETIQUETA NOVEDAD */
+        .etiqueta-novedad {
+            background-color: var(--color-globo); /* Fondo Rosa */
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: auto; /* Empuja al fondo del contenedor */
         }
 
         footer {
@@ -148,7 +154,11 @@
         <div class="grid-item"><img src="./img/marshall.png" alt="marshall"></div>
         <div class="grid-item"><img src="./img/chase.png" alt="chase"></div>
         <div class="grid-item"><img src="./img/stichangel.png" alt="stitch"></div>
-        <div class="grid-item"><img src="./img/rumi.jpg" alt="rumi"></div>
+        
+        <div class="grid-item">
+            <img src="./img/rumi.jpg" alt="rumi">
+            <div class="etiqueta-novedad">NOVEDAD</div>
+        </div>
     </div>
 </section>
 
@@ -166,22 +176,12 @@
 
 <section id="personalizacion" class="seccion-galeria">
     <h2>🎨 Personalización Única</h2>
-    
-    <span class="subtitulo-interno">🎁 Regalos y Detalles</span>
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/puloverperro.jpg" alt="pulover perro"></div>
         <div class="grid-item"><img src="./img/camisaarma.jpg" alt="camisa arma"></div>
         <div class="grid-item"><img src="./img/camisadragon.jpg" alt="camisa dragon"></div>
         <div class="grid-item"><img src="./img/cojindragon.jpg" alt="cojin dragon"></div>
         <div class="grid-item"><img src="./img/guerragalaxia.jpg" alt="guerra galaxia"></div>
-    </div>
-
-    <span class="subtitulo-interno">📸 Photocalls Personalizados</span>
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/photoaitana.jpg" alt="photocall aitana"></div>
-        <div class="grid-item"><img src="./img/photodakarys.jpg" alt="photocall dakarys"></div>
-        <div class="grid-item"><img src="./img/photoneyll.jpg" alt="photocall neyll"></div>
-        <div class="grid-item"><img src="./img/photoleyre.jpg" alt="photocall leyre"></div>
     </div>
 </section>
 
@@ -191,4 +191,19 @@
         <div class="grid-item"><img src="./img/aaron.jpg" alt="aaron"></div>
         <div class="grid-item"><img src="./img/adriel.jpg" alt="adriel"></div>
         <div class="grid-item"><img src="./img/ainara.jpg" alt="ainara"></div>
-        
+        <div class="grid-item"><img src="./img/isabella.jpg" alt="isabella"></div>
+        <div class="grid-item"><img src="./img/jamie.jpg" alt="jamie"></div>
+        <div class="grid-item"><img src="./img/jason.jpg" alt="jason"></div>
+        <div class="grid-item"><img src="./img/kennen.jpg" alt="kennen"></div>
+        <div class="grid-item"><img src="./img/ohana.jpg" alt="ohana"></div>
+        <div class="grid-item"><img src="./img/sofia.jpg" alt="sofia"></div>
+        <div class="grid-item"><img src="./img/yaron.jpg" alt="yaron"></div>
+    </div>
+</section>
+
+<footer>
+    &copy; 2026 El Evento de Pitusa | Gran Canaria
+</footer>
+
+</body>
+</html>
