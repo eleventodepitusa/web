@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | El Evento de Pitusa</title>
     <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
@@ -72,7 +73,10 @@
             padding: 6px 12px;
             border-radius: 20px;
             background-color: #f9f9f9;
+            transition: 0.3s;
         }
+
+        .nav-secciones a:hover { background: var(--color-pico); color: white; }
 
         /* DISEÑO PINTEREST */
         .pitusa-grid {
@@ -159,12 +163,13 @@
             margin-top: 25px;
         }
 
+        /* BOTÓN WHATSAPP FLOTANTE OFICIAL */
         .btn-whatsapp {
             position: fixed;
-            width: 55px;
-            height: 55px;
-            bottom: 20px;
-            right: 20px;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
             background-color: #25d366;
             color: white;
             border-radius: 50px;
@@ -173,7 +178,14 @@
             justify-content: center;
             text-decoration: none;
             z-index: 2000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-size: 32px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.1);
+            background-color: #128c7e;
         }
 
         footer { text-align: center; padding: 40px 20px; color: #999; font-size: 0.8rem; border-top: 1px solid #eee; margin-top: 50px; }
@@ -187,15 +199,17 @@
 </header>
 
 <nav class="nav-secciones">
-    <a href="#hinchables">Castillos</a>
-    <a href="#animacion">Animación</a>
-    <a href="#decoracion">Decoración</a>
-    <a href="#personalizacion">Personalización</a>
-    <a href="#bellypainting">Bellypainting</a>
-    <a href="#alquiler">Alquiler Espacio</a>
+    <a href="#hinchables">🏰 Castillos</a>
+    <a href="#animacion">🎪 Animación</a>
+    <a href="#decoracion">🎈 Decoración</a>
+    <a href="#personalizacion">🎨 Personalización</a>
+    <a href="#bellypainting">🤰 Bellypainting</a>
+    <a href="#alquiler">🏠 Alquiler Local</a>
 </nav>
 
-<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank">📲</a>
+<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
 <section id="hinchables" class="seccion-galeria">
     <h2>🏰 Castillos Hinchables</h2>
@@ -256,12 +270,12 @@
 
         <div class="servicio-box">
             <h4>🍭 Servicio de Mesa Dulce (80€)</h4>
-            <p>Un rincón listo para disfrutar. Incluye: Mini Pringles, Ambrosías Tirma, Bote de golosinas, Mini donuts (chocolate y azúcar) y Palomitas individuales.</p>
+            <p>Un rincón dulce pensado para disfrutar durante la celebración. Incluye: Mini Pringles, Ambrosías Tirma, Bote de golosinas, Mini donuts y Palomitas individuales.</p>
         </div>
 
         <div class="servicio-box" style="border-left-color: var(--color-pico);">
             <h4>🎪 Animación y Extras</h4>
-            <p><small>Pintacaras: 80€ | Pintacaras + Globoflexia: 95€ | Hinchable: 120€ | Muñecotes: 130€ | Máquina de palomitas o algodón: 140€</small></p>
+            <p><small>Pintacaras: 80 € | Pintacaras + Globoflexia: 95 € | Hinchable: 120 € | Muñecotes: 130 € | Máquina de palomitas o algodón de azúcar: 140 €</small></p>
         </div>
 
         <div class="ubicacion-tag">
