@@ -1,1 +1,207 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Alquiler | El Evento de Pitusa</title>
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-mirlo: #2d3436;
+            --color-pico: #f1c40f;
+            --color-globo: #ff9a9e;
+            --color-fondo: #fffdf9;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-mirlo);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        .btn-atras {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--color-mirlo);
+            font-weight: bold;
+            font-size: 0.9rem;
+            background: #eee;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .card-info {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        h1 { 
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--color-mirlo);
+            text-align: center;
+        }
+
+        .destacado {
+            text-align: center;
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        /* BLOQUES DE PRECIO */
+        .grid-precios {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .precio-box {
+            background: #fffdf0;
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px dashed var(--color-pico);
+            text-align: center;
+        }
+
+        .precio-box strong { font-size: 0.9rem; text-transform: uppercase; color: #888; }
+        .precio-box span { font-size: 2.2rem; font-weight: bold; display: block; color: var(--color-mirlo); }
+
+        /* SECCIONES DETALLE */
+        h3 { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: var(--color-mirlo); 
+            border-bottom: 2px solid #f1f1f1;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        .lista-horarios {
+            list-style: none;
+            padding: 0;
+        }
+
+        .lista-horarios li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f9f9f9;
+            font-size: 0.95rem;
+        }
+
+        .extra-item {
+            background: white;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid var(--color-globo);
+        }
+
+        .extra-item strong { color: var(--color-mirlo); display: block; margin-bottom: 5px; }
+
+        .ubicacion-final {
+            text-align: center;
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 40px;
+            font-weight: bold;
+        }
+
+        /* BOTÓN WHATSAPP */
+        .btn-whatsapp {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        @media (max-width: 500px) {
+            .grid-precios { grid-template-columns: 1fr; }
+            .card-info { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="galeria.html" class="btn-atras"><i class="fas fa-arrow-left"></i> Volver al catálogo</a>
+
+    <div class="card-info">
+        <h1>🏠 Alquiler del Local</h1>
+        <p class="destacado">Uso completo del espacio y zonas de juego en Ingenio.</p>
+
+        <div class="grid-precios">
+            <div class="precio-box">
+                <strong>Tarifa 3 Horas</strong>
+                <span>160 €</span>
+            </div>
+            <div class="precio-box">
+                <strong>Tarifa 4 Horas</strong>
+                <span>190 €</span>
+            </div>
+        </div>
+
+        <h3><i class="far fa-clock" style="color: var(--color-pico);"></i> Horarios a elegir</h3>
+        <ul class="lista-horarios">
+            <li><strong>Mañanas:</strong> 10:00, 10:30 o 11:00</li>
+            <li><strong>Tardes:</strong> 16:00, 16:30 o 17:00</li>
+            <li><small>*El tiempo empieza a contar desde la hora seleccionada.</small></li>
+        </ul>
+
+        <h3><i class="fas fa-star" style="color: var(--color-globo);"></i> Servicios Opcionales</h3>
+        
+        <div class="extra-item">
+            <strong>✨ Decoración Completa (140€)</strong>
+            Invitación digital, banderín temático, corona personalizada, columna de globos, nombre del peque y cajitas de golosinas.
+        </div>
+
+        <div class="extra-item">
+            <strong>🍭 Mesa Dulce (80€)</strong>
+            Mini Pringles, Ambrosías Tirma, botes de chuches, mini donuts y palomitas individuales.
+        </div>
+
+        <div class="extra-item" style="border-left-color: var(--color-pico);">
+            <strong>🎪 Animación y Extras</strong>
+            Pintacaras (80€), Castillos hinchables (120€), Personajes/Muñecotes (130€), Máquinas de algodón o palomitas (140€).
+        </div>
+
+        <div class="ubicacion-final">
+            📍 Ubicación del local: Ingenio
+        </div>
+    </div>
+</div>
+
+<a href="https://wa.me/34652678718?text=Hola!%20Me%20gustaría%20consultar%20disponibilidad%20para%20el%20local%20de%20Ingenio" class="btn-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+</body>
+</html>
