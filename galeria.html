@@ -74,9 +74,9 @@
             background-color: #f9f9f9;
         }
 
-        /* DISEÑO PINTEREST REFEINADO (Imágenes más pequeñas) */
+        /* DISEÑO PINTEREST (Imágenes pequeñas y visuales) */
         .pitusa-grid {
-            column-count: 4; /* 4 columnas para que sean más pequeñas */
+            column-count: 4;
             column-gap: 15px;
             max-width: 1300px;
             margin: 0 auto;
@@ -93,6 +93,7 @@
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             background: white;
+            break-inside: avoid;
         }
 
         .grid-item img {
@@ -102,7 +103,14 @@
             transition: transform 0.3s;
         }
 
-        .grid-item:hover img { transform: scale(1.05); }
+        .info-foto {
+            padding: 8px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background: white;
+            color: var(--color-mirlo);
+        }
 
         .etiqueta-novedad {
             background-color: var(--color-globo);
@@ -114,17 +122,9 @@
             text-transform: uppercase;
         }
 
-        .seccion-galeria {
-            padding: 40px 20px;
-        }
+        .seccion-galeria { padding: 40px 20px; }
+        .seccion-galeria h2 { text-align: center; font-size: 1.8rem; margin-bottom: 30px; }
 
-        .seccion-galeria h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-        }
-
-        /* ESTILOS INFO ALQUILER AL FINAL */
         .contenedor-alquiler {
             max-width: 900px;
             margin: 0 auto 40px;
@@ -159,15 +159,6 @@
             font-size: 0.9rem;
         }
 
-        .direccion-local {
-            background: #f1f1f1;
-            padding: 10px;
-            text-align: center;
-            border-radius: 10px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
         .btn-whatsapp {
             position: fixed;
             width: 55px;
@@ -177,24 +168,14 @@
             background-color: #25d366;
             color: white;
             border-radius: 50px;
-            text-align: center;
-            font-size: 28px;
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
-            z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            z-index: 2000;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: #fff;
-            border-top: 1px solid #eee;
-            color: #999;
-            font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 40px 20px; color: #999; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -205,16 +186,57 @@
 </header>
 
 <nav class="nav-secciones">
+    <a href="#hinchables">Castillos</a>
     <a href="#animacion">Animación</a>
     <a href="#decoracion">Decoración</a>
-    <a href="#personalizacion">Personalización</a>
-    <a href="#bellypainting">Bellypainting</a>
-    <a href="#alquiler">Alquiler de Espacio</a>
+    <a href="#personalizacion">Perso</a>
+    <a href="#bellypainting">Belly</a>
+    <a href="#alquiler">Alquiler</a>
 </nav>
 
-<a href="https://wa.me/34652678718?text=Hola!%20Me%20interesa%20información%20sobre%20vuestros%20servicios." class="btn-whatsapp" target="_blank">
-    <span>📲</span>
-</a>
+<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank">📲</a>
+
+<section id="hinchables" class="seccion-galeria">
+    <h2>🏰 Castillos Hinchables</h2>
+    <div class="pitusa-grid">
+        <div class="grid-item">
+            <img src="./img/caststich.jpg" alt="Stitch">
+            <div class="info-foto">Stitch 3x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/ccampanilla.jpg" alt="Campanilla">
+            <div class="info-foto">Campanilla 3x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/sonrisa.jpg" alt="Sonrisa">
+            <div class="info-foto">Sonrisa 5x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/rampa.jpg" alt="Rampa">
+            <div class="info-foto">Rampa 5x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/rampad.jpg" alt="Rampa D">
+            <div class="info-foto">Rampa 6x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/tobogan.jpg" alt="Tobogan">
+            <div class="info-foto">Tobogán 8x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/tobogan1.jpg" alt="Tobogan 1">
+            <div class="info-foto">Tobogán 8x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/ojodebuey.jpg" alt="Ojo de buey">
+            <div class="info-foto">Ojo de Buey 8x4m</div>
+        </div>
+        <div class="grid-item">
+            <img src="./img/pistaamericana.jpg" alt="Pista Americana">
+            <div class="info-foto">Pista Americana 12x4m</div>
+        </div>
+    </div>
+</section>
 
 <section id="animacion" class="seccion-galeria">
     <h2>🎪 Animación y Muñecotes</h2>
@@ -235,9 +257,7 @@
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/nubeaitana.jpg" alt="nube aitana"></div>
         <div class="grid-item"><img src="./img/galletaaitan.jpg" alt="galleta aitana"></div>
-        <div class="grid-item"><img src="./img/risisgaby.jpg" alt="risis gaby"></div>
         <div class="grid-item"><img src="./img/papasneyll.jpg" alt="papas neyll"></div>
-        <div class="grid-item"><img src="./img/nubegaby.jpg" alt="nube gaby"></div>
         <div class="grid-item"><img src="./img/nocillagaby.jpg" alt="nocilla gaby"></div>
     </div>
 </section>
@@ -249,63 +269,41 @@
         <div class="grid-item"><img src="./img/camisaarma.jpg" alt="camisa arma"></div>
         <div class="grid-item"><img src="./img/camisadragon.jpg" alt="camisa dragon"></div>
         <div class="grid-item"><img src="./img/cojindragon.jpg" alt="cojin dragon"></div>
-        <div class="grid-item"><img src="./img/guerragalaxia.jpg" alt="guerra galaxia"></div>
     </div>
 </section>
 
 <section id="bellypainting" class="seccion-galeria">
-    <h2>🤰 Bellypainting y Premamá</h2>
+    <h2>🤰 Bellypainting</h2>
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/aaron.jpg" alt="aaron"></div>
         <div class="grid-item"><img src="./img/adriel.jpg" alt="adriel"></div>
         <div class="grid-item"><img src="./img/ainara.jpg" alt="ainara"></div>
-        <div class="grid-item"><img src="./img/isabella.jpg" alt="isabella"></div>
-        <div class="grid-item"><img src="./img/jamie.jpg" alt="jamie"></div>
-        <div class="grid-item"><img src="./img/jason.jpg" alt="jason"></div>
-        <div class="grid-item"><img src="./img/kennen.jpg" alt="kennen"></div>
         <div class="grid-item"><img src="./img/ohana.jpg" alt="ohana"></div>
-        <div class="grid-item"><img src="./img/sofia.jpg" alt="sofia"></div>
-        <div class="grid-item"><img src="./img/yaron.jpg" alt="yaron"></div>
     </div>
 </section>
 
-<section id="alquiler" class="seccion-galeria" style="background-color: #fff;">
+<section id="alquiler" class="seccion-galeria">
     <h2>🏠 Alquiler de Espacio</h2>
-    
-    <div class="pitusa-grid" style="margin-bottom: 30px;">
-        <div class="grid-item"><img src="./img/localmesas.jpg" alt="Mesa local"></div>
-        <div class="grid-item"><img src="./img/localmesa.jpg" alt="Local"></div>
-        <div class="grid-item"><img src="./img/lmesapeq.jpg" alt="Mesa pequeña"></div>
-        <div class="grid-item"><img src="./img/lespacio.jpg" alt="Espacio"></div>
-        <div class="grid-item"><img src="./img/espacio.jpg" alt="Zona juegos"></div>
+    <div class="pitusa-grid" style="margin-bottom: 20px;">
+        <div class="grid-item"><img src="./img/localmesas.jpg"></div>
+        <div class="grid-item"><img src="./img/localmesa.jpg"></div>
+        <div class="grid-item"><img src="./img/lmesapeq.jpg"></div>
+        <div class="grid-item"><img src="./img/espacio.jpg"></div>
     </div>
-
     <div class="contenedor-alquiler">
-        <p>Uso completo del espacio durante el tiempo contratado, con acceso a instalaciones y zonas de juego.</p>
-        
         <div class="grid-tarifas">
-            <div class="tarjeta-tarifa">
-                <strong>3 HORAS: 160 €</strong><br>
-                <small>Turnos: 10:00, 10:30, 11:00 / 16:00, 16:30, 17:00</small>
-            </div>
-            <div class="tarjeta-tarifa">
-                <strong>4 HORAS: 190 €</strong><br>
-                <small>Turnos: 10:00, 10:30, 11:00 / 16:00, 16:30, 17:00</small>
-            </div>
+            <div class="tarjeta-tarifa"><strong>3 HORAS: 160 €</strong></div>
+            <div class="tarjeta-tarifa"><strong>4 HORAS: 190 €</strong></div>
         </div>
-
-        <div class="servicio-box"><strong>✨ Decoración (140€):</strong> Incluye invitación, banderín, corona, columna globos y cajas chuches.</div>
-        <div class="servicio-box"><strong>🍭 Mesa Dulce (80€):</strong> Mini Pringles, Ambrosías Tirma, chuches, donuts y palomitas.</div>
-        <div class="servicio-box"><strong>🎪 Animación:</strong> Pintacaras (80€), Hinchable (120€), Muñecotes (130€), Máquinas (140€).</div>
-        
-        <div class="direccion-local">
-            📍 Ubicación del local: Calle Alonso de matos, 48 (Ingenio)
+        <div class="servicio-box">✨ Decoración (140€) | 🍭 Mesa Dulce (80€) | 🎪 Animación</div>
+        <div style="text-align: center; font-weight: bold; padding: 10px; background: #f1f1f1; border-radius: 10px;">
+            📍 Ubicación del local: Ingenio
         </div>
     </div>
 </section>
 
 <footer>
-    &copy; 2026 El Evento de Pitusa | Gran Canaria
+    &copy; 2026 El Evento de Pitusa
 </footer>
 
 </body>
