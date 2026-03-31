@@ -90,26 +90,58 @@
             margin-bottom: 40px;
         }
 
+        /* DISEÑO TIPO PINTEREST (MOSAICO) */
+        .pitusa-grid {
+            column-count: 3; /* 3 columnas en PC */
+            column-gap: 20px;
+        }
+
+        @media (max-width: 900px) { .pitusa-grid { column-count: 2; } }
+        @media (max-width: 600px) { .pitusa-grid { column-count: 1; } }
+
+        .grid-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover { transform: scale(1.02); }
+
+        .grid-item img {
+            width: 100%;
+            display: block;
+            height: auto; /* Para efecto Pinterest */
+        }
+
+        .etiqueta-novedad {
+            background-color: var(--color-globo);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            padding: 5px 0;
+            text-transform: uppercase;
+        }
+
+        /* ESTILOS ALQUILER (AL FINAL) */
         .contenedor-alquiler {
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             margin-bottom: 40px;
-        }
-
-        .descripcion-alquiler {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            color: #555;
         }
 
         .grid-tarifas {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin: 30px 0;
         }
 
         .tarjeta-tarifa {
@@ -120,59 +152,16 @@
             text-align: center;
         }
 
-        .tarjeta-tarifa h3 { margin: 0; color: var(--color-mirlo); }
-        .precio { font-size: 2.2rem; font-weight: bold; margin: 10px 0; color: var(--color-mirlo); }
-
-        .grid-servicios {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
         .servicio-box {
             background: #fff;
             border: 1px solid #eee;
             padding: 20px;
             border-radius: 15px;
             border-left: 5px solid var(--color-globo);
+            margin-bottom: 15px;
         }
 
-        .servicio-box h4 { margin-top: 0; color: var(--color-mirlo); border-bottom: 1px solid #eee; padding-bottom: 10px; }
-
-        .pitusa-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .grid-item {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-            background: #f0f0f0; 
-            height: 320px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-        }
-
-        .etiqueta-novedad {
-            background-color: var(--color-globo);
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-            padding: 8px 0;
-            text-transform: uppercase;
-            margin-top: auto;
-        }
-
+        /* BOTÓN WHATSAPP */
         .btn-whatsapp {
             position: fixed;
             width: 60px;
@@ -190,17 +179,13 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: 0.3s;
         }
-
-        .btn-whatsapp:hover { transform: scale(1.1); background-color: #128c7e; }
 
         footer {
             text-align: center;
             padding: 60px 20px;
-            background: white;
-            color: #777;
-            border-top: 1px solid #eee;
+            background: #2d3436;
+            color: white;
         }
     </style>
 </head>
@@ -212,70 +197,16 @@
 </header>
 
 <nav class="nav-secciones">
-    <a href="#alquiler">🏠 Alquiler</a>
     <a href="#animacion">🎪 Animación</a>
     <a href="#decoracion">🎈 Decoración</a>
     <a href="#personalizacion">🎨 Personalización</a>
     <a href="#bellypainting">🤰 Bellypainting</a>
+    <a href="#alquiler">🏠 Alquiler Local</a>
 </nav>
 
-<a href="https://wa.me/34652678718?text=Hola!%20Me%20gustaría%20información%20sobre%20el%20alquiler%20del%20espacio." class="btn-whatsapp" target="_blank">
+<a href="https://wa.me/34652678718?text=Hola!%20Me%20interesa%20información%20sobre%20tus%20servicios." class="btn-whatsapp" target="_blank">
     <span>📲</span>
 </a>
-
-<section id="alquiler" class="seccion-galeria">
-    <h2>🏠 Alquiler de Espacio</h2>
-    
-    <div class="contenedor-alquiler">
-        <p class="descripcion-alquiler">Incluye el uso completo del espacio durante el tiempo contratado, con acceso a las instalaciones y zonas de juego para una celebración llena de diversión.</p>
-        
-        <div class="grid-tarifas">
-            <div class="tarjeta-tarifa">
-                <h3>Opción 3 HORAS</h3>
-                <div class="precio">160 €</div>
-                <p><strong>Horarios disponibles:</strong><br>
-                Mañanas: 10:00-13:00 | 10:30-13:30 | 11:00-14:00<br>
-                Tardes: 16:00-19:00 | 16:30-19:30 | 17:00-20:00</p>
-            </div>
-            <div class="tarjeta-tarifa">
-                <h3>Opción 4 HORAS</h3>
-                <div class="precio">190 €</div>
-                <p><strong>Horarios disponibles:</strong><br>
-                Mañanas: 10:00-14:00 | 10:30-14:30 | 11:00-15:00<br>
-                Tardes: 16:00-20:00 | 16:30-20:30 | 17:00-21:00</p>
-            </div>
-        </div>
-
-        <div class="grid-servicios">
-            <div class="servicio-box">
-                <h4>✨ Servicio de Decoración (140€)</h4>
-                <p>Montaje temático cuidado al detalle. Incluye: Invitación digital, Banderín decorativo, Corona del cumpleañero, Columna de globos, Nombre integrado y Cajitas de golosinas.</p>
-            </div>
-            <div class="servicio-box">
-                <h4>🍭 Servicio de Mesa Dulce (80€)</h4>
-                <p>Incluye: Mini Pringles, Ambrosías Tirma, Bote de golosinas, Mini donuts (chocolate y azúcar) y Palomitas individuales.</p>
-            </div>
-            <div class="servicio-box">
-                <h4>🎪 Animación y Extras</h4>
-                <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
-                    <li>• Pintacaras: 80 €</li>
-                    <li>• Pintacaras + Globoflexia: 95 €</li>
-                    <li>• Hinchable: 120 €</li>
-                    <li>• Muñecotes: 130 €</li>
-                    <li>• Máquina de palomitas o algodón: 140 €</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/localmesas.jpg" alt="Zona de mesas"></div>
-        <div class="grid-item"><img src="./img/localmesa.jpg" alt="Mesa principal"></div>
-        <div class="grid-item"><img src="./img/lmesapeq.jpg" alt="Mesa pequeña"></div>
-        <div class="grid-item"><img src="./img/lespacio.jpg" alt="Vistas del local"></div>
-        <div class="grid-item"><img src="./img/espacio.jpg" alt="Zona de juegos"></div>
-    </div>
-</section>
 
 <section id="animacion" class="seccion-galeria">
     <h2>🎪 Animación y Muñecotes</h2>
@@ -327,6 +258,43 @@
         <div class="grid-item"><img src="./img/ohana.jpg" alt="ohana"></div>
         <div class="grid-item"><img src="./img/sofia.jpg" alt="sofia"></div>
         <div class="grid-item"><img src="./img/yaron.jpg" alt="yaron"></div>
+    </div>
+</section>
+
+<section id="alquiler" class="seccion-galeria">
+    <h2>🏠 Alquiler de Espacio</h2>
+    
+    <div class="pitusa-grid" style="margin-bottom: 30px;">
+        <div class="grid-item"><img src="./img/localmesas.jpg" alt="Zona mesas"></div>
+        <div class="grid-item"><img src="./img/localmesa.jpg" alt="Mesa principal"></div>
+        <div class="grid-item"><img src="./img/lmesapeq.jpg" alt="Mesa infantil"></div>
+        <div class="grid-item"><img src="./img/lespacio.jpg" alt="Local Ingenio"></div>
+        <div class="grid-item"><img src="./img/espacio.jpg" alt="Juegos"></div>
+    </div>
+
+    <div class="contenedor-alquiler">
+        <p>Incluye el uso completo del espacio durante el tiempo contratado, con acceso a las instalaciones y zonas de juego para una celebración llena de diversión.</p>
+        
+        <div class="grid-tarifas">
+            <div class="tarjeta-tarifa">
+                <h3>3 HORAS: 160 €</h3>
+                <small>10:00-13:00 | 10:30-13:30 | 11:00-14:00<br>16:00-19:00 | 16:30-19:30 | 17:00-20:00</small>
+            </div>
+            <div class="tarjeta-tarifa">
+                <h3>4 HORAS: 190 €</h3>
+                <small>10:00-14:00 | 10:30-14:30 | 11:00-15:00<br>16:00-20:00 | 16:30-20:30 | 17:00-21:00</small>
+            </div>
+        </div>
+
+        <div class="servicio-box">
+            <strong>✨ Servicio de Decoración (140€):</strong> Montaje temático cuidado al detalle. Incluye Invitación, Banderín, Corona, Columna de globos, Nombre integrado y Cajitas de chuches.
+        </div>
+        <div class="servicio-box">
+            <strong>🍭 Mesa Dulce (80€):</strong> Variedad lista para disfrutar: Pringles, Ambrosías Tirma, Bote de chuches, Donuts y Palomitas.
+        </div>
+        <div class="servicio-box" style="border-left-color: var(--color-pico);">
+            <strong>🎪 Animación:</strong> Pintacaras (80€), Hinchable (120€), Muñecotes (130€), Máquinas (140€).
+        </div>
     </div>
 </section>
 
