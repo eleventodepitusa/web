@@ -73,12 +73,9 @@
             padding: 6px 12px;
             border-radius: 20px;
             background-color: #f9f9f9;
-            transition: 0.3s;
         }
 
-        .nav-secciones a:hover { background: var(--color-pico); color: white; }
-
-        /* DISEÑO PINTEREST Refinado */
+        /* DISEÑO PINTEREST */
         .pitusa-grid {
             column-count: 4;
             column-gap: 15px;
@@ -100,70 +97,34 @@
             break-inside: avoid;
         }
 
-        .grid-item img {
-            width: 100%;
-            display: block;
-            height: auto;
-        }
+        .grid-item img { width: 100%; display: block; height: auto; }
 
-        .info-foto {
-            padding: 8px;
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            background: white;
-        }
+        .info-foto { padding: 8px; text-align: center; font-size: 0.8rem; font-weight: bold; }
 
         .seccion-galeria { padding: 40px 20px; }
         .seccion-galeria h2 { text-align: center; font-size: 1.8rem; margin-bottom: 30px; }
 
-        /* CONTENEDOR INFO ALQUILER DETALLADO */
-        .contenedor-alquiler {
-            max-width: 950px;
-            margin: 30px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
-        }
-
-        .grid-tarifas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .tarjeta-tarifa {
-            background: #fdfcf0;
-            padding: 20px;
-            border-radius: 20px;
-            border: 2px dashed var(--color-pico);
-        }
-
-        .tarjeta-tarifa h3 { margin-top: 0; color: var(--color-mirlo); border-bottom: 1px solid #eee; padding-bottom: 10px; }
-
-        .servicio-box {
-            background: #fff;
-            border: 1px solid #eee;
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 5px solid var(--color-globo);
-            margin-bottom: 15px;
-        }
-
-        .servicio-box h4 { margin: 0 0 10px 0; color: var(--color-mirlo); }
-
-        .ubicacion-tag {
+        /* BOTÓN INFO ALQUILER */
+        .header-alquiler {
             text-align: center;
-            font-weight: bold;
-            padding: 15px;
-            background: #f1f1f1;
-            border-radius: 15px;
-            margin-top: 25px;
+            margin-bottom: 30px;
         }
 
-        /* BOTÓN WHATSAPP FLOTANTE OFICIAL */
+        .btn-info-alquiler {
+            display: inline-block;
+            background-color: var(--color-pico);
+            color: var(--color-mirlo);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-info-alquiler:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4); }
+
         .btn-whatsapp {
             position: fixed;
             width: 60px;
@@ -180,15 +141,9 @@
             z-index: 2000;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             font-size: 32px;
-            transition: transform 0.3s ease;
         }
 
-        .btn-whatsapp:hover {
-            transform: scale(1.1);
-            background-color: #128c7e;
-        }
-
-        footer { text-align: center; padding: 40px 20px; color: #999; font-size: 0.8rem; border-top: 1px solid #eee; margin-top: 50px; }
+        footer { text-align: center; padding: 40px 20px; color: #999; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -202,14 +157,12 @@
     <a href="#hinchables">🏰 Castillos</a>
     <a href="#animacion">🎪 Animación</a>
     <a href="#decoracion">🎈 Decoración</a>
-    <a href="#personalizacion">🎨 Personalización</a>
-    <a href="#bellypainting">🤰 Bellypainting</a>
-    <a href="#alquiler">🏠 Alquiler Local</a>
+    <a href="#personalizacion">🎨 Perso</a>
+    <a href="#bellypainting">🤰 Belly</a>
+    <a href="#alquiler">🏠 El Local</a>
 </nav>
 
-<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <section id="hinchables" class="seccion-galeria">
     <h2>🏰 Castillos Hinchables</h2>
@@ -226,101 +179,18 @@
     </div>
 </section>
 
-<section id="animacion" class="seccion-galeria">
-    <h2>🎪 Animación y Muñecotes</h2>
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/bluey.png"></div>
-        <div class="grid-item"><img src="./img/marshall.png"></div>
-        <div class="grid-item"><img src="./img/chase.png"></div>
-        <div class="grid-item"><img src="./img/stichangel.png"></div>
-        <div class="grid-item"><img src="./img/rumi.jpg"></div>
+<section id="alquiler" class="seccion-galeria" style="background: white; border-top: 1px solid #eee;">
+    <div class="header-alquiler">
+        <h2>🏠 Alquiler de Espacio en Ingenio</h2>
+        <a href="alquiler.html" class="btn-info-alquiler">📝 VER TARIFAS E INFORMACIÓN</a>
     </div>
-</section>
-
-<section id="decoracion" class="seccion-galeria">
-    <h2>🎈 Decoración y Mesas Dulces</h2>
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/nubeaitana.jpg"></div>
-        <div class="grid-item"><img src="./img/galletaaitan.jpg"></div>
-        <div class="grid-item"><img src="./img/risisgaby.jpg"></div>
-        <div class="grid-item"><img src="./img/papasneyll.jpg"></div>
-        <div class="grid-item"><img src="./img/nubegaby.jpg"></div>
-        <div class="grid-item"><img src="./img/nocillagaby.jpg"></div>
-    </div>
-</section>
-
-<section id="personalizacion" class="seccion-galeria">
-    <h2>🎨 Personalización Única</h2>
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/puloverperro.jpg"></div>
-        <div class="grid-item"><img src="./img/camisaarma.jpg"></div>
-        <div class="grid-item"><img src="./img/camisadragon.jpg"></div>
-        <div class="grid-item"><img src="./img/cojindragon.jpg"></div>
-        <div class="grid-item"><img src="./img/guerragalaxia.jpg"></div>
-    </div>
-</section>
-
-<section id="bellypainting" class="seccion-galeria">
-    <h2 style="border-bottom-color: var(--color-belly);">🤰 Bellypainting</h2>
-    <div class="pitusa-grid">
-        <div class="grid-item"><img src="./img/aaron.jpg"></div>
-        <div class="grid-item"><img src="./img/adriel.jpg"></div>
-        <div class="grid-item"><img src="./img/ainara.jpg"></div>
-        <div class="grid-item"><img src="./img/isabella.jpg"></div>
-        <div class="grid-item"><img src="./img/jamie.jpg"></div>
-        <div class="grid-item"><img src="./img/jason.jpg"></div>
-        <div class="grid-item"><img src="./img/kennen.jpg"></div>
-        <div class="grid-item"><img src="./img/ohana.jpg"></div>
-        <div class="grid-item"><img src="./img/sofia.jpg"></div>
-        <div class="grid-item"><img src="./img/yaron.jpg"></div>
-    </div>
-</section>
-
-<section id="alquiler" class="seccion-galeria" style="background: #fff;">
-    <h2>🏠 Alquiler de Espacio</h2>
     
-    <div class="pitusa-grid" style="margin-bottom: 20px;">
+    <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/localmesas.jpg"></div>
         <div class="grid-item"><img src="./img/localmesa.jpg"></div>
         <div class="grid-item"><img src="./img/lmesapeq.jpg"></div>
         <div class="grid-item"><img src="./img/lespacio.jpg"></div>
         <div class="grid-item"><img src="./img/espacio.jpg"></div>
-    </div>
-
-    <div class="contenedor-alquiler">
-        <p>Incluye el uso completo del espacio durante el tiempo contratado, con acceso a las instalaciones y zonas de juego para una celebración llena de diversión.</p>
-
-        <div class="grid-tarifas">
-            <div class="tarjeta-tarifa">
-                <h3>TARIFAS</h3>
-                <p><strong>• 3 horas:</strong> 160 €</p>
-                <p><strong>• 4 horas:</strong> 190 €</p>
-            </div>
-            <div class="tarjeta-tarifa">
-                <h3>HORARIOS</h3>
-                <p><small><strong>Opciones 3H:</strong> 10:00-13:00, 10:30-13:30, 11:00-14:00, 16:00-19:00, 16:30-19:30, 17:00-20:00</small></p>
-                <p><small><strong>Opciones 4H:</strong> 10:00-14:00, 10:30-14:30, 11:00-15:00, 16:00-20:00, 16:30-20:30, 17:00-21:00</small></p>
-            </div>
-        </div>
-
-        <div class="servicio-box">
-            <h4>✨ Servicio de Decoración (140€)</h4>
-            <p>Montaje temático cuidado al detalle. Incluye: Invitación (a juego), Banderín decorativo, Corona del cumpleañero, Columna de globos, Nombre del niño integrado y Cajitas de golosinas.</p>
-        </div>
-
-        <div class="servicio-box">
-            <h4>🍭 Servicio de Mesa Dulce (80€)</h4>
-            <p>Un rincón dulce pensado para disfrutar durante la celebración. Incluye: Mini Pringles, Ambrosías Tirma, Bote de golosinas, Mini donuts y Palomitas individuales.</p>
-        </div>
-
-        <div class="servicio-box" style="border-left-color: var(--color-pico);">
-            <h4>🎪 Animación y Extras</h4>
-            <p><small>Pintacaras: 80 € | Pintacaras + Globoflexia: 95 € | Hinchable: 120 € | Muñecotes: 130 € | Máquina de palomitas o algodón de azúcar: 140 €</small></p>
-        </div>
-
-        <div class="ubicacion-tag">
-            📍 Ubicación del local: Ingenio
-        </div>
     </div>
 </section>
 
