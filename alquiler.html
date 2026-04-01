@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,13 +20,27 @@
             background-color: var(--color-fondo);
             color: var(--color-mirlo);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             line-height: 1.6;
+        }
+
+        /* Encabezado con Logo */
+        header {
+            background-color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .logo-header {
+            max-width: 150px;
         }
 
         .container {
             max-width: 700px;
-            margin: 20px auto;
+            margin: 0 auto;
+            padding: 0 20px 40px 20px;
         }
 
         .btn-atras {
@@ -56,14 +69,6 @@
             text-align: center;
         }
 
-        .destacado {
-            text-align: center;
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
-        }
-
-        /* BLOQUES DE PRECIO */
         .grid-precios {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -79,29 +84,15 @@
             text-align: center;
         }
 
-        .precio-box strong { font-size: 0.9rem; text-transform: uppercase; color: #888; }
         .precio-box span { font-size: 2.2rem; font-weight: bold; display: block; color: var(--color-mirlo); }
 
-        /* SECCIONES DETALLE */
         h3 { 
             display: flex; 
             align-items: center; 
             gap: 10px; 
-            color: var(--color-mirlo); 
             border-bottom: 2px solid #f1f1f1;
             padding-bottom: 10px;
             margin-top: 30px;
-        }
-
-        .lista-horarios {
-            list-style: none;
-            padding: 0;
-        }
-
-        .lista-horarios li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f9f9f9;
-            font-size: 0.95rem;
         }
 
         .extra-item {
@@ -113,8 +104,6 @@
             border-left: 5px solid var(--color-globo);
         }
 
-        .extra-item strong { color: var(--color-mirlo); display: block; margin-bottom: 5px; }
-
         .ubicacion-final {
             text-align: center;
             background: #f1f1f1;
@@ -124,7 +113,6 @@
             font-weight: bold;
         }
 
-        /* BOTÓN WHATSAPP */
         .btn-whatsapp {
             position: fixed;
             width: 60px;
@@ -145,61 +133,55 @@
 
         @media (max-width: 500px) {
             .grid-precios { grid-template-columns: 1fr; }
-            .card-info { padding: 20px; }
         }
     </style>
 </head>
 <body>
+
+<header>
+    <img src="./img/logo.png" alt="Logo El Evento de Pitusa" class="logo-header">
+</header>
 
 <div class="container">
     <a href="galeria.html" class="btn-atras"><i class="fas fa-arrow-left"></i> Volver al catálogo</a>
 
     <div class="card-info">
         <h1>🏠 Alquiler del Local</h1>
-        <p class="destacado">Uso completo del espacio y zonas de juego en Ingenio.</p>
-
+        
         <div class="grid-precios">
             <div class="precio-box">
-                <strong>Tarifa 3 Horas</strong>
+                <small>TARIFA 3 HORAS</small>
                 <span>160 €</span>
             </div>
             <div class="precio-box">
-                <strong>Tarifa 4 Horas</strong>
+                <small>TARIFA 4 HORAS</small>
                 <span>190 €</span>
             </div>
         </div>
 
-        <h3><i class="far fa-clock" style="color: var(--color-pico);"></i> Horarios a elegir</h3>
-        <ul class="lista-horarios">
-            <li><strong>Mañanas:</strong> 10:00, 10:30 o 11:00</li>
-            <li><strong>Tardes:</strong> 16:00, 16:30 o 17:00</li>
-            <li><small>*El tiempo empieza a contar desde la hora seleccionada.</small></li>
-        </ul>
+        <h3><i class="far fa-clock"></i> Horarios disponibles</h3>
+        <p><strong>Mañanas:</strong> 10:00, 10:30 o 11:00<br>
+        <strong>Tardes:</strong> 16:00, 16:30 o 17:00</p>
 
-        <h3><i class="fas fa-star" style="color: var(--color-globo);"></i> Servicios Opcionales</h3>
+        <h3><i class="fas fa-magic"></i> Servicios Opcionales</h3>
         
         <div class="extra-item">
-            <strong>✨ Decoración Completa (140€)</strong>
-            Invitación digital, banderín temático, corona personalizada, columna de globos, nombre del peque y cajitas de golosinas.
+            <strong>✨ Decoración Completa (140€)</strong><br>
+            Invitación digital, banderín, corona, columna de globos, nombre y cajitas de chuches.
         </div>
 
         <div class="extra-item">
-            <strong>🍭 Mesa Dulce (80€)</strong>
-            Mini Pringles, Ambrosías Tirma, botes de chuches, mini donuts y palomitas individuales.
-        </div>
-
-        <div class="extra-item" style="border-left-color: var(--color-pico);">
-            <strong>🎪 Animación y Extras</strong>
-            Pintacaras (80€), Castillos hinchables (120€), Personajes/Muñecotes (130€), Máquinas de algodón o palomitas (140€).
+            <strong>🍭 Mesa Dulce (80€)</strong><br>
+            Pringles, Ambrosías Tirma, chuches, donuts y palomitas.
         </div>
 
         <div class="ubicacion-final">
-            📍 Ubicación del local: Ingenio
+            📍 Ubicación del local: Ingenio (Gran Canaria)
         </div>
     </div>
 </div>
 
-<a href="https://wa.me/34652678718?text=Hola!%20Me%20gustaría%20consultar%20disponibilidad%20para%20el%20local%20de%20Ingenio" class="btn-whatsapp" target="_blank">
+<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
