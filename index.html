@@ -22,119 +22,152 @@
             color: var(--color-mirlo);
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: white;
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            max-width: 180px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         .hero {
-            padding: 40px 20px;
-            max-width: 600px;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+            border-radius: 30px;
+            margin-bottom: 40px;
         }
 
-        .logo-principal {
-            max-width: 280px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            color: var(--color-mirlo);
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: #636e72;
-            margin-bottom: 30px;
-        }
-
-        .menu-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .btn {
-            text-decoration: none;
-            padding: 18px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .btn-catalogo {
+        .hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
+        
+        .btn-principal {
+            display: inline-block;
             background-color: var(--color-mirlo);
             color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin: 10px;
         }
 
-        .btn-whatsapp {
+        /* ESTILO FORMULARIO RESTAURADO */
+        .seccion-contacto {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .formulario-contacto {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .formulario-contacto input, 
+        .formulario-contacto select, 
+        .formulario-contacto textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .btn-enviar {
             background-color: #25d366;
             color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        .footer-info {
-            margin-top: 50px;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #95a5a6;
-            border-top: 1px solid #eee;
-            width: 80%;
-        }
-
-        .badge-reserva {
-            display: inline-block;
-            background: #fff3cd;
-            color: #856404;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 15px;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
             font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-enviar:hover { background-color: #128c7e; }
+
+        .info-reserva {
+            margin-top: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #d35400;
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <img src="./img/logo.png" alt="El Evento de Pitusa" class="logo-principal">
-        <h1>¡Hacemos magia!</h1>
-        <p>Decoración, castillos hinchables, bellypainting y mucho más en Gran Canaria.</p>
+    <header>
+        <img src="./img/logo.png" alt="El Evento de Pitusa" class="logo">
+    </header>
 
-        <div class="menu-links">
-            <a href="galeria.html" class="btn btn-catalogo">
-                <i class="fas fa-images"></i> VER CATÁLOGO COMPLETO
-            </a>
-            <a href="https://wa.me/34652678718?text=Hola!%20Quiero%20pedir%20presupuesto" class="btn btn-whatsapp">
-                <i class="fab fa-whatsapp"></i> PEDIR PRESUPUESTO
-            </a>
-        </div>
+    <div class="container">
+        <section class="hero">
+            <h1>¡Hacemos realidad tu evento!</h1>
+            <p>Decoración, castillos hinchables y animación en Gran Canaria.</p>
+            <a href="galeria.html" class="btn-principal">📸 VER CATÁLOGO</a>
+        </section>
 
-        <div class="badge-reserva">
-            ✨ Reserva tu fecha con un 50% de adelanto
-        </div>
+        <section class="seccion-contacto">
+            <h2 style="text-align: center;">Pide tu Presupuesto</h2>
+            <form class="formulario-contacto" action="https://formsubmit.co/eleventodepitusa@gmail.com" method="POST">
+                <input type="text" name="nombre" placeholder="Tu Nombre" required>
+                <input type="tel" name="telefono" placeholder="Teléfono de contacto" required>
+                <select name="servicio" required>
+                    <option value="">Selecciona un servicio...</option>
+                    <option value="alquiler-local">Alquiler de Local (Ingenio)</option>
+                    <option value="hinchables">Castillos Hinchables</option>
+                    <option value="decoracion">Decoración / Mesa Dulce</option>
+                    <option value="bellypainting">Bellypainting</option>
+                    <option value="pack-completo">Pack Completo</option>
+                </select>
+                <textarea name="mensaje" rows="4" placeholder="Cuéntanos detalles (Fecha, lugar, temática...)" required></textarea>
+                
+                <input type="hidden" name="_next" value="https://eleventodepitusa.github.io/index.html">
+                <input type="hidden" name="_captcha" value="false">
+
+                <button type="submit" class="btn-enviar">📩 ENVIAR PRESUPUESTO</button>
+            </form>
+
+            <div class="info-reserva">
+                ✨ Recuerda: Reserva tu fecha con un 50% de adelanto.
+            </div>
+        </section>
     </div>
 
-    <div class="footer-info">
+    <footer>
         &copy; 2026 El Evento de Pitusa | Ingenio, Gran Canaria
-    </div>
+    </footer>
 
 </body>
 </html>
