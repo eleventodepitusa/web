@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -51,7 +50,6 @@
         }
 
         .titulo-seccion h1 { font-size: 2rem; color: var(--color-mirlo); margin-bottom: 10px; }
-        .titulo-seccion p { color: #666; font-size: 1.1rem; }
 
         /* TARJETAS DE EXPERIENCIA */
         .experiencia-card {
@@ -66,7 +64,7 @@
 
         .experiencia-img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
         }
 
@@ -87,43 +85,41 @@
             margin-bottom: 10px;
         }
 
-        /* INFO DEL VIAJE */
+        /* BANNER FINAL */
         .banner-viaje {
             background: linear-gradient(135deg, #2d3436 0%, #000 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 20px;
             text-align: center;
             margin-top: 40px;
         }
 
         .precio-grande {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: bold;
             color: var(--color-pico);
             display: block;
-            margin: 10px 0;
+            margin: 15px 0;
         }
 
         .btn-reserva {
             display: inline-block;
             background-color: #25d366;
             color: white;
-            padding: 18px 35px;
+            padding: 20px 40px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-top: 20px;
             transition: 0.3s;
         }
 
-        .btn-reserva:hover { transform: scale(1.05); background-color: #128c7e; }
-
         @media (min-width: 768px) {
             .experiencia-card { flex-direction: row; }
-            .experiencia-img { width: 40%; height: auto; }
-            .experiencia-content { width: 60%; }
+            .experiencia-img { width: 45%; height: auto; }
+            .experiencia-content { width: 55%; }
         }
     </style>
 </head>
@@ -134,46 +130,54 @@
 </header>
 
 <div class="container">
-    <a href="index.html" class="btn-atras">⬅ Volver al inicio</a>
+    <a href="galeria.html" class="btn-atras">⬅ Volver a Galería</a>
 
     <div class="titulo-seccion">
         <h1>Campus Summer Sun Barcelona 2026</h1>
-        <p>Una aventura inolvidable de 5 días para jóvenes de 6 a 19 años.</p>
+        <p>Toda la información sobre nuestro viaje estrella</p>
     </div>
 
     <div class="experiencia-card">
-        <img src="./img/1000226047.jpg" class="experiencia-img" alt="PortAventura World">
+        <img src="./img/cartel.jpg" class="experiencia-img" alt="Información del viaje">
         <div class="experiencia-content">
-            <span class="tag">DIVERSIÓN TOTAL</span>
-            <h2>PortAventura World</h2>
-            <p>Disfruta de 3 parques temáticos increíbles. Desde la adrenalina de las montañas rusas más altas de Europa hasta espectáculos mágicos que te dejarán sin palabras.</p>
+            <span class="tag">INFO GENERAL</span>
+            <h2>Detalles del Campus</h2>
+            <p>Un viaje completo del 10 al 14 de agosto. Incluye vuelos, traslados, pensión completa y tour guiado por Barcelona para jóvenes de 6 a 19 años.</p>
         </div>
     </div>
 
     <div class="experiencia-card">
-        <img src="./img/1000226046.jpg" class="experiencia-img" alt="Ferrari Land">
+        <img src="./img/port.jpg" class="experiencia-img" alt="PortAventura Park">
+        <div class="experiencia-content">
+            <span class="tag">ADRENALINA</span>
+            <h2>PortAventura World</h2>
+            <p>Acceso a los mejores parques temáticos. Disfruta de mundos llenos de aventuras, espectáculos increíbles y las atracciones más famosas de España.</p>
+        </div>
+    </div>
+
+    <div class="experiencia-card">
+        <img src="./img/ferrari.jpg" class="experiencia-img" alt="Ferrari Land">
         <div class="experiencia-content">
             <span class="tag">VELOCIDAD</span>
-            <h2>Ferrari Land Experience</h2>
-            <p>Siente la pasión de la escudería italiana. Vive la velocidad en Red Force, el acelerador vertical más alto y rápido de Europa. ¡De 0 a 180 km/h en solo 5 segundos!</p>
+            <h2>Ferrari Land</h2>
+            <p>Siente la emoción de la velocidad pura en Red Force y descubre los secretos de la escudería italiana en una experiencia única en el mundo.</p>
         </div>
     </div>
 
     <div class="experiencia-card">
-        <img src="./img/1000226045.jpg" class="experiencia-img" alt="Camp Nou" style="object-position: bottom;">
+        <img src="./img/land.jpg" class="experiencia-img" alt="Ferrari Experience">
         <div class="experiencia-content">
-            <span class="tag">PASIÓN POR EL FÚTBOL</span>
-            <h2>Spotify Camp Nou Tour</h2>
-            <p>Visita el templo del FC Barcelona. Recorre el museo, pisa el terreno de juego y descubre la historia de uno de los clubes más grandes del mundo.</p>
+            <span class="tag">MÁS EMOCIÓN</span>
+            <h2>Ferrari Experience</h2>
+            <p>Inmersión total en la tecnología y el diseño Ferrari. Un recorrido interactivo para que los amantes de los coches vivan un sueño.</p>
         </div>
     </div>
 
     <div class="banner-viaje">
-        <h2>¿Te vienes con nosotros?</h2>
-        <p>Del 10 al 14 de Agosto | Pensión Completa | Todo Incluido</p>
+        <h2>¿Listo para la aventura?</h2>
+        <p>Reserva ahora y paga cómodamente en 9 cuotas</p>
         <span class="precio-grande">850€</span>
-        <p>Posibilidad de pago en 9 cuotas</p>
-        <a href="https://wa.me/34653485061?text=Hola!%20Quiero%20información%20sobre%20el%20viaje%20a%20Barcelona" class="btn-reserva">
+        <a href="https://wa.me/34653485061?text=Hola!%20Quiero%20reservar%20plaza%20para%20el%20viaje%20a%20Barcelona" class="btn-reserva">
             <i class="fab fa-whatsapp"></i> RESERVAR MI PLAZA
         </a>
     </div>
