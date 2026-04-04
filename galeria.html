@@ -12,7 +12,7 @@
             --color-mirlo: #2d3436;
             --color-pico: #f1c40f;
             --color-globo: #ff9a9e;
-            --color-belly: #a1c4fd;
+            --color-rojo: #e30613;
             --color-fondo: #fffdf9;
         }
 
@@ -20,8 +20,7 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--color-fondo);
             color: var(--color-mirlo);
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             scroll-behavior: smooth;
         }
 
@@ -32,9 +31,7 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
 
         .logo-small { max-width: 120px; }
@@ -48,7 +45,6 @@
             border-radius: 25px;
             font-size: 0.75rem;
             font-weight: bold;
-            text-transform: uppercase;
         }
 
         .nav-secciones {
@@ -56,13 +52,8 @@
             padding: 10px;
             background: #fff;
             border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 65px;
-            z-index: 900;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
+            position: sticky; top: 65px; z-index: 900;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 8px;
         }
 
         .nav-secciones a {
@@ -73,12 +64,9 @@
             padding: 6px 12px;
             border-radius: 20px;
             background-color: #f9f9f9;
-            transition: 0.3s;
         }
 
-        .nav-secciones a:hover { background: var(--color-pico); color: white; }
-
-        /* DISEÑO PINTEREST Refinado (Imágenes más pequeñas) */
+        /* DISEÑO PINTEREST */
         .pitusa-grid {
             column-count: 4;
             column-gap: 15px;
@@ -100,91 +88,66 @@
             break-inside: avoid;
         }
 
-        .grid-item img {
-            width: 100%;
-            display: block;
-            height: auto;
-        }
-
-        .info-foto {
-            padding: 8px;
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            background: white;
-        }
+        .grid-item img { width: 100%; display: block; height: auto; }
+        .info-foto { padding: 8px; text-align: center; font-size: 0.8rem; font-weight: bold; }
 
         .seccion-galeria { padding: 40px 20px; }
-        .seccion-galeria h2 { text-align: center; font-size: 1.8rem; margin-bottom: 30px; }
+        .seccion-galeria h2 { text-align: center; font-size: 1.8rem; margin-bottom: 20px; }
 
-        /* BOTÓN INFO ALQUILER */
-        .header-alquiler {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .btn-info-alquiler {
+        /* BOTONES DE ENLACE */
+        .header-enlace { text-align: center; margin-bottom: 30px; }
+        .btn-info-extra {
             display: inline-block;
-            background-color: var(--color-pico);
-            color: var(--color-mirlo);
+            color: white;
             text-decoration: none;
             padding: 12px 25px;
             border-radius: 30px;
             font-weight: bold;
             font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
             transition: 0.3s;
         }
 
-        .btn-info-alquiler:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4); }
-
-        /* BOTÓN WHATSAPP FLOTANTE OFICIAL */
         .btn-whatsapp {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 25px;
-            right: 25px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            z-index: 2000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            font-size: 32px;
-            transition: transform 0.3s ease;
+            position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px;
+            background-color: #25d366; color: white; border-radius: 50px;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; z-index: 2000; font-size: 32px;
         }
 
-        .btn-whatsapp:hover {
-            transform: scale(1.1);
-            background-color: #128c7e;
-        }
-
-        footer { text-align: center; padding: 40px 20px; color: #999; font-size: 0.8rem; border-top: 1px solid #eee; margin-top: 50px; }
+        footer { text-align: center; padding: 40px 20px; color: #999; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo-small"><img src="./img/logo.png" alt="Logo"></div>
-    <a href="index.html" class="btn-volver">⬅ Volver</a>
+    <a href="index.html" class="btn-volver">⬅ INICIO</a>
 </header>
 
 <nav class="nav-secciones">
     <a href="#hinchables">🏰 Castillos</a>
     <a href="#animacion">🎪 Animación</a>
     <a href="#decoracion">🎈 Decoración</a>
-    <a href="#personalizacion">🎨 Personalización</a>
-    <a href="#bellypainting">🤰 Bellypainting</a>
+    <a href="#personalizacion">🎨 Perso</a>
+    <a href="#bellypainting">🤰 Belly</a>
     <a href="#alquiler">🏠 El Local</a>
+    <a href="#experiencias" style="background: var(--color-rojo); color: white;">✈️ Experiencias</a>
 </nav>
 
-<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<section id="experiencias" class="seccion-galeria" style="background: #fff5f5; border-bottom: 2px solid #ffecec;">
+    <div class="header-enlace">
+        <h2>✈️ Viaje a Barcelona 2026</h2>
+        <a href="experiencias.html" class="btn-info-extra" style="background-color: var(--color-rojo);">✈️ VER DETALLES Y PRECIOS DEL VIAJE</a>
+    </div>
+    <div class="pitusa-grid">
+        <div class="grid-item"><img src="./img/1000226045.jpg"><div class="info-foto">Spotify Camp Nou</div></div>
+        <div class="grid-item"><img src="./img/1000226047.jpg"><div class="info-foto">PortAventura World</div></div>
+        <div class="grid-item"><img src="./img/1000226046.jpg"><div class="info-foto">Ferrari Land</div></div>
+        <div class="grid-item"><img src="./img/1000226048.jpg"><div class="info-foto">Ferrari Experience</div></div>
+    </div>
+</section>
 
 <section id="hinchables" class="seccion-galeria">
     <h2>🏰 Castillos Hinchables</h2>
@@ -217,7 +180,6 @@
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/nubeaitana.jpg"></div>
         <div class="grid-item"><img src="./img/galletaaitan.jpg"></div>
-        <div class="grid-item"><img src="./img/risisgaby.jpg"></div>
         <div class="grid-item"><img src="./img/papasneyll.jpg"></div>
         <div class="grid-item"><img src="./img/nubegaby.jpg"></div>
         <div class="grid-item"><img src="./img/nocillagaby.jpg"></div>
@@ -236,27 +198,21 @@
 </section>
 
 <section id="bellypainting" class="seccion-galeria">
-    <h2 style="border-bottom-color: var(--color-belly);">🤰 Bellypainting</h2>
+    <h2>🤰 Bellypainting</h2>
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/aaron.jpg"></div>
         <div class="grid-item"><img src="./img/adriel.jpg"></div>
         <div class="grid-item"><img src="./img/ainara.jpg"></div>
-        <div class="grid-item"><img src="./img/isabella.jpg"></div>
-        <div class="grid-item"><img src="./img/jamie.jpg"></div>
-        <div class="grid-item"><img src="./img/jason.jpg"></div>
-        <div class="grid-item"><img src="./img/kennen.jpg"></div>
         <div class="grid-item"><img src="./img/ohana.jpg"></div>
         <div class="grid-item"><img src="./img/sofia.jpg"></div>
-        <div class="grid-item"><img src="./img/yaron.jpg"></div>
     </div>
 </section>
 
-<section id="alquiler" class="seccion-galeria" style="background: white; border-top: 1px solid #eee;">
-    <div class="header-alquiler">
+<section id="alquiler" class="seccion-galeria" style="background: white; border-top: 2px solid #eee;">
+    <div class="header-enlace">
         <h2>🏠 Alquiler de Espacio en Ingenio</h2>
-        <a href="alquiler.html" class="btn-info-alquiler">📝 VER TARIFAS E INFORMACIÓN</a>
+        <a href="alquiler.html" class="btn-info-extra" style="background-color: var(--color-pico); color: var(--color-mirlo);">📝 VER TARIFAS E INFORMACIÓN</a>
     </div>
-    
     <div class="pitusa-grid">
         <div class="grid-item"><img src="./img/localmesas.jpg"></div>
         <div class="grid-item"><img src="./img/localmesa.jpg"></div>
