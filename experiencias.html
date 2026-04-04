@@ -1,1 +1,188 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencias Barcelona | El Evento de Pitusa</title>
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-mirlo: #2d3436;
+            --color-pico: #f1c40f;
+            --color-ferrari: #e30613;
+            --color-fondo: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--color-fondo);
+            margin: 0; padding: 0; color: var(--color-mirlo);
+        }
+
+        header {
+            background-color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo-header { max-width: 140px; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        .btn-atras {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--color-mirlo);
+            font-weight: bold;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .titulo-seccion h1 { font-size: 2rem; color: var(--color-mirlo); margin-bottom: 10px; }
+        .titulo-seccion p { color: #666; font-size: 1.1rem; }
+
+        /* TARJETAS DE EXPERIENCIA */
+        .experiencia-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experiencia-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .experiencia-content {
+            padding: 25px;
+        }
+
+        .experiencia-content h2 { margin: 0 0 10px 0; color: var(--color-mirlo); }
+        .experiencia-content p { color: #555; line-height: 1.6; }
+
+        .tag {
+            display: inline-block;
+            background: var(--color-pico);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* INFO DEL VIAJE */
+        .banner-viaje {
+            background: linear-gradient(135deg, #2d3436 0%, #000 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .precio-grande {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-pico);
+            display: block;
+            margin: 10px 0;
+        }
+
+        .btn-reserva {
+            display: inline-block;
+            background-color: #25d366;
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-reserva:hover { transform: scale(1.05); background-color: #128c7e; }
+
+        @media (min-width: 768px) {
+            .experiencia-card { flex-direction: row; }
+            .experiencia-img { width: 40%; height: auto; }
+            .experiencia-content { width: 60%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="./img/logo.png" alt="Logo El Evento de Pitusa" class="logo-header">
+</header>
+
+<div class="container">
+    <a href="index.html" class="btn-atras">⬅ Volver al inicio</a>
+
+    <div class="titulo-seccion">
+        <h1>Campus Summer Sun Barcelona 2026</h1>
+        <p>Una aventura inolvidable de 5 días para jóvenes de 6 a 19 años.</p>
+    </div>
+
+    <div class="experiencia-card">
+        <img src="./img/1000226047.jpg" class="experiencia-img" alt="PortAventura World">
+        <div class="experiencia-content">
+            <span class="tag">DIVERSIÓN TOTAL</span>
+            <h2>PortAventura World</h2>
+            <p>Disfruta de 3 parques temáticos increíbles. Desde la adrenalina de las montañas rusas más altas de Europa hasta espectáculos mágicos que te dejarán sin palabras.</p>
+        </div>
+    </div>
+
+    <div class="experiencia-card">
+        <img src="./img/1000226046.jpg" class="experiencia-img" alt="Ferrari Land">
+        <div class="experiencia-content">
+            <span class="tag">VELOCIDAD</span>
+            <h2>Ferrari Land Experience</h2>
+            <p>Siente la pasión de la escudería italiana. Vive la velocidad en Red Force, el acelerador vertical más alto y rápido de Europa. ¡De 0 a 180 km/h en solo 5 segundos!</p>
+        </div>
+    </div>
+
+    <div class="experiencia-card">
+        <img src="./img/1000226045.jpg" class="experiencia-img" alt="Camp Nou" style="object-position: bottom;">
+        <div class="experiencia-content">
+            <span class="tag">PASIÓN POR EL FÚTBOL</span>
+            <h2>Spotify Camp Nou Tour</h2>
+            <p>Visita el templo del FC Barcelona. Recorre el museo, pisa el terreno de juego y descubre la historia de uno de los clubes más grandes del mundo.</p>
+        </div>
+    </div>
+
+    <div class="banner-viaje">
+        <h2>¿Te vienes con nosotros?</h2>
+        <p>Del 10 al 14 de Agosto | Pensión Completa | Todo Incluido</p>
+        <span class="precio-grande">850€</span>
+        <p>Posibilidad de pago en 9 cuotas</p>
+        <a href="https://wa.me/34653485061?text=Hola!%20Quiero%20información%20sobre%20el%20viaje%20a%20Barcelona" class="btn-reserva">
+            <i class="fab fa-whatsapp"></i> RESERVAR MI PLAZA
+        </a>
+    </div>
+
+</div>
+
+<footer style="text-align: center; padding: 40px; color: #999; font-size: 0.8rem;">
+    &copy; 2026 El Evento de Pitusa | Mandy Magic
+</footer>
+
+</body>
+</html>
