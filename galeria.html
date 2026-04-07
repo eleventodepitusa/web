@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Completo | El Evento de Pitusa</title>
+    <title>Catálogo | El Evento de Pitusa</title>
     <link rel="icon" type="image/png" href="./img/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -11,7 +11,6 @@
         :root {
             --color-mirlo: #2d3436;
             --color-pico: #f1c40f;
-            --color-globo: #ff9a9e;
             --color-rojo: #e30613;
             --color-fondo: #fffdf9;
         }
@@ -19,7 +18,6 @@
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--color-fondo);
-            color: var(--color-mirlo);
             margin: 0; padding: 0;
             scroll-behavior: smooth;
         }
@@ -38,164 +36,140 @@
         .logo-small img { width: 100%; display: block; }
 
         .btn-volver {
-            background-color: var(--color-mirlo);
+            background: var(--color-mirlo);
             color: white;
             text-decoration: none;
             padding: 8px 18px;
             border-radius: 25px;
-            font-size: 0.75rem;
             font-weight: bold;
+            font-size: 0.8rem;
         }
 
         .nav-secciones {
             text-align: center;
             padding: 10px;
             background: #fff;
-            border-bottom: 1px solid #eee;
             position: sticky; top: 65px; z-index: 900;
             display: flex; justify-content: center; flex-wrap: wrap; gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .nav-secciones a {
             text-decoration: none;
             color: var(--color-mirlo);
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             padding: 6px 12px;
             border-radius: 20px;
-            background-color: #f9f9f9;
+            background: #f1f1f1;
         }
 
-        /* DISEÑO DE COLLAGE (TIPO PINTEREST) */
+        /* DISEÑO COLLAGE ESTILO PINTEREST */
         .pitusa-collage {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-auto-rows: 20px; /* Base para el cálculo de altura */
-            gap: 15px;
-            max-width: 1300px;
+            column-count: 4;
+            column-gap: 15px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 10px;
         }
+
+        @media (max-width: 1000px) { .pitusa-collage { column-count: 3; } }
+        @media (max-width: 600px) { .pitusa-collage { column-count: 2; } }
 
         .collage-item {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .collage-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .collage-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .info-foto {
-            padding: 10px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: bold;
-            background-color: white;
-        }
-
-        /* Estilos específicos para diferentes alturas de collage (simulación simple) */
-        .pitusa-collage > div:nth-child(2n) { grid-row-end: span 12; } /* Medianas */
-        .pitusa-collage > div:nth-child(3n) { grid-row-end: span 15; } /* Altas */
-        .pitusa-collage > div:nth-child(4n) { grid-row-end: span 10; } /* Cortas */
-        .pitusa-collage > div { grid-row-end: span 11; } /* Por defecto */
-
-
-        .seccion-galeria { padding: 50px 20px; border-bottom: 1px solid #eee; }
-        .seccion-galeria h2 { text-align: center; font-size: 2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
-
-        .header-enlace { text-align: center; margin-bottom: 30px; }
-        .btn-info-extra {
             display: inline-block;
-            color: white;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 0.9rem;
+            width: 100%;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: 0.3s;
+        }
+
+        .collage-item img { width: 100%; display: block; height: auto; }
+        .info-foto { padding: 10px; text-align: center; font-size: 0.8rem; font-weight: bold; color: #555; }
+
+        .seccion-galeria { padding: 60px 15px; }
+        .seccion-galeria h2 { 
+            text-align: center; 
+            font-size: 1.8rem; 
+            margin-bottom: 30px; 
+            text-transform: uppercase;
+            color: var(--color-mirlo);
         }
 
         .btn-whatsapp {
             position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px;
-            background-color: #25d366; color: white; border-radius: 50px;
+            background: #25d366; color: white; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            text-decoration: none; z-index: 2000; font-size: 32px;
+            text-decoration: none; z-index: 2000; font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        footer { text-align: center; padding: 40px 20px; color: #999; font-size: 0.8rem; }
+        .header-enlace { text-align: center; margin-bottom: 30px; }
+        .btn-especial {
+            display: inline-block; color: white; text-decoration: none;
+            padding: 12px 25px; border-radius: 30px; font-weight: bold;
+        }
+
+        footer { text-align: center; padding: 40px; color: #bbb; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo-small"><img src="./img/logo.png" alt="Logo"></div>
-    <a href="index.html" class="btn-volver">⬅ INICIO</a>
+    <a href="index.html" class="btn-volver">INICIO</a>
 </header>
 
 <nav class="nav-secciones">
-    <a href="#experiencias" style="background: var(--color-rojo); color: white;">✈️ Experiencias</a>
-    <a href="#hinchables">🏰 Castillos</a>
-    <a href="#animacion">🎪 Animación</a>
-    <a href="#decoracion">🎈 Decoración</a>
-    <a href="#personalizacion">🎨 Personalización</a>
-    <a href="#bellypainting">🤰 Bellypainting</a>
-    <a href="#alquiler">🏠 Alquiler Local</a>
+    <a href="#experiencias" style="background: var(--color-rojo); color: white;">✈️ EXPERIENCIAS</a>
+    <a href="#hinchables">🏰 CASTILLOS</a>
+    <a href="#animacion">🎪 ANIMACIÓN</a>
+    <a href="#decoracion">🎈 DECORACIÓN</a>
+    <a href="#personalizacion">🎨 PERSONALIZACIÓN</a>
+    <a href="#bellypainting">🤰 BELLYPAINTING</a>
+    <a href="#alquiler">🏠 ALQUILER</a>
 </nav>
 
 <a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <section id="experiencias" class="seccion-galeria" style="background: #fff5f5;">
-    <h2>✈️ Experiencias Barcelona 2026</h2>
+    <h2>✈️ Experiencias Barcelona</h2>
     <div class="header-enlace">
-        <a href="experiencias.html" class="btn-info-extra" style="background-color: var(--color-rojo);">✈️ VER DETALLES Y PRECIOS DEL VIAJE</a>
+        <a href="experiencias.html" class="btn-especial" style="background: var(--color-rojo);">VER DETALLES Y CUOTAS</a>
     </div>
     <div class="pitusa-collage">
-        <div class="collage-item"><img src="./img/cartel.jpg"><div class="info-foto">Información General</div></div>
-        <div class="collage-item"><img src="./img/port.jpg"><div class="info-foto">PortAventura World</div></div>
+        <div class="collage-item"><img src="./img/cartel.jpg"><div class="info-foto">Info Viaje</div></div>
+        <div class="collage-item"><img src="./img/port.jpg"><div class="info-foto">PortAventura</div></div>
         <div class="collage-item"><img src="./img/ferrari.jpg"><div class="info-foto">Ferrari Land</div></div>
         <div class="collage-item"><img src="./img/land.jpg"><div class="info-foto">Ferrari Experience</div></div>
     </div>
 </section>
 
-<section id="hinchables" class="seccion-galeria">
-    <h2>🏰 Castillos Hinchables</h2>
-    <div class="pitusa-collage">
-        <div class="collage-item"><img src="./img/caststich.jpg"><div class="info-foto">Stitch 3x4m</div></div>
-        <div class="collage-item"><img src="./img/ccampanilla.jpg"><div class="info-foto">Campanilla 3x4m</div></div>
-        <div class="collage-item"><img src="./img/sonrisa.jpg"><div class="info-foto">Sonrisa 5x4m</div></div>
-        <div class="collage-item"><img src="./img/rampa.jpg"><div class="info-foto">Rampa 5x4m</div></div>
-        <div class="collage-item"><img src="./img/rampad.jpg"><div class="info-foto">Rampa 6x4m</div></div>
-        <div class="collage-item"><img src="./img/tobogan.jpg"><div class="info-foto">Tobogán 8x4m</div></div>
-        <div class="collage-item"><img src="./img/tobogan1.jpg"><div class="info-foto">Tobogán 8x4m</div></div>
-        <div class="collage-item"><img src="./img/ojodebuey.jpg"><div class="info-foto">Ojo de Buey 8x4m</div></div>
-        <div class="collage-item"><img src="./img/pistaamericana.jpg"><div class="info-foto">Pista Americana 12x4m</div></div>
-    </div>
-</section>
-
-<section id="animacion" class="seccion-galeria" style="background: #fdfcf4;">
+<section id="animacion" class="seccion-galeria">
     <h2>🎪 Animación y Muñecotes</h2>
     <div class="pitusa-collage">
-        <div class="collage-item"><img src="./img/plataforma.jpg"><div class="info-foto">Plataforma Divertida</div></div>
-        <div class="collage-item"><img src="./img/anime.jpg"><div class="info-foto">Animación Temática</div></div>
-        <div class="collage-item"><img src="./img/pinglo.jpg"><div class="info-foto">Pintacaras y Globos</div></div>
-        <div class="collage-item"><img src="./img/canon.jpg"><div class="info-foto">Cañón de Espuma</div></div>
-        
+        <div class="collage-item"><img src="./img/plataforma.png"><div class="info-foto">Plataforma 360</div></div>
+        <div class="collage-item"><img src="./img/anime.png"><div class="info-foto">Animación</div></div>
+        <div class="collage-item"><img src="./img/pinglo.png"><div class="info-foto">Pintacaras</div></div>
+        <div class="collage-item"><img src="./img/canon.png"><div class="info-foto">Cañón Espuma</div></div>
         <div class="collage-item"><img src="./img/bluey.png"><div class="info-foto">Bluey</div></div>
         <div class="collage-item"><img src="./img/marshall.png"><div class="info-foto">Marshall</div></div>
         <div class="collage-item"><img src="./img/chase.png"><div class="info-foto">Chase</div></div>
         <div class="collage-item"><img src="./img/stichangel.png"><div class="info-foto">Stitch y Angel</div></div>
-        <div class="collage-item"><img src="./img/rumi.jpg"><div class="info-foto">Personajes</div></div>
+    </div>
+</section>
+
+<section id="hinchables" class="seccion-galeria" style="background: #f4f7f6;">
+    <h2>🏰 Castillos Hinchables</h2>
+    <div class="pitusa-collage">
+        <div class="collage-item"><img src="./img/caststich.jpg"><div class="info-foto">Stitch</div></div>
+        <div class="collage-item"><img src="./img/ccampanilla.jpg"><div class="info-foto">Campanilla</div></div>
+        <div class="collage-item"><img src="./img/sonrisa.jpg"><div class="info-foto">Sonrisa</div></div>
+        <div class="collage-item"><img src="./img/rampa.jpg"><div class="info-foto">Rampa</div></div>
+        <div class="collage-item"><img src="./img/tobogan.jpg"><div class="info-foto">Tobogán</div></div>
     </div>
 </section>
 
@@ -206,18 +180,15 @@
         <div class="collage-item"><img src="./img/galletaaitan.jpg"></div>
         <div class="collage-item"><img src="./img/papasneyll.jpg"></div>
         <div class="collage-item"><img src="./img/nubegaby.jpg"></div>
-        <div class="collage-item"><img src="./img/nocillagaby.jpg"></div>
     </div>
 </section>
 
-<section id="personalizacion" class="seccion-galeria">
+<section id="personalizacion" class="seccion-galeria" style="background: #f9f9f9;">
     <h2>🎨 Personalización Única</h2>
     <div class="pitusa-collage">
         <div class="collage-item"><img src="./img/puloverperro.jpg"></div>
         <div class="collage-item"><img src="./img/camisaarma.jpg"></div>
         <div class="collage-item"><img src="./img/camisadragon.jpg"></div>
-        <div class="collage-item"><img src="./img/cojindragon.jpg"></div>
-        <div class="collage-item"><img src="./img/guerragalaxia.jpg"></div>
     </div>
 </section>
 
@@ -228,21 +199,18 @@
         <div class="collage-item"><img src="./img/adriel.jpg"></div>
         <div class="collage-item"><img src="./img/ainara.jpg"></div>
         <div class="collage-item"><img src="./img/ohana.jpg"></div>
-        <div class="collage-item"><img src="./img/sofia.jpg"></div>
     </div>
 </section>
 
 <section id="alquiler" class="seccion-galeria" style="background: white; border-top: 2px solid #eee;">
-    <h2>🏠 Alquiler de Espacio en Ingenio</h2>
+    <h2>🏠 Alquiler Local Ingenio</h2>
     <div class="header-enlace">
-        <a href="alquiler.html" class="btn-info-extra" style="background-color: var(--color-pico); color: var(--color-mirlo);">📝 VER TARIFAS E INFORMACIÓN</a>
+        <a href="alquiler.html" class="btn-especial" style="background: var(--color-pico); color: black;">VER TARIFAS LOCAL</a>
     </div>
     <div class="pitusa-collage">
         <div class="collage-item"><img src="./img/localmesas.jpg"></div>
         <div class="collage-item"><img src="./img/localmesa.jpg"></div>
-        <div class="collage-item"><img src="./img/lmesapeq.jpg"></div>
         <div class="collage-item"><img src="./img/lespacio.jpg"></div>
-        <div class="collage-item"><img src="./img/espacio.jpg"></div>
     </div>
 </section>
 
