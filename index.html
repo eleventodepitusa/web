@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Evento de Pitusa | Eventos en Gran Canaria</title>
+    <title>Presupuesto | El Evento de Pitusa</title>
     <link rel="icon" type="image/png" href="./img/logo.png">
     <style>
         :root {
@@ -11,59 +11,98 @@
             --color-mirlo: #2d3436;
             --color-fondo: #fffdf9;
         }
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--color-fondo); margin: 0; text-align: center; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--color-fondo); margin: 0; padding: 20px; text-align: center; }
+        .logo-main { max-width: 180px; margin-bottom: 10px; }
         
-        .hero { padding: 50px 20px; }
-        .logo-main { max-width: 200px; margin-bottom: 20px; }
-        
-        /* Contenedor de botones */
-        .grid-botones {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
+        .formulario-presupuesto {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
         }
 
-        .btn-principal {
-            background-color: white;
-            color: var(--color-mirlo);
-            text-decoration: none;
-            padding: 20px;
-            border-radius: 15px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            border: 2px solid transparent;
+        label { display: block; margin-top: 15px; font-weight: bold; color: var(--color-mirlo); }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
         }
-        
-        .btn-principal:hover { border-color: var(--color-rojo); transform: translateY(-5px); }
-        
-        /* Botón destacado para Experiencias */
-        .btn-destacado { background-color: var(--color-rojo); color: white; }
+
+        .btn-enviar {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 25px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .nota-informativa {
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
 
-<section class="hero">
     <img src="./img/logo.png" alt="Logo" class="logo-main">
-    <h1>¡Hacemos realidad tu evento!</h1>
-    <p>Decoración, castillos hinchables, animación y mucho más.</p>
     
-    <div class="grid-botones">
-        <a href="experiencias.html" class="btn-principal btn-destacado">✈️ EXPERIENCIA BARCELONA</a>
-        
-        <a href="galeria.html#hinchables" class="btn-principal">🏰 CASTILLOS</a>
-        
-        <a href="galeria.html#animacion" class="btn-principal">🎪 ANIMACIÓN</a>
-        <a href="galeria.html#personalizacion" class="btn-principal">🎨 PERSONALIZACIÓN</a>
-        
-        <a href="galeria.html#decoracion" class="btn-principal">🎈 DECORACIÓN</a>
-        <a href="galeria.html#bellypainting" class="btn-principal">🤰 BELLYPAINTING</a>
-        <a href="galeria.html#alquiler" class="btn-principal">🏠 ALQUILER LOCAL</a>
+    <div class="formulario-presupuesto">
+        <form action="https://formsubmit.co/eleventodepitusa@gmail.com" method="POST">
+            <input type="hidden" name="_next" value="https://eleventodepitusa.github.io/gracias.html">
+            <input type="hidden" name="_captcha" value="false">
+
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
+
+            <label for="whatsapp">Teléfono / WhatsApp</label>
+            <input type="tel" name="whatsapp" placeholder="600 000 000" required>
+
+            <label for="servicio">Selecciona un servicio...</label>
+            <select name="servicio" required>
+                <option value="" disabled selected>Selecciona un servicio...</option>
+                <option value="Alquiler de Local">Alquiler de Local (Ingenio)</option>
+                <option value="Castillos Hinchables">Castillos Hinchables</option>
+                <option value="Animacion y Muñecotes">Animación y Muñecotes</option>
+                <option value="Decoracion / Mesa Dulce">Decoración / Mesa Dulce</option>
+                <option value="Bellypainting">Bellypainting</option>
+                <option value="Personalizacion">Personalización</option>
+                <option value="Pack Completo">Pack Completo</option>
+                <option value="Experiencia Barcelona">Experiencia Barcelona 2026</option>
+            </select>
+
+            <label for="fecha">Fecha del evento</label>
+            <input type="date" name="fecha" required>
+
+            <label for="mensaje">Cuéntanos más detalles</label>
+            <textarea name="mensaje" rows="4" placeholder="¿Cuántos niños son? ¿Qué temática te gusta?"></textarea>
+
+            <button type="submit" class="btn-enviar">📩 ENVIAR PRESUPUESTO</button>
+        </form>
+
+        <div class="nota-informativa">
+            📌 Una vez aceptado el presupuesto para la reserva, se tendrá que abonar el 50% para bloquear fechas.
+        </div>
     </div>
-</section>
+
+    <p style="margin-top: 20px;"><a href="galeria.html" style="color: var(--color-rojo); font-weight: bold; text-decoration: none;">Ver fotos de nuestros trabajos</a></p>
 
 </body>
 </html>
