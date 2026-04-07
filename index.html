@@ -14,77 +14,24 @@
             --color-fondo: #fffdf9;
         }
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--color-fondo); margin: 0; padding: 20px; text-align: center; }
-        
         .logo-main { max-width: 180px; margin-bottom: 10px; }
         
-        .btn-galeria-top {
-            display: inline-block;
-            background-color: var(--color-pico);
-            color: var(--color-mirlo);
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+        /* Botón Galería */
+        .btn-galeria-top { display: inline-block; background-color: var(--color-pico); color: var(--color-mirlo); text-decoration: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        .formulario-presupuesto {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 550px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
+        .formulario-presupuesto { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 550px; margin: 0 auto; text-align: left; }
         label { display: block; margin-top: 15px; font-weight: bold; color: var(--color-mirlo); font-size: 0.9rem; }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        .row-inputs {
-            display: flex;
-            gap: 10px;
-        }
+        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        .row-inputs { display: flex; gap: 10px; }
         .row-inputs div { width: 50%; }
+        .btn-enviar { background-color: #e30613; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 25px; cursor: pointer; }
 
-        .btn-enviar {
-            background-color: #25d366;
-            color: white;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 25px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .nota-informativa {
-            background: #fff4f4;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 0.85rem;
-            color: #d63031;
-            font-weight: bold;
-            text-align: center;
-        }
-
+        /* BURBUJA WHATSAPP FLOTANTE */
+        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; display: flex; align-items: center; gap: 10px; z-index: 9999; }
+        .whatsapp-bubble { background: white; padding: 10px 15px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-size: 0.9rem; font-weight: bold; color: var(--color-mirlo); }
+        .whatsapp-icon { background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; }
+        
+        .nota-informativa { background: #fff4f4; padding: 15px; border-radius: 10px; margin-top: 20px; font-size: 0.85rem; color: #d63031; font-weight: bold; text-align: center; }
         footer { margin-top: 40px; padding: 20px; color: #777; font-size: 0.85rem; }
     </style>
 </head>
@@ -104,10 +51,10 @@
             <label>Nombre Completo</label>
             <input type="text" name="nombre" placeholder="Escribe tu nombre" required>
 
-            <label>WhatsApp de contacto</label>
-            <input type="tel" name="whatsapp" placeholder="600 000 000" required>
+            <label>Teléfono de contacto</label>
+            <input type="tel" name="telefono" placeholder="600 000 000" required>
 
-            <label>Selecciona el servicio principal</label>
+            <label>Servicio principal</label>
             <select name="servicio" required>
                 <option value="" disabled selected>Selecciona un servicio...</option>
                 <option value="Alquiler de Local">Alquiler de Local (Ingenio)</option>
@@ -124,39 +71,35 @@
             <input type="date" name="fecha" required>
 
             <div class="row-inputs">
-                <div>
-                    <label>Nº de Niños (aprox.)</label>
-                    <input type="number" name="cantidad_ninos" placeholder="0">
-                </div>
-                <div>
-                    <label>Nº de Adultos (aprox.)</label>
-                    <input type="number" name="cantidad_adultos" placeholder="0">
-                </div>
+                <div><label>Nº de Niños</label><input type="number" name="ninos" placeholder="0"></div>
+                <div><label>Nº de Adultos</label><input type="number" name="adultos" placeholder="0"></div>
             </div>
 
-            <label>Ubicación del evento (Municipio / Dirección)</label>
-            <input type="text" name="ubicacion" placeholder="Ej: Ingenio, Telde, Las Palmas..." required>
+            <label>Ubicación del evento</label>
+            <input type="text" name="ubicacion" placeholder="Ej: Ingenio, Telde..." required>
 
             <label>Tipo de espacio</label>
-            <select name="tipo_espacio">
-                <option value="No especificado">¿Dónde se celebra?</option>
-                <option value="Interior / Local cerrado">Interior / Local cerrado</option>
-                <option value="Exterior / Aire libre">Exterior / Aire libre</option>
-                <option value="Terraza / Jardín privado">Terraza / Jardín privado</option>
+            <select name="espacio">
+                <option value="Local cerrado">Local cerrado</option>
+                <option value="Aire libre">Aire libre</option>
+                <option value="Terraza/Jardín">Terraza/Jardín</option>
             </select>
 
-            <label>Detalles adicionales (temática, horario...)</label>
-            <textarea name="mensaje" rows="3" placeholder="Cuéntanos más para personalizar tu presupuesto"></textarea>
+            <label>Detalles adicionales</label>
+            <textarea name="mensaje" rows="3" placeholder="¿Cómo podemos ayudarte?"></textarea>
 
-            <button type="submit" class="btn-enviar">
-                <i class="fas fa-paper-plane"></i> SOLICITAR PRESUPUESTO
-            </button>
+            <button type="submit" class="btn-enviar">SOLICITAR PRESUPUESTO</button>
         </form>
 
         <div class="nota-informativa">
             📌 Una vez aceptado el presupuesto, se abona el 50% para bloquear la fecha.
         </div>
     </div>
+
+    <a href="https://wa.me/34652678718" class="whatsapp-float" target="_blank">
+        <div class="whatsapp-bubble">¿En qué podemos ayudarte?</div>
+        <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+    </a>
 
     <footer>
         &copy; 2026 El Evento de Pitusa<br>
