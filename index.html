@@ -5,15 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presupuesto | El Evento de Pitusa</title>
     <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --color-rojo: #e30613;
             --color-mirlo: #2d3436;
+            --color-pico: #f1c40f;
             --color-fondo: #fffdf9;
         }
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--color-fondo); margin: 0; padding: 20px; text-align: center; }
+        
         .logo-main { max-width: 180px; margin-bottom: 10px; }
         
+        /* Botón de Galería que faltaba */
+        .btn-galeria-top {
+            display: inline-block;
+            background-color: var(--color-pico);
+            color: var(--color-mirlo);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         .formulario-presupuesto {
             background: white;
             padding: 25px;
@@ -37,7 +53,7 @@
         }
 
         .btn-enviar {
-            background-color: #28a745;
+            background-color: #25d366;
             color: white;
             border: none;
             padding: 15px;
@@ -47,16 +63,28 @@
             font-size: 18px;
             margin-top: 25px;
             cursor: pointer;
-            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .nota-informativa {
-            background: #f1f1f1;
+            background: #fff4f4;
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.85rem;
+            color: #d63031;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -64,45 +92,54 @@
 
     <img src="./img/logo.png" alt="Logo" class="logo-main">
     
+    <div>
+        <a href="galeria.html" class="btn-galeria-top">📸 VER GALERÍA DE TRABAJOS</a>
+    </div>
+
     <div class="formulario-presupuesto">
         <form action="https://formsubmit.co/eleventodepitusa@gmail.com" method="POST">
             <input type="hidden" name="_next" value="https://eleventodepitusa.github.io/gracias.html">
             <input type="hidden" name="_captcha" value="false">
 
-            <label for="nombre">Nombre Completo</label>
-            <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <label>Nombre Completo</label>
+            <input type="text" name="nombre" placeholder="Escribe tu nombre" required>
 
-            <label for="whatsapp">Teléfono / WhatsApp</label>
+            <label>WhatsApp de contacto</label>
             <input type="tel" name="whatsapp" placeholder="600 000 000" required>
 
-            <label for="servicio">Selecciona un servicio...</label>
+            <label>Selecciona un servicio...</label>
             <select name="servicio" required>
                 <option value="" disabled selected>Selecciona un servicio...</option>
                 <option value="Alquiler de Local">Alquiler de Local (Ingenio)</option>
                 <option value="Castillos Hinchables">Castillos Hinchables</option>
-                <option value="Animacion y Muñecotes">Animación y Muñecotes</option>
+                <option value="Animacion / Muñecotes">Animación / Muñecotes</option>
                 <option value="Decoracion / Mesa Dulce">Decoración / Mesa Dulce</option>
                 <option value="Bellypainting">Bellypainting</option>
                 <option value="Personalizacion">Personalización</option>
                 <option value="Pack Completo">Pack Completo</option>
-                <option value="Experiencia Barcelona">Experiencia Barcelona 2026</option>
+                <option value="Campus Barcelona 2026">Campus Barcelona 2026</option>
             </select>
 
-            <label for="fecha">Fecha del evento</label>
+            <label>Fecha del evento</label>
             <input type="date" name="fecha" required>
 
-            <label for="mensaje">Cuéntanos más detalles</label>
-            <textarea name="mensaje" rows="4" placeholder="¿Cuántos niños son? ¿Qué temática te gusta?"></textarea>
+            <label>Detalles adicionales</label>
+            <textarea name="mensaje" rows="3" placeholder="¿Cómo podemos ayudarte?"></textarea>
 
-            <button type="submit" class="btn-enviar">📩 ENVIAR PRESUPUESTO</button>
+            <button type="submit" class="btn-enviar">
+                <i class="fas fa-paper-plane"></i> ENVIAR PRESUPUESTO
+            </button>
         </form>
 
         <div class="nota-informativa">
-            📌 Una vez aceptado el presupuesto para la reserva, se tendrá que abonar el 50% para bloquear fechas.
+            📌 Una vez aceptado el presupuesto, se abona el 50% para bloquear la fecha.
         </div>
     </div>
 
-    <p style="margin-top: 20px;"><a href="galeria.html" style="color: var(--color-rojo); font-weight: bold; text-decoration: none;">Ver fotos de nuestros trabajos</a></p>
+    <footer>
+        &copy; 2026 El Evento de Pitusa<br>
+        <i class="fas fa-envelope"></i> eleventodepitusa@gmail.com
+    </footer>
 
 </body>
 </html>
