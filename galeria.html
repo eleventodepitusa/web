@@ -73,6 +73,19 @@
             padding: 0 10px;
         }
 
+        /* DISEÑO PARA FOTO ÚNICA CENTRADA */
+        .foto-central {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .foto-central .collage-item {
+            max-width: 400px; /* Tamaño destacado para la foto única */
+            width: 100%;
+        }
+
         @media (max-width: 1000px) { .pitusa-collage { column-count: 3; } }
         @media (max-width: 700px) { .pitusa-collage { column-count: 2; } }
 
@@ -91,17 +104,12 @@
         .seccion-galeria { padding: 50px 15px; }
         .seccion-galeria h2 { text-align: center; font-size: 1.8rem; margin-bottom: 10px; text-transform: uppercase; color: var(--color-mirlo); }
         
-        /* SUBTITULOS DE ANIMACION */
         .sub-categoria {
             text-align: center;
             font-size: 1.2rem;
             color: var(--color-rojo);
-            margin: 30px 0 20px 0;
+            margin: 40px 0 20px 0;
             font-weight: bold;
-            text-transform: none;
-            border-bottom: 2px solid #eee;
-            display: inline-block;
-            width: 100%;
         }
 
         .btn-whatsapp {
@@ -166,22 +174,22 @@
     <h2>🎪 Animación y Muñecotes</h2>
 
     <h3 class="sub-categoria">🎨 Pintacaras y globoflexia</h3>
-    <div class="pitusa-collage">
+    <div class="foto-central">
         <div class="collage-item"><img src="./img/pinglo.png"></div>
     </div>
 
     <h3 class="sub-categoria">🎉 Juegos y animación</h3>
-    <div class="pitusa-collage">
+    <div class="foto-central">
         <div class="collage-item"><img src="./img/anime.png"></div>
     </div>
 
     <h3 class="sub-categoria">📸 Plataforma 360°</h3>
-    <div class="pitusa-collage">
+    <div class="foto-central">
         <div class="collage-item"><img src="./img/plataforma.png"></div>
     </div>
 
     <h3 class="sub-categoria">🫧 Cañón de espuma</h3>
-    <div class="pitusa-collage">
+    <div class="foto-central">
         <div class="collage-item"><img src="./img/canon.png"></div>
     </div>
 
