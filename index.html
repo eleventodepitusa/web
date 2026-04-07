@@ -17,7 +17,6 @@
         
         .logo-main { max-width: 180px; margin-bottom: 10px; }
         
-        /* Botón de Galería que faltaba */
         .btn-galeria-top {
             display: inline-block;
             background-color: var(--color-pico);
@@ -35,12 +34,12 @@
             padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
             text-align: left;
         }
 
-        label { display: block; margin-top: 15px; font-weight: bold; color: var(--color-mirlo); }
+        label { display: block; margin-top: 15px; font-weight: bold; color: var(--color-mirlo); font-size: 0.9rem; }
         
         input, select, textarea {
             width: 100%;
@@ -51,6 +50,12 @@
             box-sizing: border-box;
             font-size: 16px;
         }
+
+        .row-inputs {
+            display: flex;
+            gap: 10px;
+        }
+        .row-inputs div { width: 50%; }
 
         .btn-enviar {
             background-color: #25d366;
@@ -80,12 +85,7 @@
             text-align: center;
         }
 
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-            color: #777;
-            font-size: 0.85rem;
-        }
+        footer { margin-top: 40px; padding: 20px; color: #777; font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -107,7 +107,7 @@
             <label>WhatsApp de contacto</label>
             <input type="tel" name="whatsapp" placeholder="600 000 000" required>
 
-            <label>Selecciona un servicio...</label>
+            <label>Selecciona el servicio principal</label>
             <select name="servicio" required>
                 <option value="" disabled selected>Selecciona un servicio...</option>
                 <option value="Alquiler de Local">Alquiler de Local (Ingenio)</option>
@@ -123,11 +123,33 @@
             <label>Fecha del evento</label>
             <input type="date" name="fecha" required>
 
-            <label>Detalles adicionales</label>
-            <textarea name="mensaje" rows="3" placeholder="¿Cómo podemos ayudarte?"></textarea>
+            <div class="row-inputs">
+                <div>
+                    <label>Nº de Niños (aprox.)</label>
+                    <input type="number" name="cantidad_ninos" placeholder="0">
+                </div>
+                <div>
+                    <label>Nº de Adultos (aprox.)</label>
+                    <input type="number" name="cantidad_adultos" placeholder="0">
+                </div>
+            </div>
+
+            <label>Ubicación del evento (Municipio / Dirección)</label>
+            <input type="text" name="ubicacion" placeholder="Ej: Ingenio, Telde, Las Palmas..." required>
+
+            <label>Tipo de espacio</label>
+            <select name="tipo_espacio">
+                <option value="No especificado">¿Dónde se celebra?</option>
+                <option value="Interior / Local cerrado">Interior / Local cerrado</option>
+                <option value="Exterior / Aire libre">Exterior / Aire libre</option>
+                <option value="Terraza / Jardín privado">Terraza / Jardín privado</option>
+            </select>
+
+            <label>Detalles adicionales (temática, horario...)</label>
+            <textarea name="mensaje" rows="3" placeholder="Cuéntanos más para personalizar tu presupuesto"></textarea>
 
             <button type="submit" class="btn-enviar">
-                <i class="fas fa-paper-plane"></i> ENVIAR PRESUPUESTO
+                <i class="fas fa-paper-plane"></i> SOLICITAR PRESUPUESTO
             </button>
         </form>
 
