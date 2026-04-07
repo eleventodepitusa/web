@@ -14,25 +14,24 @@
             --color-fondo: #fffdf9;
         }
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--color-fondo); margin: 0; padding: 20px; text-align: center; }
-        .logo-main { max-width: 180px; margin-bottom: 10px; }
+        .logo-main { max-width: 180px; margin-bottom: 20px; }
         
-        /* Botón Galería */
-        .btn-galeria-top { display: inline-block; background-color: var(--color-pico); color: var(--color-mirlo); text-decoration: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-galeria-top { display: inline-block; background-color: var(--color-pico); color: var(--color-mirlo); text-decoration: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-        .formulario-presupuesto { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 550px; margin: 0 auto; text-align: left; }
-        label { display: block; margin-top: 15px; font-weight: bold; color: var(--color-mirlo); font-size: 0.9rem; }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        .formulario-presupuesto { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); max-width: 500px; margin: 0 auto; text-align: left; }
+        label { display: block; margin-top: 15px; font-weight: 600; color: var(--color-mirlo); font-size: 0.9rem; }
+        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 15px; background: #fafafa; }
         .row-inputs { display: flex; gap: 10px; }
         .row-inputs div { width: 50%; }
-        .btn-enviar { background-color: #e30613; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 18px; margin-top: 25px; cursor: pointer; }
-
-        /* BURBUJA WHATSAPP FLOTANTE */
-        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; display: flex; align-items: center; gap: 10px; z-index: 9999; }
-        .whatsapp-bubble { background: white; padding: 10px 15px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-size: 0.9rem; font-weight: bold; color: var(--color-mirlo); }
-        .whatsapp-icon { background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; }
         
-        .nota-informativa { background: #fff4f4; padding: 15px; border-radius: 10px; margin-top: 20px; font-size: 0.85rem; color: #d63031; font-weight: bold; text-align: center; }
-        footer { margin-top: 40px; padding: 20px; color: #777; font-size: 0.85rem; }
+        /* Botón elegante */
+        .btn-enviar { background-color: var(--color-mirlo); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 25px; cursor: pointer; transition: 0.3s; }
+        .btn-enviar:hover { background-color: #000; }
+
+        /* Nota informativa discreta */
+        .nota-informativa { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 0.8rem; color: #888; text-align: center; border-left: 3px solid #ddd; }
+        
+        footer { margin-top: 40px; padding: 20px; color: #bbb; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -48,15 +47,15 @@
             <input type="hidden" name="_next" value="https://eleventodepitusa.github.io/gracias.html">
             <input type="hidden" name="_captcha" value="false">
 
-            <label>Nombre Completo</label>
-            <input type="text" name="nombre" placeholder="Escribe tu nombre" required>
+            <label>Nombre y Apellidos</label>
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
 
             <label>Teléfono de contacto</label>
             <input type="tel" name="telefono" placeholder="600 000 000" required>
 
-            <label>Servicio principal</label>
+            <label>Servicio deseado</label>
             <select name="servicio" required>
-                <option value="" disabled selected>Selecciona un servicio...</option>
+                <option value="" disabled selected>Elige un servicio...</option>
                 <option value="Alquiler de Local">Alquiler de Local (Ingenio)</option>
                 <option value="Castillos Hinchables">Castillos Hinchables</option>
                 <option value="Animacion / Muñecotes">Animación / Muñecotes</option>
@@ -76,34 +75,29 @@
             </div>
 
             <label>Ubicación del evento</label>
-            <input type="text" name="ubicacion" placeholder="Ej: Ingenio, Telde..." required>
+            <input type="text" name="ubicacion" placeholder="Ej: Ingenio, Las Palmas..." required>
 
-            <label>Tipo de espacio</label>
+            <label>Espacio</label>
             <select name="espacio">
                 <option value="Local cerrado">Local cerrado</option>
                 <option value="Aire libre">Aire libre</option>
                 <option value="Terraza/Jardín">Terraza/Jardín</option>
             </select>
 
-            <label>Detalles adicionales</label>
-            <textarea name="mensaje" rows="3" placeholder="¿Cómo podemos ayudarte?"></textarea>
+            <label>Comentarios adicionales</label>
+            <textarea name="mensaje" rows="3" placeholder="¿Alguna idea o temática especial?"></textarea>
 
-            <button type="submit" class="btn-enviar">SOLICITAR PRESUPUESTO</button>
+            <button type="submit" class="btn-enviar">ENVIAR PRESUPUESTO</button>
         </form>
 
         <div class="nota-informativa">
-            📌 Una vez aceptado el presupuesto, se abona el 50% para bloquear la fecha.
+            Para formalizar la reserva y bloqueo de fecha, se realiza un depósito del 50%.
         </div>
     </div>
 
-    <a href="https://wa.me/34652678718" class="whatsapp-float" target="_blank">
-        <div class="whatsapp-bubble">¿En qué podemos ayudarte?</div>
-        <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
-    </a>
-
     <footer>
         &copy; 2026 El Evento de Pitusa<br>
-        <i class="fas fa-envelope"></i> eleventodepitusa@gmail.com
+        eleventodepitusa@gmail.com
     </footer>
 
 </body>
