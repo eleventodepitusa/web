@@ -73,7 +73,7 @@
             padding: 0 10px;
         }
 
-        /* DISEÑO PARA FOTO ÚNICA CENTRADA */
+        /* DISEÑO PARA FOTO ÚNICA CENTRADA (Adiós a los tics) */
         .foto-central {
             display: flex;
             justify-content: center;
@@ -82,7 +82,7 @@
         }
 
         .foto-central .collage-item {
-            max-width: 400px; /* Tamaño destacado para la foto única */
+            max-width: 400px;
             width: 100%;
         }
 
@@ -112,12 +112,21 @@
             font-weight: bold;
         }
 
-        .btn-whatsapp {
-            position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px;
-            background: #25d366; color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; z-index: 2000; font-size: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        .btn-personajes {
+            background: var(--color-pico);
+            color: var(--color-mirlo);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid var(--color-mirlo);
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-personajes:hover {
+            background: var(--color-mirlo);
+            color: white;
         }
 
         footer { text-align: center; padding: 40px; color: #bbb; font-size: 0.8rem; }
@@ -127,7 +136,7 @@
 
 <header>
     <div class="logo-small"><img src="./img/logo.png" alt="Logo"></div>
-    <a href="index.html" class="btn-volver">INICIO</a>
+    <a href="index.html" class="btn-volver">VOLVER AL FORMULARIO</a>
 </header>
 
 <nav class="nav-secciones">
@@ -139,8 +148,6 @@
     <a href="#bellypainting">🤰 BELLYPAINTING</a>
     <a href="#alquiler">🏠 ALQUILER</a>
 </nav>
-
-<a href="https://wa.me/34652678718" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <section id="experiencias" class="seccion-galeria" style="background: #fff5f5;">
     <h2>✈️ Experiencias Barcelona 2026</h2>
@@ -194,6 +201,13 @@
     </div>
 
     <h3 class="sub-categoria">🧸 Personajes o muñecotes</h3>
+    
+    <div style="text-align: center; margin-bottom: 25px;">
+        <a href="muñecotes.html" class="btn-personajes">
+            <i class="fas fa-mask"></i> VER TODOS LOS PERSONAJES
+        </a>
+    </div>
+
     <div class="pitusa-collage">
         <div class="collage-item"><img src="./img/bluey.png"></div>
         <div class="collage-item"><img src="./img/marshall.png"></div>
