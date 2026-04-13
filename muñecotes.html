@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Personajes | El Evento de Pitusa</title>
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-rojo: #e30613;
+            --color-mirlo: #2d3436;
+            --color-pico: #f1c40f;
+            --color-fondo: #fffdf9;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--color-fondo);
+            margin: 0; padding: 0;
+            color: var(--color-mirlo);
+        }
+
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: white;
+            border-bottom: 3px solid var(--color-pico);
+        }
+
+        .logo-header { max-width: 150px; margin-bottom: 15px; }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--color-rojo);
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* DISEÑO COLLAGE DINÁMICO */
+        .collage-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+            column-count: 4; /* 4 columnas en PC */
+            column-gap: 15px;
+        }
+
+        @media (max-width: 1000px) { .collage-container { column-count: 3; } }
+        @media (max-width: 700px) { .collage-container { column-count: 2; } }
+
+        .item-personaje {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .item-personaje:hover {
+            transform: scale(1.02);
+            border-color: var(--color-rojo);
+        }
+
+        .item-personaje img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .nombre-personaje {
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            background: white;
+            color: var(--color-mirlo);
+        }
+
+        .btn-volver {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--color-mirlo);
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-volver:hover { background: var(--color-rojo); }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html"><img src="./img/logo.png" alt="Logo" class="logo-header"></a>
+    <h1>Nuestros Personajes</h1>
+    <p class="subtitle">¡Haz que tu fiesta sea mágica con sus invitados favoritos!</p>
+    <a href="galeria.html" class="btn-volver"><i class="fas fa-arrow-left"></i> VOLVER</a>
+</header>
+
+<main class="collage-container">
+    <div class="item-personaje">
+        <img src="./img/1000231445.jpg" alt="Sonic">
+        <div class="nombre-personaje">SONIC</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000231442.jpg" alt="Marie">
+        <div class="nombre-personaje">GATITA MARIE</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000231443.jpg" alt="Poppy">
+        <div class="nombre-personaje">POPPY TROLLS</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000222683.jpg" alt="Personaje">
+        <div class="nombre-personaje">FANTASÍA</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/bluey.png" alt="Bluey">
+        <div class="nombre-personaje">BLUEY</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000095202.png" alt="Olaf">
+        <div class="nombre-personaje">OLAF</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000095203.png" alt="JJ">
+        <div class="nombre-personaje">JJ COCOMELON</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000095204.png" alt="Dumbo">
+        <div class="nombre-personaje">DUMBO</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000095205.png" alt="Minion">
+        <div class="nombre-personaje">MINION</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/chase.png" alt="Chase">
+        <div class="nombre-personaje">CHASE</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000095207.png" alt="Winnie">
+        <div class="nombre-personaje">WINNIE THE POOH</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000095208.png" alt="Peppa">
+        <div class="nombre-personaje">PEPPA PIG</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/1000095209.png" alt="Buzz">
+        <div class="nombre-personaje">BUZZ LIGHTYEAR</div>
+    </div>
+
+    <div class="item-personaje">
+        <img src="./img/stichangel.png" alt="Stitch y Angel">
+        <div class="nombre-personaje">STITCH & ANGEL</div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 El Evento de Pitusa<br>
+    ¡Diversión garantizada en cada rincón!
+</footer>
+
+</body>
+</html>
+
