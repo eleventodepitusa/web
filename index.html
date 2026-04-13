@@ -6,95 +6,122 @@
     <title>Presupuesto | El Evento de Pitusa</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        :root { --rosa: #f2a6b1; --negro: #333; --fondo: #f8f9fa; --verde: #25d366; }
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; background: #fff; color: var(--negro); line-height: 1.6; }
-        header { text-align: center; padding: 30px; background: var(--fondo); }
-        .logo { max-width: 220px; }
-        .container { max-width: 900px; margin: auto; padding: 20px; }
-        .card { background: var(--fondo); padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #eee; }
-        h2 { color: var(--negro); border-bottom: 2px solid var(--rosa); padding-bottom: 10px; font-size: 1.4rem; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        .servicio-item { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        select, input { padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; }
-        .resumen { background: var(--negro); color: white; padding: 20px; border-radius: 15px; margin-top: 30px; }
-        .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; margin-top: 10px; }
-        .total-final { font-size: 1.8rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #555; padding-top: 10px; }
+        :root { --rosa: #f2a6b1; --negro: #333; --fondo: #ffffff; --gris-claro: #f9f9f9; --verde: #25d366; --urgente: #e74c3c; }
+        body { font-family: 'Arial', sans-serif; margin: 0; background: #eee; color: var(--negro); }
         
-        /* Botones */
-        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .btn { padding: 15px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; font-size: 1rem; transition: 0.3s; display: inline-block; }
-        .btn-wa { background: var(--verde); color: white; }
-        .btn-pdf { background: #555; color: white; }
-        .btn-galeria { 
-            background: var(--negro); 
-            color: white; 
-            margin: 20px auto; 
-            display: block; 
-            max-width: 300px;
-            border: 2px solid var(--rosa);
-        }
-        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
+        #hoja-presupuesto { background: white; max-width: 800px; margin: 20px auto; padding: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--rosa); padding-bottom: 20px; }
+        .logo { width: 250px; height: auto; margin-bottom: 10px; }
+        
+        h1 { font-size: 1.6rem; color: var(--negro); text-transform: uppercase; }
+        h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.2rem; margin-top: 30px; background: var(--gris-claro); padding: 10px; }
 
-        @media (max-width: 600px) { .form-grid, .btn-group { grid-template-columns: 1fr; } }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; font-size: 14px; }
+        
+        .aviso-urgencia { 
+            display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; 
+            border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; font-size: 0.95rem;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink { 0% { border-color: var(--urgente); } 50% { border-color: transparent; } 100% { border-color: var(--urgente); } }
+
+        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .resumen-caja { background: var(--negro); color: white; padding: 25px; border-radius: 10px; margin-top: 30px; }
+        .fila-total { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
+        .total-grande { font-size: 1.6rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #555; padding-top: 10px; }
+
+        .nota-pdf { font-size: 0.85rem; color: #555; margin-top: 30px; line-height: 1.4; border: 1px dashed #ccc; padding: 15px; }
+        .urgente-pdf-box { display: none; background: #333; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-top: 15px; font-weight: bold; }
+
+        .no-print { text-align: center; margin: 20px 0; }
+        .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; display: inline-block; text-decoration: none; color: white; }
+        .btn-wa { background: var(--verde); }
+        .btn-pdf { background: #444; }
+        .btn-galeria { background: var(--rosa); }
     </style>
 </head>
 <body>
 
-<header>
-    <img src="tu-logo-pitusa.webp" alt="El Evento de Pitusa" class="logo">
-    <h1>Presupuesto de Servicios</h1>
+<div class="no-print">
     <a href="galeria.html" class="btn btn-galeria">📸 Ver Galería de Fotos</a>
-</header>
+</div>
 
-<div class="container" id="hoja-presupuesto">
-    <div class="card">
+<div id="hoja-presupuesto">
+    <header>
+        <img src="logo.jpg" alt="El Evento de Pitusa" class="logo">
+        <h1>Presupuesto de Evento</h1>
+        <div id="urgente-pdf-box" class="urgente-pdf-box">
+            ⚡ PRIORIDAD ALTA: Gestión en menos de 24h
+        </div>
+    </header>
+
+    <section>
         <h2>1. Datos del Evento</h2>
         <div class="form-grid">
-            <select id="tipo-evento"><option value="">Tipo de evento...</option><option value="Comunión">Comunión</option><option value="Cumpleaños">Cumpleaños</option><option value="Boda">Boda</option><option value="Privado">Privado</option></select>
-            <input type="date" id="fecha-evento">
-            <input type="text" id="ubicacion" placeholder="Lugar/Municipio">
-            <input type="number" id="adultos" placeholder="Nº Adultos">
+            <div>
+                <label>Tipo de Evento</label>
+                <select id="tipo-evento">
+                    <option value="">Seleccionar...</option>
+                    <option value="Comunión">Comunión</option>
+                    <option value="Cumpleaños">Cumpleaños</option>
+                    <option value="Boda">Boda</option>
+                    <option value="Bautizo">Bautizo</option>
+                    <option value="Baby Shower">Baby Shower</option>
+                    <option value="Fiesta Escolar">Fiesta Escolar</option>
+                    <option value="Evento Público">Evento Público</option>
+                </select>
+            </div>
+            <div>
+                <label>Fecha del Evento</label>
+                <input type="date" id="fecha-evento" onchange="calcular()">
+            </div>
+            <div id="div-urgencia" class="aviso-urgencia" style="grid-column: 1 / -1;">
+                ⚠️ TASA DE URGENCIA ACTIVADA: Al quedar menos de 7 días, se aplica un suplemento de 50€ por gestión prioritaria. Le contactaremos en menos de 24 horas.
+            </div>
+            <div><label>Horario</label><input type="text" id="horario" placeholder="Ej: 11:00 a 14:00"></div>
+            <div><label>Ubicación</label><input type="text" id="ubicacion"></div>
+            <div><label>Nº de Niños</label><input type="number" id="n-ninos"></div>
         </div>
-    </div>
+    </section>
 
-    <div class="card">
+    <section>
         <h2>2. Hinchables</h2>
-        <div id="lista-hinchables"></div>
+        <div id="hinchables-lista"></div>
+    </section>
+
+    <section>
+        <h2>3. Animación y Personajes</h2>
+        <div class="servicio-item"><span>Pack Animación</span><select class="calc" onchange="calcular()"><option value="0">Ninguno</option><option value="150">Pack Sonrisa (2h) - 150€</option><option value="125">Pintacaras + Globoflexia (1.5h - 2 mon.) - 125€</option><option value="95">Pintacaras + Globoflexia (1.5h - 1 mon.) - 95€</option><option value="70">Individual Pintacaras O Globoflexia (1h) - 70€</option></select></div>
+        <div class="servicio-item"><span>Personaje Muñecote</span><select class="calc" onchange="calcular()"><option value="0">Ninguno</option><option value="60">Uno a elegir - 60€</option><option value="80">Dos a elegir - 80€</option></select></div>
+    </section>
+
+    <section>
+        <h2>4. Máquinas y Otros</h2>
+        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
+        <div class="servicio-item"><span>Máquina Palomitas (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Máquina Algodón (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+    </section>
+
+    <div class="resumen-caja">
+        <div class="fila-total"><span>Suma Servicios:</span><span><span id="res-sub">0</span>€</span></div>
+        <div class="fila-total"><span>Gestión Logística (10%):</span><span><span id="res-ges">0</span>€</span></div>
+        <div id="fila-urgencia" class="fila-total" style="display:none; color: var(--rosa);"><span>⚠️ Tasa Urgencia:</span><span>50.00€</span></div>
+        <div class="fila-total total-grande"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
     </div>
 
-    <div class="card">
-        <h2>3. Otros Servicios</h2>
-        <select class="select-prod" onchange="calcular()">
-            <option value="0">Animación...</option>
-            <option value="150">Pack Sonrisa (2h - 2 mon.) - 150€</option>
-            <option value="125">Pintacaras+Globo (1.5h - 2 mon.) - 125€</option>
-            <option value="95">Pintacaras+Globo (1.5h - 1 mon.) - 95€</option>
-            <option value="70">Pintacaras+Globo (1h - Indiv.) - 70€</option>
-        </select>
-        <br><br>
-        <select class="select-prod" onchange="calcular()">
-            <option value="0">Cañón de Espuma...</option>
-            <option value="280">Cañón Público - 280€</option>
-            <option value="230">Cañón Privado - 230€</option>
-        </select>
-        <br><br>
-        <select class="select-prod" onchange="calcular()">
-            <option value="0">Máquina Azúcar/Palomitas...</option>
-            <option value="140">Individual (1.5h) - 140€</option>
-        </select>
+    <div class="nota-pdf">
+        <strong>Información Importante:</strong><br>
+        • Tras la confirmación de disponibilidad, se abona el <strong>50% para la reserva</strong>.<br>
+        • El resto del pago se realiza antes del evento.<br>
+        • <span id="texto-urgencia-pdf"></span>
     </div>
+</div>
 
-    <div class="resumen">
-        <div class="total-row"><span>Subtotal:</span><span><span id="sub-val">0</span>€</span></div>
-        <div class="total-row" style="font-size: 0.9rem; color: #aaa;"><span>Gestión Integral (10%):</span><span><span id="ges-val">0</span>€</span></div>
-        <div class="total-row total-final"><span>TOTAL ESTIMADO:</span><span><span id="tot-val">0</span>€</span></div>
-        <p style="font-size: 0.8rem; margin-top: 15px;">* Sujeto a disponibilidad. El 10% incluye la gestión, seguros y logística.</p>
-    </div>
-
-    <div class="btn-group">
-        <button onclick="enviarWA()" class="btn btn-wa">Enviar a Pitusa (WhatsApp)</button>
-        <button onclick="generarPDF()" class="btn btn-pdf">Descargar mi Presupuesto</button>
-    </div>
+<div class="no-print">
+    <button onclick="enviarWA()" class="btn btn-wa">📲 Confirmar WhatsApp</button>
+    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF</button>
 </div>
 
 <script>
@@ -109,48 +136,64 @@
     function cargarHinchables() {
         let html = "";
         hinchables.forEach(h => {
-            html += `<div class="servicio-item">
-                <span><strong>${h.n}</strong></span>
-                <select class="h-select" onchange="calcular()">
-                    <option value="0" data-n="Sin ${h.n}">No añadir</option>
-                    <option value="${h.p2}" data-n="${h.n} (2h)">2 Horas (${h.p2}€)</option>
-                    <option value="${h.p3}" data-n="${h.n} (3h)">3 Horas (${h.p3}€)</option>
-                </select>
-            </div>`;
+            html += `<div class="servicio-item"><span><strong>${h.n}</strong></span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="${h.p2}">${h.p2}€ (2h)</option><option value="${h.p3}">${h.p3}€ (3h)</option></select></div>`;
         });
-        document.getElementById('lista-hinchables').innerHTML = html;
+        document.getElementById('hinchables-lista').innerHTML = html;
     }
 
     function calcular() {
         let sub = 0;
-        document.querySelectorAll('.h-select, .select-prod').forEach(s => sub += parseFloat(s.value));
-        let ges = sub * 0.10;
-        document.getElementById('sub-val').innerText = sub.toFixed(2);
-        document.getElementById('ges-val').innerText = ges.toFixed(2);
-        document.getElementById('tot-val').innerText = (sub + ges).toFixed(2);
+        document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
+        const fechaIn = document.getElementById('fecha-evento').value;
+        let urgencia = 0;
+        
+        if (fechaIn) {
+            const fecha = new Date(fechaIn);
+            const hoy = new Date();
+            const diff = (fecha - hoy) / (1000 * 60 * 60 * 24);
+            
+            if (diff >= 0 && diff < 7) {
+                urgencia = 50;
+                document.getElementById('div-urgencia').style.display = 'block';
+                document.getElementById('fila-urgencia').style.display = 'flex';
+                document.getElementById('urgente-pdf-box').style.display = 'block';
+                document.getElementById('texto-urgencia-pdf').innerHTML = "<strong>EVENTO URGENTE:</strong> Recibirá respuesta en menos de 24 horas.";
+            } else {
+                document.getElementById('div-urgencia').style.display = 'none';
+                document.getElementById('fila-urgencia').style.display = 'none';
+                document.getElementById('urgente-pdf-box').style.display = 'none';
+                document.getElementById('texto-urgencia-pdf').innerText = "";
+            }
+        }
+        document.getElementById('res-sub').innerText = sub.toFixed(2);
+        document.getElementById('res-ges').innerText = (sub * 0.10).toFixed(2);
+        document.getElementById('res-tot').innerText = (sub * 1.10 + urgencia).toFixed(2);
     }
 
     function enviarWA() {
         const tipo = document.getElementById('tipo-evento').value;
         const fecha = document.getElementById('fecha-evento').value;
-        const total = document.getElementById('tot-val').innerText;
-        if(!tipo || !fecha) return alert("Rellena fecha y tipo de evento");
+        const total = document.getElementById('res-tot').innerText;
+        const esUrgente = document.getElementById('fila-urgencia').style.display === 'flex';
+        
+        if(!tipo || !fecha) return alert("Rellena los datos");
 
-        let msg = `¡Hola Pitusa! 👋 Presupuesto para ${tipo} (${fecha}):%0A`;
-        document.querySelectorAll('.h-select, .select-prod').forEach(s => {
+        let cabecera = esUrgente ? "🚨🚨 *EVENTO URGENTE (Respuesta <24h)* 🚨🚨%0A%0A" : "✨ *Nueva Solicitud de Evento* ✨%0A%0A";
+        let msg = cabecera + `*Evento:* ${tipo}%0A*Fecha:* ${fecha}%0A%0A*Servicios:*%0A`;
+        
+        document.querySelectorAll('select.calc').forEach(s => {
             if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`;
         });
-        msg += `%0A*TOTAL con Gestión:* ${total}€`;
+        
+        msg += `%0A*TOTAL:* ${total}€`;
         window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
     function generarPDF() {
         const el = document.getElementById('hoja-presupuesto');
-        html2pdf().from(el).set({ margin: 0.5, filename: 'Presupuesto_Pitusa.pdf' }).save();
+        html2pdf().from(el).set({ margin: 0.3, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 } }).save();
     }
-
     window.onload = cargarHinchables;
 </script>
-
 </body>
 </html>
