@@ -3,174 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Evento de Pitusa | Gestión de Eventos Infantiles</title>
+    <title>Presupuesto | El Evento de Pitusa</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        :root {
-            --rosa-pitusa: #f2a6b1;
-            --negro-pitusa: #333;
-            --gris-fondo: #f4f4f4;
-            --verde-wa: #25d366;
-        }
-
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--negro-pitusa); background: white; }
-        
-        header { text-align: center; padding: 40px 20px; background: var(--gris-fondo); }
-        .logo { max-width: 250px; }
-
+        :root { --rosa: #f2a6b1; --negro: #333; --fondo: #f8f9fa; --verde: #25d366; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; background: #fff; color: var(--negro); line-height: 1.6; }
+        header { text-align: center; padding: 30px; background: var(--fondo); }
+        .logo { max-width: 220px; }
         .container { max-width: 900px; margin: auto; padding: 20px; }
+        .card { background: var(--fondo); padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #eee; }
+        h2 { color: var(--negro); border-bottom: 2px solid var(--rosa); padding-bottom: 10px; font-size: 1.4rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .servicio-item { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        select, input { padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; }
+        .resumen { background: var(--negro); color: white; padding: 20px; border-radius: 15px; margin-top: 30px; }
+        .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; margin-top: 10px; }
+        .total-final { font-size: 1.8rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #555; padding-top: 10px; }
         
-        h2 { color: var(--negro-pitusa); text-align: center; border-bottom: 2px solid var(--rosa-pitusa); padding-bottom: 10px; }
-
-        .seccion-cotizador { background: var(--gris-fondo); padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-
-        .grupo-input { margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        input, select { padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; width: 100%; box-sizing: border-box; }
-
-        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-        .card-servicio { background: white; padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #eee; }
-        .card-servicio img { width: 100%; border-radius: 8px; height: 150px; object-fit: cover; }
-
-        .resumen-total { background: var(--negro-pitusa); color: white; padding: 25px; border-radius: 15px; margin-top: 40px; }
-        .linea-resumen { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 18px; }
-        .total-destacado { font-size: 24px; color: var(--rosa-pitusa); font-weight: bold; border-top: 1px solid #555; pt: 10px; }
-
-        .botones-accion { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .btn { padding: 15px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; text-decoration: none; text-align: center; }
-        .btn-wa { background: var(--verde-wa); color: white; }
+        /* Botones */
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .btn { padding: 15px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; font-size: 1rem; transition: 0.3s; display: inline-block; }
+        .btn-wa { background: var(--verde); color: white; }
         .btn-pdf { background: #555; color: white; }
-        .btn:hover { opacity: 0.8; }
+        .btn-galeria { 
+            background: var(--negro); 
+            color: white; 
+            margin: 20px auto; 
+            display: block; 
+            max-width: 300px;
+            border: 2px solid var(--rosa);
+        }
+        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
 
-        @media (max-width: 600px) { .grupo-input, .botones-accion { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .form-grid, .btn-group { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <header>
     <img src="tu-logo-pitusa.webp" alt="El Evento de Pitusa" class="logo">
-    <h1>Configura tu Evento Mágico</h1>
+    <h1>Presupuesto de Servicios</h1>
+    <a href="galeria.html" class="btn btn-galeria">📸 Ver Galería de Fotos</a>
 </header>
 
-<div class="container" id="contenido-a-pdf">
-    <div class="seccion-cotizador">
+<div class="container" id="hoja-presupuesto">
+    <div class="card">
         <h2>1. Datos del Evento</h2>
-        <div class="grupo-input">
-            <select id="tipo-evento">
-                <option value="">¿Qué celebramos?</option>
-                <option value="Comunión">Comunión</option>
-                <option value="Cumpleaños">Cumpleaños</option>
-                <option value="Boda">Boda</option>
-                <option value="Bautizo">Bautizo</option>
-            </select>
+        <div class="form-grid">
+            <select id="tipo-evento"><option value="">Tipo de evento...</option><option value="Comunión">Comunión</option><option value="Cumpleaños">Cumpleaños</option><option value="Boda">Boda</option><option value="Privado">Privado</option></select>
             <input type="date" id="fecha-evento">
-            <input type="text" id="ubicacion" placeholder="Municipio / Lugar">
-            <input type="number" id="invitados" placeholder="Nº aproximado de niños">
-        </div>
-
-        <h2>2. Elige tus Servicios</h2>
-        <div class="grid-servicios">
-            <div class="card-servicio">
-                <img src="hinchable-ejemplo.jpg" alt="Hinchables">
-                <h3>Castillos Hinchables</h3>
-                <select class="servicio-select" onchange="calcular()">
-                    <option value="0" data-name="Sin hinchable">Seleccionar opción...</option>
-                    <option value="80" data-name="Hinchable Estándar">Estándar (3x4m) - 80€</option>
-                    <option value="120" data-name="Hinchable Grande">Grande (5x6m) - 120€</option>
-                    <option value="200" data-name="Acuático">Acuático - 200€</option>
-                </select>
-            </div>
-
-            <div class="card-servicio">
-                <img src="animacion-ejemplo.jpg" alt="Animación">
-                <h3>Animación</h3>
-                <select class="servicio-select" onchange="calcular()">
-                    <option value="0" data-name="Sin animación">Seleccionar opción...</option>
-                    <option value="90" data-name="Animación Básica">Básica (1.5h) - 90€</option>
-                    <option value="150" data-name="Animación Premium">Premium con Personaje - 150€</option>
-                </select>
-            </div>
-
-            <div class="card-servicio">
-                <img src="decoracion-ejemplo.jpg" alt="Decoración">
-                <h3>Decoración Temática</h3>
-                <select class="servicio-select" onchange="calcular()">
-                    <option value="0" data-name="Sin decoración">Seleccionar opción...</option>
-                    <option value="100" data-name="Candy Bar Básico">Candy Bar Básico - 100€</option>
-                    <option value="250" data-name="Decoración Integral">Decoración Integral - 250€</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="resumen-total">
-            <div class="linea-resumen">
-                <span>Subtotal servicios:</span>
-                <span><span id="txt-subtotal">0</span>€</span>
-            </div>
-            <div class="linea-resumen" style="font-size: 15px; color: #bbb;">
-                <span>Gestión, logística y seguros (10%):</span>
-                <span><span id="txt-gestion">0</span>€</span>
-            </div>
-            <div class="linea-resumen total-destacado">
-                <span>TOTAL ESTIMADO:</span>
-                <span><span id="txt-total">0</span>€</span>
-            </div>
-            <p style="font-size: 12px; margin-top: 15px; color: #ccc;">* Presupuesto sujeto a disponibilidad. El 10% cubre la gestión integral de proveedores y logística de El Evento de Pitusa.</p>
+            <input type="text" id="ubicacion" placeholder="Lugar/Municipio">
+            <input type="number" id="adultos" placeholder="Nº Adultos">
         </div>
     </div>
 
-    <div class="botones-accion">
-        <button onclick="enviarWA()" class="btn btn-wa">Enviar por WhatsApp</button>
-        <button onclick="generarPDF()" class="btn btn-pdf">Descargar PDF</button>
+    <div class="card">
+        <h2>2. Hinchables</h2>
+        <div id="lista-hinchables"></div>
+    </div>
+
+    <div class="card">
+        <h2>3. Otros Servicios</h2>
+        <select class="select-prod" onchange="calcular()">
+            <option value="0">Animación...</option>
+            <option value="150">Pack Sonrisa (2h - 2 mon.) - 150€</option>
+            <option value="125">Pintacaras+Globo (1.5h - 2 mon.) - 125€</option>
+            <option value="95">Pintacaras+Globo (1.5h - 1 mon.) - 95€</option>
+            <option value="70">Pintacaras+Globo (1h - Indiv.) - 70€</option>
+        </select>
+        <br><br>
+        <select class="select-prod" onchange="calcular()">
+            <option value="0">Cañón de Espuma...</option>
+            <option value="280">Cañón Público - 280€</option>
+            <option value="230">Cañón Privado - 230€</option>
+        </select>
+        <br><br>
+        <select class="select-prod" onchange="calcular()">
+            <option value="0">Máquina Azúcar/Palomitas...</option>
+            <option value="140">Individual (1.5h) - 140€</option>
+        </select>
+    </div>
+
+    <div class="resumen">
+        <div class="total-row"><span>Subtotal:</span><span><span id="sub-val">0</span>€</span></div>
+        <div class="total-row" style="font-size: 0.9rem; color: #aaa;"><span>Gestión Integral (10%):</span><span><span id="ges-val">0</span>€</span></div>
+        <div class="total-row total-final"><span>TOTAL ESTIMADO:</span><span><span id="tot-val">0</span>€</span></div>
+        <p style="font-size: 0.8rem; margin-top: 15px;">* Sujeto a disponibilidad. El 10% incluye la gestión, seguros y logística.</p>
+    </div>
+
+    <div class="btn-group">
+        <button onclick="enviarWA()" class="btn btn-wa">Enviar a Pitusa (WhatsApp)</button>
+        <button onclick="generarPDF()" class="btn btn-pdf">Descargar mi Presupuesto</button>
     </div>
 </div>
 
 <script>
-    function calcular() {
-        let subtotal = 0;
-        const selects = document.querySelectorAll('.servicio-select');
-        
-        selects.forEach(s => {
-            subtotal += parseFloat(s.value);
+    const hinchables = [
+        {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
+        {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
+        {n: "Rampa II / Ojo de Buey (6x4)", p2: 170, p3: 200},
+        {n: "Tobogán (8x4)", p2: 190, p3: 220},
+        {n: "Pista Americana (12x4)", p2: 260, p3: 300}
+    ];
+
+    function cargarHinchables() {
+        let html = "";
+        hinchables.forEach(h => {
+            html += `<div class="servicio-item">
+                <span><strong>${h.n}</strong></span>
+                <select class="h-select" onchange="calcular()">
+                    <option value="0" data-n="Sin ${h.n}">No añadir</option>
+                    <option value="${h.p2}" data-n="${h.n} (2h)">2 Horas (${h.p2}€)</option>
+                    <option value="${h.p3}" data-n="${h.n} (3h)">3 Horas (${h.p3}€)</option>
+                </select>
+            </div>`;
         });
+        document.getElementById('lista-hinchables').innerHTML = html;
+    }
 
-        const gestion = subtotal * 0.10;
-        const total = subtotal + gestion;
-
-        document.getElementById('txt-subtotal').innerText = subtotal.toFixed(2);
-        document.getElementById('txt-gestion').innerText = gestion.toFixed(2);
-        document.getElementById('txt-total').innerText = total.toFixed(2);
+    function calcular() {
+        let sub = 0;
+        document.querySelectorAll('.h-select, .select-prod').forEach(s => sub += parseFloat(s.value));
+        let ges = sub * 0.10;
+        document.getElementById('sub-val').innerText = sub.toFixed(2);
+        document.getElementById('ges-val').innerText = ges.toFixed(2);
+        document.getElementById('tot-val').innerText = (sub + ges).toFixed(2);
     }
 
     function enviarWA() {
         const tipo = document.getElementById('tipo-evento').value;
         const fecha = document.getElementById('fecha-evento').value;
-        const total = document.getElementById('txt-total').innerText;
-        
-        if(!tipo || !fecha) { alert("Por favor, rellena los datos del evento primero."); return; }
+        const total = document.getElementById('tot-val').innerText;
+        if(!tipo || !fecha) return alert("Rellena fecha y tipo de evento");
 
-        let serviciosElegidos = "";
-        document.querySelectorAll('.servicio-select').forEach(s => {
-            if(s.value > 0) {
-                serviciosElegidos += `- ${s.options[s.selectedIndex].getAttribute('data-name')}%0A`;
-            }
+        let msg = `¡Hola Pitusa! 👋 Presupuesto para ${tipo} (${fecha}):%0A`;
+        document.querySelectorAll('.h-select, .select-prod').forEach(s => {
+            if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`;
         });
-
-        const texto = `¡Hola Pitusa! 👋%0AQuiero reservar para mi *${tipo}*%0A*Fecha:* ${fecha}%0A*Servicios:*%0A${serviciosElegidos}%0A*Presupuesto Total:* ${total}€`;
-        
-        window.open(`https://wa.me/34652678718?text=${texto}`, '_blank');
+        msg += `%0A*TOTAL con Gestión:* ${total}€`;
+        window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
     function generarPDF() {
-        const elemento = document.getElementById('contenido-a-pdf');
-        const opciones = {
-            margin: 1,
-            filename: 'Presupuesto_Pitusa.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
-        html2pdf().set(opciones).from(elemento).save();
+        const el = document.getElementById('hoja-presupuesto');
+        html2pdf().from(el).set({ margin: 0.5, filename: 'Presupuesto_Pitusa.pdf' }).save();
     }
+
+    window.onload = cargarHinchables;
 </script>
 
 </body>
