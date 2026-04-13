@@ -82,7 +82,8 @@
             </div>
             <div><label>Horario</label><input type="text" id="horario" placeholder="Ej: 11:00 a 14:00"></div>
             <div><label>Ubicación</label><input type="text" id="ubicacion"></div>
-            <div><label>Nº de Niños</label><input type="number" id="n-ninos"></div>
+            <div><label>Nº de Niños</label><input type="number" id="n-ninos" placeholder="Aprox."></div>
+            <div><label>Nº de Adultos</label><input type="number" id="n-adultos" placeholder="Aprox."></div>
         </div>
     </section>
 
@@ -93,8 +94,25 @@
 
     <section>
         <h2>3. Animación y Personajes</h2>
-        <div class="servicio-item"><span>Pack Animación</span><select class="calc" onchange="calcular()"><option value="0">Ninguno</option><option value="150">Pack Sonrisa (2h) - 150€</option><option value="125">Pintacaras + Globoflexia (1.5h - 2 mon.) - 125€</option><option value="95">Pintacaras + Globoflexia (1.5h - 1 mon.) - 95€</option><option value="70">Individual Pintacaras O Globoflexia (1h) - 70€</option></select></div>
-        <div class="servicio-item"><span>Personaje Muñecote</span><select class="calc" onchange="calcular()"><option value="0">Ninguno</option><option value="60">Uno a elegir - 60€</option><option value="80">Dos a elegir - 80€</option></select></div>
+        <div class="servicio-item">
+            <span>Pack Animación</span>
+            <select class="calc" onchange="calcular()">
+                <option value="0">Ninguno</option>
+                <option value="150">Pack Sonrisa (2h) - 150€</option>
+                <option value="125">Pintacaras + Globoflexia (1.5h - 2 mon.) - 125€</option>
+                <option value="95">Pintacaras + Globoflexia (1.5h - 1 mon.) - 95€</option>
+                <option value="70">Individual Pintacaras O Globoflexia (1h) - 70€</option>
+            </select>
+        </div>
+        <div class="servicio-item">
+            <span>Personaje Muñecote</span>
+            <select class="calc" onchange="calcular()">
+                <option value="0">Ninguno</option>
+                <option value="120">1 a elegir - desde 120€</option>
+                <option value="210">2 a elegir - desde 210€</option>
+                <option value="300">3 a elegir - desde 300€</option>
+            </select>
+        </div>
     </section>
 
     <section>
@@ -173,13 +191,15 @@
     function enviarWA() {
         const tipo = document.getElementById('tipo-evento').value;
         const fecha = document.getElementById('fecha-evento').value;
+        const adultos = document.getElementById('n-adultos').value;
+        const ninos = document.getElementById('n-ninos').value;
         const total = document.getElementById('res-tot').innerText;
         const esUrgente = document.getElementById('fila-urgencia').style.display === 'flex';
         
         if(!tipo || !fecha) return alert("Rellena los datos");
 
         let cabecera = esUrgente ? "🚨🚨 *EVENTO URGENTE (Respuesta <24h)* 🚨🚨%0A%0A" : "✨ *Nueva Solicitud de Evento* ✨%0A%0A";
-        let msg = cabecera + `*Evento:* ${tipo}%0A*Fecha:* ${fecha}%0A%0A*Servicios:*%0A`;
+        let msg = cabecera + `*Evento:* ${tipo}%0A*Fecha:* ${fecha}%0A*Invitados:* ${ninos} niños y ${adultos} adultos%0A%0A*Servicios:*%0A`;
         
         document.querySelectorAll('select.calc').forEach(s => {
             if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`;
