@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presupuesto | El Evento de Pitusa</title>
+    
+    <title>El Evento de Pitusa | Gestión de Eventos Infantiles en Gran Canaria</title>
+    <meta name="description" content="Organización integral de fiestas infantiles en Gran Canaria. Animación, hinchables y coordinación de proveedores para que los padres disfruten sin preocupaciones.">
+    <meta name="keywords" content="Eventos infantiles, Las Palmas, Animación, Cumpleaños, Gestión integral, El Evento de Pitusa">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root { --rosa: #f2a6b1; --negro: #333; --fondo: #ffffff; --gris-claro: #f9f9f9; --verde: #25d366; --urgente: #e74c3c; }
@@ -38,10 +42,9 @@
         .btn-pdf { background: #444; }
         .btn-galeria { background: var(--rosa); }
 
-        .info-munecotes { background: #fff9fa; border: 1px solid var(--rosa); padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; }
-        .info-munecotes ul { margin: 5px 0 0 18px; padding: 0; }
-        .info-munecotes li { margin-bottom: 3px; }
-
+        .info-cuadro { background: #fff9fa; border: 1px solid var(--rosa); padding: 12px; border-radius: 8px; margin-top: 5px; font-size: 0.85rem; margin-bottom: 10px; }
+        .info-cuadro ul { margin: 5px 0 0 18px; padding: 0; }
+        
         .info-extra { font-size: 0.8rem; color: #666; display: block; margin-top: 2px; }
         .caja-munecotes { background: white; padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px dashed var(--rosa); }
         
@@ -100,13 +103,21 @@
                 <option value="190">4 Horas - 190€</option>
             </select>
         </div>
+        
         <div class="servicio-item">
             <div><span>Decoración Completa (Local)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select>
         </div>
+        <div class="info-cuadro">
+            Incluye: Fondo de pared (arco o estructura), globos orgánicos, nombre del cumpleañero/a, bandejas decorativas y figuras temáticas.
+        </div>
+
         <div class="servicio-item">
             <div><span>Mesa Dulce (Local)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select>
+        </div>
+        <div class="info-cuadro">
+            Incluye: Variedad de chuches temáticas, decoración personalizada de la mesa, snacks dulces y salados.
         </div>
     </section>
 
@@ -141,7 +152,7 @@
         <div style="margin-top:15px; border-top: 1px solid #ccc; pt:10px;">
             <h3>Muñecotes (Personajes)</h3>
             
-            <div class="info-munecotes">
+            <div class="info-cuadro">
                 <strong>¿Qué incluye este servicio?</strong>
                 <ul>
                     <li>Duración: Entre 45 min y 1 hora.</li>
