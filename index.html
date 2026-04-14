@@ -9,12 +9,20 @@
         :root { --rosa: #f2a6b1; --negro: #333; --fondo: #ffffff; --gris-claro: #f9f9f9; --verde: #25d366; --urgente: #e74c3c; }
         body { font-family: 'Arial', sans-serif; margin: 0; background: #eee; color: var(--negro); }
         
-        #hoja-presupuesto { background: white; max-width: 800px; margin: 20px auto; padding: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        /* Contenedor optimizado para PDF */
+        #hoja-presupuesto { 
+            background: white; 
+            max-width: 800px; 
+            margin: 20px auto; 
+            padding: 40px; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
         header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--rosa); padding-bottom: 20px; }
-        .logo { width: 250px; height: auto; margin-bottom: 10px; }
+        .logo { width: 220px; height: auto; margin-bottom: 10px; }
         
-        h1 { font-size: 1.6rem; color: var(--negro); text-transform: uppercase; }
-        h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.2rem; margin-top: 30px; background: var(--gris-claro); padding: 10px; }
+        h1 { font-size: 1.6rem; color: var(--negro); text-transform: uppercase; margin: 10px 0; }
+        h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.1rem; margin-top: 25px; background: var(--gris-claro); padding: 10px; }
 
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; font-size: 14px; }
@@ -22,18 +30,15 @@
         .aviso-urgencia { 
             display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; 
             border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; font-size: 0.95rem;
-            animation: blink 2s infinite;
         }
 
-        @keyframes blink { 0% { border-color: var(--urgente); } 50% { border-color: transparent; } 100% { border-color: var(--urgente); } }
-
-        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
         .resumen-caja { background: var(--negro); color: white; padding: 25px; border-radius: 10px; margin-top: 30px; }
-        .fila-total { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
+        .fila-total { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; }
         .total-grande { font-size: 1.6rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #555; padding-top: 10px; }
 
-        .nota-pdf { font-size: 0.85rem; color: #555; margin-top: 30px; line-height: 1.4; border: 1px dashed #ccc; padding: 15px; }
-        .urgente-pdf-box { display: none; background: #333; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-top: 15px; font-weight: bold; }
+        .nota-pdf { font-size: 0.85rem; color: #555; margin-top: 25px; line-height: 1.4; border: 1px dashed #ccc; padding: 15px; }
+        .urgente-pdf-box { display: none; background: #333; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 15px; font-weight: bold; }
 
         .no-print { text-align: center; margin: 20px 0; }
         .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; display: inline-block; text-decoration: none; color: white; }
@@ -50,11 +55,11 @@
 
 <div id="hoja-presupuesto">
     <header>
-        <img src="logo.jpg" alt="El Evento de Pitusa" class="logo">
-        <h1>Presupuesto de Evento</h1>
+        <img src="logo.png" alt="El Evento de Pitusa" class="logo">
         <div id="urgente-pdf-box" class="urgente-pdf-box">
             ⚡ PRIORIDAD ALTA: Gestión en menos de 24h
         </div>
+        <h1>Presupuesto de Evento</h1>
     </header>
 
     <section>
@@ -77,13 +82,17 @@
                 <label>Fecha del Evento</label>
                 <input type="date" id="fecha-evento" onchange="calcular()">
             </div>
+            <div>
+                <label>Teléfono de Contacto</label>
+                <input type="tel" id="telefono-cliente" placeholder="Su número de móvil">
+            </div>
             <div id="div-urgencia" class="aviso-urgencia" style="grid-column: 1 / -1;">
-                ⚠️ TASA DE URGENCIA ACTIVADA: Al quedar menos de 7 días, se aplica un suplemento de 50€ por gestión prioritaria. Le contactaremos en menos de 24 horas.
+                ⚠️ TASA DE URGENCIA ACTIVADA (+50€): Le contactaremos en menos de 24 horas.
             </div>
             <div><label>Horario</label><input type="text" id="horario" placeholder="Ej: 11:00 a 14:00"></div>
             <div><label>Ubicación</label><input type="text" id="ubicacion"></div>
-            <div><label>Nº de Niños</label><input type="number" id="n-ninos" placeholder="Aprox."></div>
-            <div><label>Nº de Adultos</label><input type="number" id="n-adultos" placeholder="Aprox."></div>
+            <div><label>Nº Niños</label><input type="number" id="n-ninos"></div>
+            <div><label>Nº Adultos</label><input type="number" id="n-adultos"></div>
         </div>
     </section>
 
@@ -116,30 +125,30 @@
     </section>
 
     <section>
-        <h2>4. Máquinas y Otros</h2>
+        <h2>4. Extras</h2>
         <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
-        <div class="servicio-item"><span>Máquina Palomitas (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
-        <div class="servicio-item"><span>Máquina Algodón (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Palomitas Individual</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Algodón Individual</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
     </section>
 
     <div class="resumen-caja">
-        <div class="fila-total"><span>Suma Servicios:</span><span><span id="res-sub">0</span>€</span></div>
-        <div class="fila-total"><span>Gestión Logística (10%):</span><span><span id="res-ges">0</span>€</span></div>
-        <div id="fila-urgencia" class="fila-total" style="display:none; color: var(--rosa);"><span>⚠️ Tasa Urgencia:</span><span>50.00€</span></div>
-        <div class="fila-total total-grande"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
+        <div class="fila-total"><span>Servicios:</span><span><span id="res-sub">0</span>€</span></div>
+        <div class="fila-total"><span>Gestión (10%):</span><span><span id="res-ges">0</span>€</span></div>
+        <div id="fila-urgencia" class="fila-total" style="display:none; color: var(--rosa);"><span>Tasa Urgencia:</span><span>50.00€</span></div>
+        <div class="fila-total total-grande"><span>TOTAL ESTIMADO:</span><span><span id="res-tot">0</span>€</span></div>
     </div>
 
     <div class="nota-pdf">
-        <strong>Información Importante:</strong><br>
-        • Tras la confirmación de disponibilidad, se abona el <strong>50% para la reserva</strong>.<br>
-        • El resto del pago se realiza antes del evento.<br>
+        <strong>Reserva y Pagos:</strong><br>
+        • Se requiere el <strong>50% de reserva</strong> para bloquear la fecha tras confirmar disponibilidad.<br>
+        • El resto se abona como tarde el día anterior al evento.<br>
         • <span id="texto-urgencia-pdf"></span>
     </div>
 </div>
 
 <div class="no-print">
     <button onclick="enviarWA()" class="btn btn-wa">📲 Confirmar WhatsApp</button>
-    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF</button>
+    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF Correctamente</button>
 </div>
 
 <script>
@@ -169,13 +178,12 @@
             const fecha = new Date(fechaIn);
             const hoy = new Date();
             const diff = (fecha - hoy) / (1000 * 60 * 60 * 24);
-            
             if (diff >= 0 && diff < 7) {
                 urgencia = 50;
                 document.getElementById('div-urgencia').style.display = 'block';
                 document.getElementById('fila-urgencia').style.display = 'flex';
                 document.getElementById('urgente-pdf-box').style.display = 'block';
-                document.getElementById('texto-urgencia-pdf').innerHTML = "<strong>EVENTO URGENTE:</strong> Recibirá respuesta en menos de 24 horas.";
+                document.getElementById('texto-urgencia-pdf').innerHTML = "<strong>EVENTO URGENTE:</strong> Respuesta en menos de 24h.";
             } else {
                 document.getElementById('div-urgencia').style.display = 'none';
                 document.getElementById('fila-urgencia').style.display = 'none';
@@ -191,27 +199,28 @@
     function enviarWA() {
         const tipo = document.getElementById('tipo-evento').value;
         const fecha = document.getElementById('fecha-evento').value;
-        const adultos = document.getElementById('n-adultos').value;
-        const ninos = document.getElementById('n-ninos').value;
         const total = document.getElementById('res-tot').innerText;
         const esUrgente = document.getElementById('fila-urgencia').style.display === 'flex';
-        
         if(!tipo || !fecha) return alert("Rellena los datos");
 
-        let cabecera = esUrgente ? "🚨🚨 *EVENTO URGENTE (Respuesta <24h)* 🚨🚨%0A%0A" : "✨ *Nueva Solicitud de Evento* ✨%0A%0A";
-        let msg = cabecera + `*Evento:* ${tipo}%0A*Fecha:* ${fecha}%0A*Invitados:* ${ninos} niños y ${adultos} adultos%0A%0A*Servicios:*%0A`;
-        
-        document.querySelectorAll('select.calc').forEach(s => {
-            if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`;
-        });
-        
+        let msg = (esUrgente ? "🚨 *URGENTE* 🚨 " : "✨ ") + `*Evento:* ${tipo} - *Fecha:* ${fecha}%0A%0A*Servicios:*%0A`;
+        document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; });
         msg += `%0A*TOTAL:* ${total}€`;
         window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
     function generarPDF() {
+        // Fix para que el PDF no salga cortado ni vacío
+        window.scrollTo(0,0); 
         const el = document.getElementById('hoja-presupuesto');
-        html2pdf().from(el).set({ margin: 0.3, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 } }).save();
+        const opt = {
+            margin: 0.2,
+            filename: 'Presupuesto_Pitusa.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: false, letterRendering: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().from(el).set(opt).save();
     }
     window.onload = cargarHinchables;
 </script>
