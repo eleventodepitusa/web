@@ -103,10 +103,19 @@
     <section class="seccion-resaltada">
         <h2>4. Animación y Muñecotes</h2>
         <div class="servicio-item">
-            <span>Packs Animación</span>
+            <div>
+                <span>Pack Sonrisa (2h - 2 monitores)</span>
+                <span class="info-extra">Incluye: Juegos, Animación, Pintacaras y Globoflexia.</span>
+            </div>
             <select class="calc" onchange="calcular()">
                 <option value="0">Ninguno</option>
-                <option value="150">Pack Sonrisa (2h - 2 monitores) - 150€</option>
+                <option value="150">Añadir - 150€</option>
+            </select>
+        </div>
+        <div class="servicio-item">
+            <span>Packs Alternativos</span>
+            <select class="calc" onchange="calcular()">
+                <option value="0">Ninguno</option>
                 <option value="125">Pintacaras + Globos (1.5h - 2 mon.) - 125€</option>
                 <option value="95">Pintacaras + Globos (1.5h - 1 mon.) - 95€</option>
                 <option value="70">Individual (1h) - 70€</option>
@@ -162,7 +171,6 @@
     function calcular() {
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
-        
         const local = document.getElementById('alquiler-local').value;
         document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
 
@@ -187,10 +195,28 @@
     function enviarWA() {
         const nombre = document.getElementById('nombre-cliente').value;
         const fecha = document.getElementById('fecha-evento').value;
+        const horario = document.getElementById('horario').value;
+        const ninos = document.getElementById('n-ninos').value;
+        const adultos = document.getElementById('n-adultos').value;
+        const local = document.getElementById('alquiler-local').value;
+        const sitio = (local > 0) ? "Local Pitusa (Ingenio)" : document.getElementById('ubicacion').value;
+
         if(!nombre || !fecha) return alert("Rellena nombre y fecha");
-        let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${nombre}%0A*Fecha:* ${fecha}%0A%0A*Servicios:*%0A`;
-        document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; });
+
+        let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A`;
+        msg += `*Cliente:* ${nombre}%0A`;
+        msg += `*Fecha:* ${fecha}%0A`;
+        msg += `*Horario:* ${horario || 'No especificado'}%0A`;
+        msg += `*Sitio:* ${sitio || 'No especificado'}%0A`;
+        msg += `*Asistentes:* ${ninos || 0} niños / ${adultos || 0} adultos%0A%0A`;
+        msg += `*Servicios Seleccionados:*%0A`;
+        
+        document.querySelectorAll('select.calc').forEach(s => { 
+            if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; 
+        });
+        
         msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
+        
         window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
@@ -201,7 +227,6 @@
             const select = f.querySelector('select');
             if (select && select.value == "0") f.classList.add('ocultar-pdf');
         });
-
         const opt = { margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'a4' } };
         html2pdf().from(document.getElementById('hoja-presupuesto')).set(opt).save().then(() => {
             filas.forEach(f => f.classList.remove('ocultar-pdf'));
