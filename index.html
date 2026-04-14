@@ -127,19 +127,22 @@
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select>
         </div>
         <div class="servicio-item">
-            <span>Personajes Muñecotes</span>
+            <div>
+                <span>Personajes Muñecotes</span>
+                <span class="info-extra">Elige cantidad y zona para calcular el trayecto.</span>
+            </div>
             <select class="calc" id="munecotes-select" onchange="calcular()">
-                <option value="0">No</option>
-                <option value="120">1 Personaje - 120€</option>
-                <option value="210">2 Personajes - 210€</option>
-                <option value="300">3 Personajes - 300€</option>
-            </select>
-        </div>
-        <div class="servicio-item" id="div-traslado-munecote" style="display:none; background: #fff;">
-            <span>Zona del Evento (Muñecotes)</span>
-            <select class="calc" id="traslado-munecote" onchange="calcular()">
-                <option value="0">Las Palmas de G.C. (Gratis)</option>
-                <option value="20">Fuera de Las Palmas G.C. (+20€ trayecto)</option>
+                <option value="0">No añadir personajes</option>
+                <optgroup label="En Las Palmas de G.C. (Sin suplemento)">
+                    <option value="120">1 Personaje (Las Palmas GC) - 120€</option>
+                    <option value="210">2 Personajes (Las Palmas GC) - 210€</option>
+                    <option value="300">3 Personajes (Las Palmas GC) - 300€</option>
+                </optgroup>
+                <optgroup label="Fuera de Las Palmas de G.C. (+20€ Trayecto)">
+                    <option value="140">1 Personaje + Trayecto - 140€</option>
+                    <option value="230">2 Personajes + Trayecto - 230€</option>
+                    <option value="320">3 Personajes + Trayecto - 320€</option>
+                </optgroup>
             </select>
         </div>
     </section>
@@ -192,10 +195,6 @@
         
         const local = document.getElementById('alquiler-local').value;
         document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
-
-        const mun = document.getElementById('munecotes-select').value;
-        document.getElementById('div-traslado-munecote').style.display = (mun > 0) ? 'flex' : 'none';
-        if (mun == 0) document.getElementById('traslado-munecote').value = 0;
 
         const fechaIn = document.getElementById('fecha-evento').value;
         let urgencia = 0;
