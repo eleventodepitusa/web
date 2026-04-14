@@ -16,6 +16,7 @@
         .seccion-contenedor { border: 1.5px solid var(--rosa); border-radius: 15px; padding: 20px; background-color: white; margin-top: 20px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         input, select { padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; box-sizing: border-box; font-size: 14px; background: #fff; }
+        input:required { border-left: 4px solid var(--rosa); }
         .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; }
         .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
         .cuadro-info { background: #fff5f6; border: 1px solid var(--rosa); padding: 15px; border-radius: 12px; margin: 5px 0 15px 0; font-size: 0.85rem; line-height: 1.4; }
@@ -24,10 +25,10 @@
         .total-destacado { font-size: 1.8rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #444; padding-top: 15px; margin-top: 10px; }
         .nota-pdf { display: none; margin-top: 20px; padding: 15px; border: 2px solid var(--rosa); border-radius: 10px; font-weight: bold; text-align: center; background: #fff5f6; }
         .btn-container { text-align: center; margin: 30px 0; }
-        .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; }
+        .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; text-decoration: none; display: inline-block; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #555; }
-        .btn-galeria { background: #e91e63; text-decoration: none; display: inline-block; }
+        .btn-galeria { background: var(--rosa); }
         .caja-nombres { background: #fefefe; padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px dashed var(--rosa); display: none; }
         .ocultar-pdf { display: none !important; }
     </style>
@@ -47,15 +48,15 @@
     <section id="datos-obligatorios">
         <h2>1. Datos Obligatorios</h2>
         <div class="form-grid">
-            <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
-            <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
-            <div><label>Correo:*</label> <input type="email" id="email-cliente" required></div>
+            <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required placeholder="Nombre completo"></div>
+            <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required placeholder="Nº de contacto"></div>
+            <div><label>Correo:*</label> <input type="email" id="email-cliente" required placeholder="Tu email"></div>
             <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
-            <div><label>Tipo de Evento:*</label> <select id="tipo-evento"><option>Cumpleaños</option><option>Bautizo</option><option>Comunión</option><option>Boda</option><option>Otro</option></select></div>
+            <div><label>Tipo de Evento:*</label> <select id="tipo-evento" required><option value="">-- Elige evento --</option><option>Cumpleaños</option><option>Bautizo</option><option>Comunión</option><option>Boda</option><option>Otro</option></select></div>
             <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
-            <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required></div>
-            <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required></div>
-            <div id="div-ubicacion"><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona"></div>
+            <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required min="1"></div>
+            <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required min="0"></div>
+            <div id="div-ubicacion"><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona" required></div>
         </div>
         <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Reserva con menos de 7 días.</div>
     </section>
@@ -154,7 +155,7 @@
         if (cant > 0) {
             document.getElementById('caja-nombres').style.display = "block";
             for (let i = 1; i <= cant; i++) {
-                let s = `<select class="nombre-sel" style="margin-bottom:8px;"><option value="">-- Elige Personaje ${i} --</option>`;
+                let s = `<select class="nombre-sel" style="margin-bottom:8px;" required><option value="">-- Elige Personaje ${i} --</option>`;
                 personajes.forEach(p => s += `<option value="${p}">${p}</option>`);
                 cont.innerHTML += s + `</select>`;
             }
@@ -168,6 +169,7 @@
             html += `<div class="servicio-item"><span><strong>${h.n}</strong></span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="${h.p2}">${h.p2}€ (2h)</option><option value="${h.p3}">${h.p3}€ (3h)</option></select></div>`;
         });
         document.getElementById('lista-hinchables').innerHTML = html;
+        calcular();
     }
 
     function calcular() {
@@ -190,6 +192,10 @@
                 document.getElementById('fila-urgencia').style.display = 'none';
             }
         }
+        
+        const loc = document.getElementById('alquiler-local').value;
+        document.getElementById('ubicacion').required = (loc == "0");
+
         document.getElementById('sub-val').innerText = sub.toFixed(2);
         document.getElementById('ges-val').innerText = (sub * 0.10).toFixed(2);
         document.getElementById('res-tot').innerText = (sub * 1.10 + urg).toFixed(2);
@@ -197,7 +203,10 @@
 
     function validarYEnviar() {
         const v = id => document.getElementById(id).value;
-        if (!v('nombre-cliente') || !v('fecha-evento')) return alert("Nombre y fecha requeridos");
+        const inputs = document.querySelectorAll('#datos-obligatorios input, #datos-obligatorios select');
+        let faltan = false;
+        inputs.forEach(i => { if(i.required && !i.value) faltan = true; });
+        if (faltan) return alert("Por favor, rellene todos los campos obligatorios (*)");
         
         const urg = document.getElementById('div-urgencia').style.display === 'block';
         let msg = urg ? "🚨🚨 *URGENTE* 🚨🚨%0A" : "✨ *PRESUPUESTO PITUSA* ✨%0A";
@@ -215,7 +224,8 @@
             msg += `  (Zona: ${document.getElementById('zona-munecote').options[document.getElementById('zona-munecote').selectedIndex].text})%0A`;
         }
         
-        msg += `%0A💰 *TOTAL:* ${document.getElementById('res-tot').innerText}€`;
+        if(urg) msg += `%0A🚨 *Tasa de Urgencia (+50€) incluida*`;
+        msg += `%0A%0A💰 *TOTAL:* ${document.getElementById('res-tot').innerText}€`;
         window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
