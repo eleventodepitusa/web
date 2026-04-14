@@ -30,6 +30,8 @@
         .btn-pdf { background: #555; }
         .btn-galeria { background: var(--rosa); }
         .caja-nombres { background: #fefefe; padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px dashed var(--rosa); display: none; }
+        /* Estilo para que el PDF no corte secciones */
+        .seccion-contenedor { page-break-inside: avoid; }
     </style>
 </head>
 <body>
@@ -65,7 +67,7 @@
                 </select>
                 <input type="text" id="otro-evento-especificar" placeholder="¿Qué tipo de evento?" style="display:none; margin-top:5px;">
             </div>
-            <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
+            <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 10:00" required></div>
             <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required min="1"></div>
             <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required min="0"></div>
             <div id="div-ubicacion"><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona" required></div>
@@ -96,9 +98,17 @@
 
         <div style="margin-top:15px;">
             <h3>Muñecotes (Personajes)</h3>
-            <div class="cuadro-info">🕒 Incluye Fotos, Vídeos, Diploma y Dibujos temáticos.</div>
-            <div class="servicio-item"><span>Zona</span><select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas Capital</option><option value="20">Resto de la Isla (+20€)</option></select></div>
-            <div class="servicio-item"><span>Personajes</span><select id="cantidad-munecotes" onchange="gestionarNombres()">
+            <div class="cuadro-info">
+                <strong>¿Qué incluye este servicio?</strong><br>
+                <ul>
+                    <li>Duración: Entre 45 min y 1 hora.</li>
+                    <li>📷 <strong>Fotos y vídeos individual y en grupo</strong> dentro del horario.</li>
+                    <li>🎁 <strong>Diploma personalizado</strong> para el/la protagonista.</li>
+                    <li>🎨 <strong>Dibujos para colorear</strong> de la temática para los invitados.</li>
+                </ul>
+            </div>
+            <div class="servicio-item"><span>¿Zona del evento?</span><select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas de G.C. (Toda la Capital)</option><option value="20">Resto de la Isla (+20€)</option></select></div>
+            <div class="servicio-item"><span>Cantidad de personajes</span><select id="cantidad-munecotes" onchange="gestionarNombres()">
                 <option value="0">Ninguno</option>
                 <option value="120">1 Personaje - 120€</option>
                 <option value="210">2 Personajes - 210€</option>
@@ -112,15 +122,15 @@
     <div class="seccion-contenedor">
         <h2>5. Packs de Decoración</h2>
         <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
-        <div class="cuadro-info">✔️ Medio arco de globos y número.</div>
+        <div class="cuadro-info">✔️ Medio arco y número. Montaje incluido.</div>
         <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
-        <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa con chuches.</div>
+        <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches. Montaje incluido.</div>
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
-        <div class="cuadro-info">✔️ Arco, número, cartel y Mesa Dulce completa.</div>
+        <div class="cuadro-info">✔️ Arco, número, cartel con nombre y Mesa Dulce completa (Pringles, Chocolatinas, Aguas, Pomperos, 2 Tarros, Detalles globos). Montaje y colocación.</div>
     </div>
 
     <div class="seccion-contenedor">
-        <h2>6. Máquinas y Extras</h2>
+        <h2>6. Máquinas</h2>
         <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
         <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
         <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
@@ -131,7 +141,7 @@
         <div class="fila-resumen"><span>Suma de servicios:</span><span><span id="sub-val">0</span>€</span></div>
         <div class="fila-resumen"><span>Gestión Logística (10%):</span><span><span id="ges-val">0</span>€</span></div>
         <div id="fila-urgencia" class="fila-resumen" style="display:none; color: var(--rosa);"><span>🚨 TASA URGENCIA:</span><span>50.00€</span></div>
-        <div class="fila-resumen total-destacado"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
+        <div class="fila-resumen total-destacado"><span>TOTAL FINAL:</span><span><span id="res-tot">0</span>€</span></div>
     </div>
 
     <div id="nota-confirmacion" class="nota-pdf">
@@ -148,9 +158,8 @@
     const hinchables = [
         {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
         {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
-        {n: "Rampa II (6x4)", p2: 170, p3: 200},
+        {n: "Rampa II / Ojo de Buey (6x4)", p2: 170, p3: 200},
         {n: "Tobogán (8x4)", p2: 190, p3: 220},
-        {n: "Ojo de Buey", p2: 180, p3: 210},
         {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
 
@@ -168,7 +177,7 @@
         if (cant > 0) {
             document.getElementById('caja-nombres').style.display = "block";
             for (let i = 1; i <= cant; i++) {
-                let s = `<select class="nombre-sel" style="margin-bottom:8px;" required><option value="">-- Personaje ${i} --</option>`;
+                let s = `<select class="nombre-sel" style="margin-bottom:8px;" required><option value="">-- Elija Personaje ${i} --</option>`;
                 personajes.forEach(p => s += `<option value="${p}">${p}</option>`);
                 cont.innerHTML += s + `</select>`;
             }
@@ -224,8 +233,8 @@
         const tipoEv = v('tipo-evento') === "OTRO" ? v('otro-evento-especificar') : v('tipo-evento');
         const urg = document.getElementById('div-urgencia').style.display === 'block';
         
-        let msg = urg ? "🚨🚨 *URGENTE* 🚨🚨%0A" : "✨ *PRESUPUESTO PITUSA* ✨%0A";
-        msg += `👤 *Cliente:* ${v('nombre-cliente')}%0A📞 *Tel:* ${v('tel-cliente')}%0A📧 *Email:* ${v('email-cliente')}%0A📅 *Fecha:* ${v('fecha-evento')}%0A⏰ *Horario:* ${v('horario')}%0A🎂 *Evento:* ${tipoEv}%0A👦 *Niños:* ${v('n-ninos')} | *Adultos:* ${v('n-adultos')}%0A📍 *Lugar:* ${v('alquiler-local') > 0 ? 'Local Ingenio' : v('ubicacion')}%0A%0A*SERVICIOS:*%0A`;
+        let msg = urg ? "🚨🚨 *URGENTE* 🚨🚨%0A" : "✨ *NUEVO PRESUPUESTO* ✨%0A";
+        msg += `👤 *Cliente:* ${v('nombre-cliente')}%0A📞 *Tel:* ${v('tel-cliente')}%0A📧 *Email:* ${v('email-cliente')}%0A📅 *Fecha:* ${v('fecha-evento')}%0A⏰ *Horario:* ${v('horario')}%0A📍 *Lugar:* ${v('alquiler-local') > 0 ? 'Local Ingenio' : v('ubicacion')}%0A🎂 *Evento:* ${tipoEv}%0A👦 *Niños:* ${v('n-ninos')} | *Adultos:* ${v('n-adultos')}%0A%0A*SERVICIOS:*%0A`;
         
         document.querySelectorAll('select.calc').forEach(sel => {
             if (sel.value > 0 && sel.id !== 'total-mun-oculto') {
@@ -233,7 +242,6 @@
             }
         });
 
-        // CORRECCIÓN: Inclusión del precio de muñecotes en el mensaje
         const cantMun = document.getElementById('cantidad-munecotes');
         if(cantMun.value > 0) {
             msg += `*Muñecotes (${cantMun.options[cantMun.selectedIndex].text}):*%0A`;
@@ -242,17 +250,36 @@
         }
         
         if(urg) msg += `%0A🚨 *Tasa de Urgencia (+50€) incluida*`;
-        msg += `%0A%0A💰 *TOTAL:* ${document.getElementById('res-tot').innerText}€`;
+        msg += `%0A%0A💰 *TOTAL FINAL:* ${document.getElementById('res-tot').innerText}€`;
         window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
     function generarPDF() {
-        document.getElementById('nota-confirmacion').style.display = 'block';
-        const opt = { margin: 0.5, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter' } };
-        html2pdf().from(document.getElementById('hoja-presupuesto')).set(opt).save().then(() => {
-            document.getElementById('nota-confirmacion').style.display = 'none';
+        const elemento = document.getElementById('hoja-presupuesto');
+        const nota = document.getElementById('nota-confirmacion');
+        
+        nota.style.display = 'block';
+
+        const opciones = {
+            margin: [0.2, 0.2],
+            filename: 'Presupuesto_Pitusa.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, 
+                useCORS: true, 
+                logging: false,
+                letterRendering: true,
+                scrollY: 0
+            },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+
+        // El retraso asegura que el DOM se procese correctamente antes de capturar
+        html2pdf().set(opciones).from(elemento).save().then(() => {
+            nota.style.display = 'none';
         });
     }
+
     window.onload = cargarH;
 </script>
 </body>
