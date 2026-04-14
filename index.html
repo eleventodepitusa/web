@@ -16,12 +16,16 @@
         h1 { font-size: 1.6rem; color: var(--negro); text-transform: uppercase; margin: 10px 0; }
         h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.1rem; margin-top: 25px; background: var(--gris-claro); padding: 10px; }
 
+        /* Estilo para resaltar secciones clave */
+        .seccion-resaltada { border: 2px solid var(--rosa); border-radius: 10px; padding: 15px; background-color: var(--gris-claro); margin-top: 20px; }
+        .seccion-resaltada h2 { margin-top: 0; border: none; padding: 0; }
+
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; font-size: 14px; }
         
-        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; }
+        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; font-size: 0.95rem; }
 
-        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
         
         .ocultar-pdf { display: none !important; }
 
@@ -31,6 +35,8 @@
 
         .nota-pdf { font-size: 0.85rem; color: #555; margin-top: 25px; border: 1px dashed #ccc; padding: 15px; }
         .urgente-pdf-box { display: none; background: #333; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 15px; font-weight: bold; }
+
+        .ubicacion-local { margin-top: 30px; padding: 15px; background-color: #eee; border-radius: 8px; text-align: center; font-size: 0.9rem; }
 
         .no-print { text-align: center; margin: 20px 0; }
         .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; text-decoration: none; color: white; display: inline-block; }
@@ -58,9 +64,19 @@
             <div><label>Nombre:</label> <input type="text" id="nombre-cliente" placeholder="Su nombre"></div>
             <div><label>Teléfono:</label> <input type="tel" id="tel-cliente"></div>
             <div><label>Fecha:</label> <input type="date" id="fecha-evento" onchange="calcular()"></div>
-            <div><label>Evento:</label> <select id="tipo-evento"><option value="Cumpleaños">Cumpleaños</option><option value="Comunión">Comunión</option><option value="Boda">Boda</option><option value="Bautizo">Bautizo</option></select></div>
+            <div><label>Evento:</label> 
+                <select id="tipo-evento">
+                    <option value="Cumpleaños">Cumpleaños</option>
+                    <option value="Baby Shower">Baby Shower</option>
+                    <option value="Bautizo">Bautizo</option>
+                    <option value="Comunión">Comunión</option>
+                    <option value="Boda">Boda</option>
+                    <option value="Evento Escolar">Evento Escolar</option>
+                    <option value="Evento Público">Evento Público</option>
+                </select>
+            </div>
             <div><label>Horario:</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00"></div>
-            <div id="div-ubicacion"><label>Ubicación:</label> <input type="text" id="ubicacion" placeholder="Dirección del evento"></div>
+            <div id="div-ubicacion"><label>Ubicación (si no es local):</label> <input type="text" id="ubicacion" placeholder="Dirección del evento"></div>
             <div><label>Nº Niños:</label> <input type="number" id="n-ninos"></div>
             <div><label>Nº Adultos:</label> <input type="number" id="n-adultos"></div>
         </div>
@@ -78,21 +94,20 @@
                 <option value="250">Día Completo - 250€</option>
             </select>
         </div>
-        <div class="servicio-item"><span>Servicio de Limpieza</span><select class="calc" onchange="calcular()"><option value="0">No incluido</option><option value="40">Sí - 40€</option></select></div>
     </section>
 
-    <section>
+    <section class="seccion-resaltada">
         <h2>3. Hinchables</h2>
         <div id="hinchables-lista"></div>
     </section>
 
-    <section>
+    <section class="seccion-resaltada">
         <h2>4. Animación y Muñecotes</h2>
         <div class="servicio-item">
             <span>Packs Animación</span>
-            <select class="calc" onchange="calcular()">
+            <select class="calc" id="pack-animacion" onchange="calcular()">
                 <option value="0">Ninguno</option>
-                <option value="150">Pack Sonrisa (2h) - 150€</option>
+                <option value="150">Pack Sonrisa (2h - 2 mon.) - 150€</option>
                 <option value="125">Pintacaras + Globos (1.5h - 2 mon.) - 125€</option>
                 <option value="95">Pintacaras + Globos (1.5h - 1 mon.) - 95€</option>
                 <option value="70">Individual (1h) - 70€</option>
@@ -109,7 +124,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="seccion-resaltada">
         <h2>5. Máquinas y Otros</h2>
         <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
         <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
@@ -119,8 +134,12 @@
     <div class="resumen-caja">
         <div class="fila-total"><span>Servicios:</span><span><span id="res-sub">0</span>€</span></div>
         <div class="fila-total"><span>Gestión (10%):</span><span><span id="res-ges">0</span>€</span></div>
-        <div id="fila-urgencia" class="fila-total" style="display:none; color: var(--rosa);"><span>Tasa Urgencia:</span><span>50.00€</span></div>
+        <div id="fila-urgencia" class="fila-total" style="display:none; color: var(--rosa);"><span>⚠️ Tasa Urgencia:</span><span>50.00€</span></div>
         <div class="fila-total total-grande"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
+    </div>
+
+    <div class="ubicacion-local">
+        📍 Ubicación del local: Ingenio (Gran Canaria)
     </div>
 </div>
 
