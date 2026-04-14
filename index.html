@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -55,11 +56,11 @@
     </header>
 
     <section id="sec-datos">
-        <h2>1. Datos Obligatorios del Cliente</h2>
+        <h2>1. Datos Obligatorios del Evento</h2>
         <div class="form-grid">
             <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
             <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
-            <div><label>Fecha del Evento:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
+            <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
             <div><label>Tipo de Evento:*</label> 
                 <select id="tipo-evento" onchange="verificarOtroEvento()">
                     <option value="Cumpleaños">Cumpleaños</option>
@@ -72,18 +73,18 @@
                 </select>
             </div>
             <div id="div-otro-evento">
-                <label>¿Qué evento es?:*</label>
+                <label>Especificar evento:*</label>
                 <input type="text" id="otro-evento-texto">
             </div>
             <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
             <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required></div>
             <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required></div>
-            <div id="div-ubicacion"><label>Ubicación (Calle y Municipio):*</label> <input type="text" id="ubicacion" placeholder="Indispensable para hinchables"></div>
+            <div id="div-ubicacion"><label>Ubicación (si no es local):*</label> <input type="text" id="ubicacion" placeholder="Calle y Municipio"></div>
         </div>
-        <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Respuesta prioritaria por fecha próxima.</div>
+        <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€)</div>
     </section>
 
-    <section>
+    <section class="seccion-resaltada">
         <h2>2. Alquiler Local Pitusa (Ingenio)</h2>
         <div class="servicio-item">
             <span>Tarifa Local</span>
@@ -94,11 +95,11 @@
             </select>
         </div>
         <div class="servicio-item">
-            <div><span>Decoración Completa</span><span class="info-extra">Invitación, banderín, corona, globos, cajas chuches...</span></div>
+            <div><span>Decoración Completa (Local)</span><span class="info-extra">Invitación, banderín, corona, globos, cajitas...</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select>
         </div>
         <div class="servicio-item">
-            <div><span>Mesa Dulce</span><span class="info-extra">Pringles, Ambrosías, chuches, donuts, palomitas...</span></div>
+            <div><span>Mesa Dulce (Local)</span><span class="info-extra">Pringles, Ambrosías, chuches, donuts, palomitas...</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select>
         </div>
     </section>
@@ -109,21 +110,23 @@
     </section>
 
     <section class="seccion-resaltada">
-        <h2>4. Animación y Muñecotes</h2>
+        <h2>4. Animación y Personajes</h2>
         <div class="servicio-item">
-            <div>
-                <span>Pack Sonrisa (2h - 2 monitores)</span>
-                <span class="info-extra">Incluye: Juegos, Animación, Pintacaras y Globoflexia.</span>
-            </div>
+            <div><span>Pack Sonrisa (2h - 2 monitores)</span><span class="info-extra">Juegos, Animación, Pintacaras y Globoflexia.</span></div>
+            <select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select>
+        </div>
+        <div class="servicio-item">
+            <span>Pintacaras + Globos (1.5h)</span>
             <select class="calc" onchange="calcular()">
-                <option value="0">Ninguno</option>
-                <option value="150">Añadir - 150€</option>
+                <option value="0">No</option>
+                <option value="125">2 Monitores - 125€</option>
+                <option value="95">1 Monitor - 95€</option>
             </select>
         </div>
         <div class="servicio-item">
             <span>Personajes Muñecotes</span>
             <select class="calc" onchange="calcular()">
-                <option value="0">Ninguno</option>
+                <option value="0">No</option>
                 <option value="120">1 Personaje - 120€</option>
                 <option value="210">2 Personajes - 210€</option>
             </select>
@@ -154,6 +157,7 @@
     const hinchables = [
         {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
         {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
+        {n: "Rampa II / Ojo de Buey (6x4)", p2: 170, p3: 200},
         {n: "Tobogán (8x4)", p2: 190, p3: 220},
         {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
@@ -176,7 +180,6 @@
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
         const local = document.getElementById('alquiler-local').value;
         document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
-
         const fechaIn = document.getElementById('fecha-evento').value;
         let urgencia = 0;
         if (fechaIn) {
@@ -196,44 +199,23 @@
     }
 
     function validarCampos() {
-        const nombre = document.getElementById('nombre-cliente').value;
-        const fecha = document.getElementById('fecha-evento').value;
-        const horario = document.getElementById('horario').value;
-        const ninos = document.getElementById('n-ninos').value;
-        const adultos = document.getElementById('n-adultos').value;
-        const local = document.getElementById('alquiler-local').value;
-        const ubicacion = document.getElementById('ubicacion').value;
-
-        if (!nombre || !fecha || !horario || !ninos || !adultos) {
-            alert("Por favor, rellene todos los campos marcados con asterisco (*)");
-            return false;
+        const v = id => document.getElementById(id).value;
+        if (!v('nombre-cliente') || !v('fecha-evento') || !v('horario') || !v('n-ninos') || !v('n-adultos')) {
+            alert("Rellene todos los campos con asterisco (*)"); return false;
         }
-        if (local == 0 && !ubicacion) {
-            alert("Si no es en nuestro local, debe indicar la Ubicación para calcular el transporte.");
-            return false;
+        if (v('alquiler-local') == 0 && !v('ubicacion')) {
+            alert("Indique la Ubicación para eventos externos."); return false;
         }
         return true;
     }
 
     function validarYEnviar() {
         if (validarCampos()) {
-            const nombre = document.getElementById('nombre-cliente').value;
-            const fecha = document.getElementById('fecha-evento').value;
-            const horario = document.getElementById('horario').value;
-            const ninos = document.getElementById('n-ninos').value;
-            const adultos = document.getElementById('n-adultos').value;
-            const local = document.getElementById('alquiler-local').value;
-            const sitio = (local > 0) ? "Local Pitusa (Ingenio)" : document.getElementById('ubicacion').value;
-            
-            let tipoEv = document.getElementById('tipo-evento').value;
-            if(tipoEv === 'Otro') tipoEv = document.getElementById('otro-evento-texto').value;
-
-            let msg = `✨ *NUEVO PRESUPUESTO PITUSA* ✨%0A`;
-            msg += `*Cliente:* ${nombre}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${fecha}%0A*Horario:* ${horario}%0A*Lugar:* ${sitio}%0A*Asistentes:* ${ninos} niños / ${adultos} adultos%0A%0A*Servicios:*%0A`;
-            
-            document.querySelectorAll('select.calc').forEach(s => { 
-                if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; 
-            });
+            const v = id => document.getElementById(id).value;
+            const sitio = (v('alquiler-local') > 0) ? "Local Pitusa (Ingenio)" : v('ubicacion');
+            let tipoEv = v('tipo-evento') === 'Otro' ? v('otro-evento-texto') : v('tipo-evento');
+            let msg = `✨ *NUEVO PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${v('fecha-evento')}%0A*Horario:* ${v('horario')}%0A*Lugar:* ${sitio}%0A*Asistentes:* ${v('n-ninos')} niños / ${v('n-adultos')} adultos%0A%0A*Servicios:*%0A`;
+            document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; });
             msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
             window.open(`https://wa.me/34652678718?text=${msg}`);
         }
@@ -243,17 +225,12 @@
         if (validarCampos()) {
             window.scrollTo(0,0);
             const filas = document.querySelectorAll('.servicio-item');
-            filas.forEach(f => {
-                if (f.querySelector('select').value == "0") f.classList.add('ocultar-pdf');
-            });
-            html2pdf().from(document.getElementById('hoja-presupuesto')).set({
-                margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4' }
-            }).save().then(() => {
+            filas.forEach(f => { if (f.querySelector('select').value == "0") f.classList.add('ocultar-pdf'); });
+            html2pdf().from(document.getElementById('hoja-presupuesto')).set({ margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4' } }).save().then(() => {
                 filas.forEach(f => f.classList.remove('ocultar-pdf'));
             });
         }
     }
-
     window.onload = cargarHinchables;
 </script>
 </body>
