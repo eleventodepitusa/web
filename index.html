@@ -22,9 +22,9 @@
         .resumen-total { background: var(--negro); color: white; padding: 25px; border-radius: 12px; margin-top: 30px; }
         .fila-resumen { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
         .total-destacado { font-size: 1.8rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #444; padding-top: 15px; margin-top: 10px; }
-        .nota-pdf { display: none; margin-top: 20px; padding: 15px; border: 2px solid var(--rosa); border-radius: 10px; font-weight: bold; text-align: center; color: var(--negro); background: #fff5f6; }
+        .nota-pdf { display: none; margin-top: 20px; padding: 15px; border: 2px solid var(--rosa); border-radius: 10px; font-weight: bold; text-align: center; background: #fff5f6; }
         .btn-container { text-align: center; margin: 30px 0; }
-        .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 10px; color: white; }
+        .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #555; }
         .ocultar-pdf { display: none !important; }
@@ -49,7 +49,7 @@
             <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
             <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required></div>
             <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required></div>
-            <div id="div-ubicacion"><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona"></div>
+            <div id="div-ubicacion"><label>Ubicación (Si no es Local):*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona"></div>
         </div>
         <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Reserva con menos de 7 días.</div>
     </section>
@@ -64,25 +64,52 @@
     </div>
 
     <div class="seccion-contenedor">
-        <h2>3. Animación y Muñecotes</h2>
-        <div class="servicio-item"><span>Pintacaras + Globoflexia (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monitores - 125€</option><option value="95">1 Monitor - 95€</option></select></div>
-        <div class="cuadro-info">
-            <strong>¿Qué incluye este servicio?</strong><br>
-            • 🕒 Duración: Entre 45 min y 1 hora.<br>
-            • 📷 Fotos y vídeos individual y en grupo dentro del horario.<br>
-            • 🎁 Diploma personalizado para el/la protagonista.<br>
-            • 🎨 Dibujos para colorear de la temática para los invitados.
-        </div>
-        <div class="servicio-item"><span>Personajes</span><select id="cantidad-munecotes" onchange="calcular()"><option value="0">Ninguno</option><option value="120">1 Personaje - 120€</option><option value="210">2 Personajes - 210€</option></select></div>
+        <h2>3. Castillos Hinchables</h2>
+        <div id="lista-hinchables"></div>
     </div>
 
     <div class="seccion-contenedor">
-        <h2>4. Packs de Decoración</h2>
+        <h2>4. Animación y Muñecotes</h2>
+        <div class="servicio-item"><span>Pack Sonrisa (2h - 2 monitores)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
+        <div class="servicio-item"><span>Pintacaras + Globoflexia (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monitores - 125€</option><option value="95">1 Monitor - 95€</option></select></div>
+        <div class="servicio-item"><span>Pintacaras Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
+        <div class="servicio-item"><span>Globoflexia Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
+
+        <div style="margin-top:15px;">
+            <h3>Muñecotes (Personajes)</h3>
+            <div class="cuadro-info">
+                🕒 Duración: 45 min a 1 hora.<br>
+                📷 Fotos y vídeos individual y en grupo dentro del horario.<br>
+                🎁 Diploma personalizado para el/la protagonista.<br>
+                🎨 Dibujos para colorear de la temática.
+            </div>
+            <div class="servicio-item"><span>Zona</span><select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas Capital</option><option value="20">Resto de la Isla (+20€)</option></select></div>
+            <div class="servicio-item"><span>Personajes</span><select id="cantidad-munecotes" onchange="calcular()"><option value="0">Ninguno</option><option value="120">1 Personaje - 120€</option><option value="210">2 Personajes - 210€</option></select></div>
+            <input type="hidden" id="total-mun-oculto" class="calc" value="0">
+        </div>
+    </div>
+
+    <div class="seccion-contenedor">
+        <h2>5. Packs de Decoración</h2>
+        <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
+        <div class="cuadro-info">✔️ Medio arco de globos y número.</div>
+        <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
+        <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros.</div>
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
-        <div class="cuadro-info">✔️ Medio arco de globos, Número, Cartel con nombre, Mesa Dulce (10 Pringles, 10 Chocolatinas, 10 Aguas, 10 Pomperos, 2 Tarros, 10 Detalles globos).</div>
+        <div class="cuadro-info">✔️ Arco, número, cartel y Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Aguas, 10 Pomperos, 2 Tarros, 10 Detalles globos).</div>
+    </div>
+
+    <div class="seccion-contenedor">
+        <h2>6. Máquinas y Extras</h2>
+        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
+        <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
     </div>
 
     <div class="resumen-total">
+        <div class="fila-resumen"><span>Servicios:</span><span><span id="sub-val">0</span>€</span></div>
+        <div class="fila-resumen"><span>Gestión Logística (10%):</span><span><span id="ges-val">0</span>€</span></div>
         <div id="fila-urgencia" class="fila-resumen" style="display:none; color: var(--rosa);"><span>🚨 TASA URGENCIA:</span><span>50.00€</span></div>
         <div class="fila-resumen total-destacado"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
     </div>
@@ -98,16 +125,34 @@
 </div>
 
 <script>
+    const hinchables = [
+        {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
+        {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
+        {n: "Rampa II (6x4)", p2: 170, p3: 200},
+        {n: "Tobogán (8x4)", p2: 190, p3: 220},
+        {n: "Pista Americana (12x4)", p2: 260, p3: 300}
+    ];
+
+    function cargarH() {
+        let html = "";
+        hinchables.forEach(h => {
+            html += `<div class="servicio-item"><span><strong>${h.n}</strong></span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="${h.p2}">${h.p2}€ (2h)</option><option value="${h.p3}">${h.p3}€ (3h)</option></select></div>`;
+        });
+        document.getElementById('lista-hinchables').innerHTML = html;
+    }
+
     function calcular() {
+        const pMun = parseFloat(document.getElementById('cantidad-munecotes').value);
+        const zMun = pMun > 0 ? parseFloat(document.getElementById('zona-munecote').value) : 0;
+        document.getElementById('total-mun-oculto').value = pMun + zMun;
+
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
-        const mun = parseFloat(document.getElementById('cantidad-munecotes').value);
-        sub += mun;
         
-        const fechaVal = document.getElementById('fecha-evento').value;
+        const fecha = document.getElementById('fecha-evento').value;
         let urg = 0;
-        if (fechaVal) {
-            const dias = (new Date(fechaVal) - new Date()) / (1000 * 60 * 60 * 24);
+        if (fecha) {
+            const dias = (new Date(fecha) - new Date()) / (86400000);
             if (dias >= 0 && dias < 7) { 
                 urg = 50; 
                 document.getElementById('div-urgencia').style.display = 'block';
@@ -117,35 +162,38 @@
                 document.getElementById('fila-urgencia').style.display = 'none';
             }
         }
+        document.getElementById('sub-val').innerText = sub.toFixed(2);
+        document.getElementById('ges-val').innerText = (sub * 0.10).toFixed(2);
         document.getElementById('res-tot').innerText = (sub * 1.10 + urg).toFixed(2);
     }
 
     function validarYEnviar() {
         const v = id => document.getElementById(id).value;
-        const fechaVal = v('fecha-evento');
-        const dias = (new Date(fechaVal) - new Date()) / (1000 * 60 * 60 * 24);
-        const esUrgente = (dias >= 0 && dias < 7);
+        if (!v('nombre-cliente') || !v('fecha-evento')) return alert("Nombre y fecha requeridos");
         
-        let msg = esUrgente ? `🚨🚨 *URGENTE* 🚨🚨%0A` : `✨ *NUEVO PRESUPUESTO* ✨%0A`;
-        msg += `👤 *Cliente:* ${v('nombre-cliente')}%0A📅 *Fecha:* ${v('fecha-evento')}%0A%0A*SERVICIOS SELECCIONADOS:*%0A`;
+        const urg = document.getElementById('div-urgencia').style.display === 'block';
+        let msg = urg ? "🚨🚨 *URGENTE* 🚨🚨%0A" : "✨ *PRESUPUESTO PITUSA* ✨%0A";
+        msg += `*Cliente:* ${v('nombre-cliente')}%0A*Tel:* ${v('tel-cliente')}%0A*Fecha:* ${v('fecha-evento')}%0A*Niños:* ${v('n-ninos')} | *Adultos:* ${v('n-adultos')}%0A%0A*SERVICIOS:*%0A`;
         
         document.querySelectorAll('select.calc').forEach(sel => {
-            if (sel.value > 0) msg += `• ${sel.parentElement.firstElementChild.innerText}: ${sel.options[sel.selectedIndex].text}%0A`;
+            if (sel.value > 0 && sel.id !== 'total-mun-oculto') {
+                msg += `- ${sel.closest('.servicio-item').firstElementChild.innerText}: ${sel.options[sel.selectedIndex].text}%0A`;
+            }
         });
+        if(v('cantidad-munecotes') > 0) msg += `- Muñecotes: ${document.getElementById('cantidad-munecotes').options[document.getElementById('cantidad-munecotes').selectedIndex].text} (${document.getElementById('zona-munecote').options[document.getElementById('zona-munecote').selectedIndex].text})%0A`;
         
-        if(v('cantidad-munecotes') > 0) msg += `• Muñecotes: ${document.getElementById('cantidad-munecotes').options[document.getElementById('cantidad-munecotes').selectedIndex].text}%0A`;
-        
-        msg += `%0A💰 *TOTAL FINAL:* ${document.getElementById('res-tot').innerText}€`;
+        msg += `%0A💰 *TOTAL:* ${document.getElementById('res-tot').innerText}€`;
         window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
     function generarPDF() {
         document.getElementById('nota-confirmacion').style.display = 'block';
-        const elem = document.getElementById('hoja-presupuesto');
-        html2pdf().from(elem).set({ margin: 0.5, filename: 'Presupuesto_Pitusa.pdf' }).save().then(() => {
+        const opt = { margin: 0.5, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter' } };
+        html2pdf().from(document.getElementById('hoja-presupuesto')).set(opt).save().then(() => {
             document.getElementById('nota-confirmacion').style.display = 'none';
         });
     }
+    window.onload = cargarH;
 </script>
 </body>
 </html>
