@@ -22,36 +22,39 @@
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; font-size: 14px; }
         
-        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; font-size: 0.95rem; }
+        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; }
 
-        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
         .ocultar-pdf { display: none !important; }
 
         .resumen-caja { background: var(--negro); color: white; padding: 25px; border-radius: 10px; margin-top: 30px; }
         .fila-total { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; }
         .total-grande { font-size: 1.6rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #555; padding-top: 10px; }
 
-        .info-extra { font-size: 0.85rem; color: #666; font-style: italic; margin-top: 4px; display: block; }
-
         .no-print { text-align: center; margin: 20px 0; }
         .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; text-decoration: none; color: white; display: inline-block; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #444; }
+        .btn-galeria { background: var(--rosa); }
+        .info-extra { font-size: 0.8rem; color: #666; display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
 
+<div class="no-print">
+    <a href="galeria.html" class="btn btn-galeria">📸 Ver Galería de Fotos</a>
+</div>
+
 <div id="hoja-presupuesto">
     <header>
         <img src="logo.png" alt="El Evento de Pitusa" class="logo">
-        <div id="urgente-pdf-box" class="no-print" style="background: #333; color: white; padding: 5px; font-size: 12px; margin-bottom: 10px;">⚡ PRIORIDAD ALTA: Gestión en menos de 24h</div>
         <h1>Presupuesto de Evento</h1>
     </header>
 
     <section id="sec-datos">
         <h2>1. Datos del Cliente y Evento</h2>
         <div class="form-grid">
-            <div><label>Nombre:</label> <input type="text" id="nombre-cliente"></div>
+            <div><label>Nombre:</label> <input type="text" id="nombre-cliente" placeholder="Su nombre"></div>
             <div><label>Teléfono:</label> <input type="tel" id="tel-cliente"></div>
             <div><label>Fecha:</label> <input type="date" id="fecha-evento" onchange="calcular()"></div>
             <div><label>Evento:</label> 
@@ -61,88 +64,91 @@
                     <option value="Bautizo">Bautizo</option>
                     <option value="Comunión">Comunión</option>
                     <option value="Boda">Boda</option>
+                    <option value="Evento Escolar">Evento Escolar</option>
                 </select>
             </div>
-            <div id="div-ubicacion" style="grid-column: 1 / -1;">
-                <label>Ubicación (Obligatorio si no es local):</label> 
-                <input type="text" id="ubicacion" placeholder="Dirección del evento">
-            </div>
+            <div><label>Horario:</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00"></div>
+            <div><label>Nº Niños:</label> <input type="number" id="n-ninos"></div>
+            <div><label>Nº Adultos:</label> <input type="number" id="n-adultos"></div>
+            <div id="div-ubicacion"><label>Ubicación (si no es local):</label> <input type="text" id="ubicacion" placeholder="Calle y Municipio"></div>
         </div>
-        <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Respuesta prioritaria.</div>
+        <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Respuesta prioritaria por fecha próxima.</div>
     </section>
 
-    <section class="seccion-resaltada">
+    <section>
         <h2>2. Alquiler Local Pitusa (Ingenio)</h2>
         <div class="servicio-item">
-            <div>
-                <span>Tarifa por Horas</span>
-                <span class="info-extra">Mañanas: 10:00, 10:30 o 11:00 | Tardes: 16:00, 16:30 o 17:00</span>
-            </div>
+            <span>Tarifa Local</span>
             <select class="calc" id="alquiler-local" onchange="calcular()">
                 <option value="0">No contratar local</option>
-                <option value="160">Tarifa 3 Horas - 160€</option>
-                <option value="190">Tarifa 4 Horas - 190€</option>
+                <option value="160">3 Horas (Mañana o Tarde) - 160€</option>
+                <option value="190">4 Horas (Mañana o Tarde) - 190€</option>
             </select>
         </div>
         <div class="servicio-item">
-            <div>
-                <span>Decoración Completa</span>
-                <span class="info-extra">Invitación digital, banderín, corona, columna de globos, nombre y cajitas de chuches.</span>
-            </div>
+            <div><span>Decoración Completa</span><span class="info-extra">Invitación, banderín, corona, globos, cajas chuches...</span></div>
+            <select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select>
+        </div>
+        <div class="servicio-item">
+            <div><span>Mesa Dulce</span><span class="info-extra">Pringles, Ambrosías, chuches, donuts, palomitas...</span></div>
+            <select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select>
+        </div>
+    </section>
+
+    <section class="seccion-resaltada">
+        <h2>3. Hinchables</h2>
+        <div id="hinchables-lista"></div>
+    </section>
+
+    <section class="seccion-resaltada">
+        <h2>4. Animación y Muñecotes</h2>
+        <div class="servicio-item">
+            <span>Packs Animación</span>
             <select class="calc" onchange="calcular()">
-                <option value="0">No incluido</option>
-                <option value="140">Sí, añadir - 140€</option>
+                <option value="0">Ninguno</option>
+                <option value="150">Pack Sonrisa (2h - 2 monitores) - 150€</option>
+                <option value="125">Pintacaras + Globos (1.5h - 2 mon.) - 125€</option>
+                <option value="95">Pintacaras + Globos (1.5h - 1 mon.) - 95€</option>
+                <option value="70">Individual (1h) - 70€</option>
             </select>
         </div>
         <div class="servicio-item">
-            <div>
-                <span>Mesa Dulce</span>
-                <span class="info-extra">Pringles, Ambrosías Tirma, chuches, donuts y palomitas.</span>
-            </div>
+            <span>Personajes Muñecotes</span>
             <select class="calc" onchange="calcular()">
-                <option value="0">No incluido</option>
-                <option value="80">Sí, añadir - 80€</option>
+                <option value="0">Ninguno</option>
+                <option value="120">1 Personaje - 120€</option>
+                <option value="210">2 Personajes - 210€</option>
             </select>
         </div>
     </section>
 
     <section class="seccion-resaltada">
-        <h2>3. Hinchables y Diversión</h2>
-        <div id="hinchables-lista"></div>
-        <div class="servicio-item">
-            <div>
-                <span>Pack Sonrisa</span>
-                <span class="info-extra">Animación + Juegos + Globoflexia (2 monitores - 2h)</span>
-            </div>
-            <select class="calc" onchange="calcular()">
-                <option value="0">No incluido</option>
-                <option value="150">Añadir - 150€</option>
-            </select>
-        </div>
+        <h2>5. Máquinas y Otros</h2>
+        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
+        <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
     </section>
 
     <div class="resumen-caja">
         <div class="fila-total"><span>Servicios:</span><span><span id="res-sub">0</span>€</span></div>
-        <div class="fila-total"><span>Gestión (10%):</span><span><span id="res-ges">0</span>€</span></div>
+        <div class="fila-total"><span>Gestión Logística (10%):</span><span><span id="res-ges">0</span>€</span></div>
         <div id="fila-urgencia" class="fila-total" style="display:none; color: var(--rosa);"><span>Tasa Urgencia:</span><span>50.00€</span></div>
         <div class="fila-total total-grande"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
-    </div>
-
-    <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #666;">
-        📍 Ubicación del local: Ingenio (Gran Canaria)
     </div>
 </div>
 
 <div class="no-print">
-    <button onclick="enviarWA()" class="btn btn-wa">📲 Enviar a Pitusa</button>
-    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF</button>
+    <button onclick="enviarWA()" class="btn btn-wa">📲 Enviar WhatsApp</button>
+    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF Limpio</button>
 </div>
 
 <script>
     const hinchables = [
         {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
         {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
-        {n: "Tobogán (8x4)", p2: 190, p3: 220}
+        {n: "Rampa II / Ojo de Buey (6x4)", p2: 170, p3: 200},
+        {n: "Tobogán (8x4)", p2: 190, p3: 220},
+        {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
 
     function cargarHinchables() {
@@ -178,26 +184,28 @@
         document.getElementById('res-tot').innerText = (sub * 1.10 + urgencia).toFixed(2);
     }
 
+    function enviarWA() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        const fecha = document.getElementById('fecha-evento').value;
+        if(!nombre || !fecha) return alert("Rellena nombre y fecha");
+        let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${nombre}%0A*Fecha:* ${fecha}%0A%0A*Servicios:*%0A`;
+        document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; });
+        msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
+        window.open(`https://wa.me/34652678718?text=${msg}`);
+    }
+
     function generarPDF() {
+        window.scrollTo(0,0);
         const filas = document.querySelectorAll('.servicio-item');
         filas.forEach(f => {
             const select = f.querySelector('select');
             if (select && select.value == "0") f.classList.add('ocultar-pdf');
         });
 
-        html2pdf().from(document.getElementById('hoja-presupuesto')).set({
-            margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4' }
-        }).save().then(() => {
+        const opt = { margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'a4' } };
+        html2pdf().from(document.getElementById('hoja-presupuesto')).set(opt).save().then(() => {
             filas.forEach(f => f.classList.remove('ocultar-pdf'));
         });
-    }
-
-    function enviarWA() {
-        const nombre = document.getElementById('nombre-cliente').value;
-        let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${nombre}%0A%0A*Servicios:*%0A`;
-        document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; });
-        msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
-        window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
     window.onload = cargarHinchables;
