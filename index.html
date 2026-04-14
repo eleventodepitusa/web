@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -73,7 +72,7 @@
                 </select>
             </div>
             <div id="div-otro-evento">
-                <label>Especificar evento:*</label>
+                <label>Especifique evento:*</label>
                 <input type="text" id="otro-evento-texto">
             </div>
             <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
@@ -110,18 +109,25 @@
     </section>
 
     <section class="seccion-resaltada">
-        <h2>4. Animación y Personajes</h2>
+        <h2>4. Packs de Animación y Personajes</h2>
         <div class="servicio-item">
-            <div><span>Pack Sonrisa (2h - 2 monitores)</span><span class="info-extra">Juegos, Animación, Pintacaras y Globoflexia.</span></div>
+            <div>
+                <span>Pack Sonrisa (2h - 2 monitores)</span>
+                <span class="info-extra">Incluye: Juegos, Animación, Pintacaras y Globoflexia.</span>
+            </div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select>
         </div>
         <div class="servicio-item">
-            <span>Pintacaras + Globos (1.5h)</span>
+            <div><span>Pintacaras + Globoflexia (1.5h)</span><span class="info-extra">Opción de 1 o 2 monitores.</span></div>
             <select class="calc" onchange="calcular()">
                 <option value="0">No</option>
                 <option value="125">2 Monitores - 125€</option>
                 <option value="95">1 Monitor - 95€</option>
             </select>
+        </div>
+        <div class="servicio-item">
+            <div><span>Animación Individual (1h)</span><span class="info-extra">1 Monitor.</span></div>
+            <select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select>
         </div>
         <div class="servicio-item">
             <span>Personajes Muñecotes</span>
