@@ -27,6 +27,8 @@
         .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #555; }
+        .btn-galeria { background: #e91e63; text-decoration: none; display: inline-block; }
+        .caja-nombres { background: #fefefe; padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px dashed var(--rosa); display: none; }
         .ocultar-pdf { display: none !important; }
     </style>
 </head>
@@ -38,6 +40,10 @@
         <h1>Presupuesto del Evento</h1>
     </header>
 
+    <div class="btn-container no-print">
+        <a href="https://eleventodepitusa.com/galeria" target="_blank" class="btn btn-galeria">🖼️ Ver Galería de Fotos</a>
+    </div>
+
     <section id="datos-obligatorios">
         <h2>1. Datos Obligatorios</h2>
         <div class="form-grid">
@@ -45,11 +51,11 @@
             <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
             <div><label>Correo:*</label> <input type="email" id="email-cliente" required></div>
             <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
-            <div><label>Evento:*</label> <select id="tipo-evento"><option>Cumpleaños</option><option>Bautizo</option><option>Comunión</option><option>Boda</option><option>Otro</option></select></div>
+            <div><label>Tipo de Evento:*</label> <select id="tipo-evento"><option>Cumpleaños</option><option>Bautizo</option><option>Comunión</option><option>Boda</option><option>Otro</option></select></div>
             <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
             <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required></div>
             <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required></div>
-            <div id="div-ubicacion"><label>Ubicación (Si no es Local):*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona"></div>
+            <div id="div-ubicacion"><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona"></div>
         </div>
         <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Reserva con menos de 7 días.</div>
     </section>
@@ -84,7 +90,13 @@
                 🎨 Dibujos para colorear de la temática.
             </div>
             <div class="servicio-item"><span>Zona</span><select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas Capital</option><option value="20">Resto de la Isla (+20€)</option></select></div>
-            <div class="servicio-item"><span>Personajes</span><select id="cantidad-munecotes" onchange="calcular()"><option value="0">Ninguno</option><option value="120">1 Personaje - 120€</option><option value="210">2 Personajes - 210€</option></select></div>
+            <div class="servicio-item"><span>Personajes</span><select id="cantidad-munecotes" onchange="gestionarNombres()">
+                <option value="0">Ninguno</option>
+                <option value="120">1 Personaje - 120€</option>
+                <option value="210">2 Personajes - 210€</option>
+                <option value="300">3 Personajes - 300€</option>
+            </select></div>
+            <div id="caja-nombres" class="caja-nombres"><div id="nombres-cont"></div></div>
             <input type="hidden" id="total-mun-oculto" class="calc" value="0">
         </div>
     </div>
@@ -94,7 +106,7 @@
         <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
         <div class="cuadro-info">✔️ Medio arco de globos y número.</div>
         <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
-        <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros.</div>
+        <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches.</div>
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
         <div class="cuadro-info">✔️ Arco, número, cartel y Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Aguas, 10 Pomperos, 2 Tarros, 10 Detalles globos).</div>
     </div>
@@ -108,7 +120,7 @@
     </div>
 
     <div class="resumen-total">
-        <div class="fila-resumen"><span>Servicios:</span><span><span id="sub-val">0</span>€</span></div>
+        <div class="fila-resumen"><span>Suma de servicios:</span><span><span id="sub-val">0</span>€</span></div>
         <div class="fila-resumen"><span>Gestión Logística (10%):</span><span><span id="ges-val">0</span>€</span></div>
         <div id="fila-urgencia" class="fila-resumen" style="display:none; color: var(--rosa);"><span>🚨 TASA URGENCIA:</span><span>50.00€</span></div>
         <div class="fila-resumen total-destacado"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
@@ -133,6 +145,23 @@
         {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
 
+    const personajes = ["Sonic", "Bella", "Trolls", "Gatita Marie", "Olaf", "Cocomelon", "Minions", "Winnie the Pooh", "Pepa Pig", "Dumbo", "Elsa", "Chase", "Marshall", "Skye", "Gabby Gato", "Bluey", "Super Mario", "Otro"];
+
+    function gestionarNombres() {
+        const cant = document.getElementById('cantidad-munecotes').selectedIndex;
+        const cont = document.getElementById('nombres-cont');
+        cont.innerHTML = "";
+        if (cant > 0) {
+            document.getElementById('caja-nombres').style.display = "block";
+            for (let i = 1; i <= cant; i++) {
+                let s = `<select class="nombre-sel" style="margin-bottom:8px;"><option value="">-- Elige Personaje ${i} --</option>`;
+                personajes.forEach(p => s += `<option value="${p}">${p}</option>`);
+                cont.innerHTML += s + `</select>`;
+            }
+        } else { document.getElementById('caja-nombres').style.display = "none"; }
+        calcular();
+    }
+
     function cargarH() {
         let html = "";
         hinchables.forEach(h => {
@@ -148,7 +177,6 @@
 
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
-        
         const fecha = document.getElementById('fecha-evento').value;
         let urg = 0;
         if (fecha) {
@@ -173,14 +201,19 @@
         
         const urg = document.getElementById('div-urgencia').style.display === 'block';
         let msg = urg ? "🚨🚨 *URGENTE* 🚨🚨%0A" : "✨ *PRESUPUESTO PITUSA* ✨%0A";
-        msg += `*Cliente:* ${v('nombre-cliente')}%0A*Tel:* ${v('tel-cliente')}%0A*Fecha:* ${v('fecha-evento')}%0A*Niños:* ${v('n-ninos')} | *Adultos:* ${v('n-adultos')}%0A%0A*SERVICIOS:*%0A`;
+        msg += `👤 *Cliente:* ${v('nombre-cliente')}%0A📞 *Tel:* ${v('tel-cliente')}%0A📧 *Email:* ${v('email-cliente')}%0A📅 *Fecha:* ${v('fecha-evento')}%0A⏰ *Horario:* ${v('horario')}%0A🎂 *Evento:* ${v('tipo-evento')}%0A👦 *Niños:* ${v('n-ninos')} | *Adultos:* ${v('n-adultos')}%0A📍 *Lugar:* ${v('alquiler-local') > 0 ? 'Local Ingenio' : v('ubicacion')}%0A%0A*SERVICIOS:*%0A`;
         
         document.querySelectorAll('select.calc').forEach(sel => {
             if (sel.value > 0 && sel.id !== 'total-mun-oculto') {
-                msg += `- ${sel.closest('.servicio-item').firstElementChild.innerText}: ${sel.options[sel.selectedIndex].text}%0A`;
+                msg += `- ${sel.closest('.servicio-item')?.firstElementChild.innerText || 'Servicio'}: ${sel.options[sel.selectedIndex].text}%0A`;
             }
         });
-        if(v('cantidad-munecotes') > 0) msg += `- Muñecotes: ${document.getElementById('cantidad-munecotes').options[document.getElementById('cantidad-munecotes').selectedIndex].text} (${document.getElementById('zona-munecote').options[document.getElementById('zona-munecote').selectedIndex].text})%0A`;
+
+        if(v('cantidad-munecotes') > 0) {
+            msg += `*Muñecotes:*%0A`;
+            document.querySelectorAll('.nombre-sel').forEach(s => { if(s.value) msg += `  • ${s.value}%0A`; });
+            msg += `  (Zona: ${document.getElementById('zona-munecote').options[document.getElementById('zona-munecote').selectedIndex].text})%0A`;
+        }
         
         msg += `%0A💰 *TOTAL:* ${document.getElementById('res-tot').innerText}€`;
         window.open(`https://wa.me/34652678718?text=${msg}`);
