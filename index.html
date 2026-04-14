@@ -6,30 +6,46 @@
     <title>El Evento de Pitusa | Presupuesto Online</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        :root { --rosa: #f2a6b1; --negro: #333; --fondo: #ffffff; --gris-claro: #f9f9f9; --verde: #25d366; --urgente: #e74c3c; }
-        body { font-family: 'Arial', sans-serif; margin: 0; background: #eee; color: var(--negro); }
-        #hoja-presupuesto { background: white; max-width: 800px; margin: 20px auto; padding: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        :root { --rosa: #f2a6b1; --negro: #333; --fondo: #ffffff; --gris-claro: #fcfcfc; --verde: #25d366; --urgente: #e74c3c; }
+        body { font-family: 'Arial', sans-serif; margin: 0; background: #f0f0f0; color: var(--negro); }
+        
+        #hoja-presupuesto { background: white; max-width: 800px; margin: 20px auto; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--rosa); padding-bottom: 20px; }
         .logo { width: 220px; height: auto; margin-bottom: 10px; }
+        
         h1 { font-size: 1.6rem; color: var(--negro); text-transform: uppercase; margin: 10px 0; }
-        h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.1rem; margin-top: 25px; background: var(--gris-claro); padding: 10px; }
-        .seccion-resaltada { border: 2px solid var(--rosa); border-radius: 10px; padding: 15px; background-color: var(--gris-claro); margin-top: 20px; }
-        .seccion-resaltada h2 { margin-top: 0; border: none; padding: 0; }
+        h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.1rem; margin-top: 25px; background: #fff5f6; padding: 10px; border-radius: 0 5px 5px 0; }
+
+        .seccion-contenedor { border: 1.5px solid var(--rosa); border-radius: 15px; padding: 20px; background-color: white; margin-top: 20px; }
+        
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; font-size: 14px; }
-        input:required { border-left: 4px solid var(--urgente); }
-        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; }
-        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
-        .info-cuadro { background: #fff9fa; border: 1px solid var(--rosa); padding: 12px; border-radius: 8px; margin-top: 5px; font-size: 0.85rem; margin-bottom: 10px; }
-        .resumen-caja { background: var(--negro); color: white; padding: 25px; border-radius: 10px; margin-top: 30px; }
-        .fila-total { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; }
-        .total-grande { font-size: 1.6rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #555; padding-top: 10px; }
-        .no-print { text-align: center; margin: 20px 0; }
-        .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; text-decoration: none; color: white; display: inline-block; }
+        input, select { padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; box-sizing: border-box; font-size: 14px; background: #fff; }
+        
+        .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+        
+        /* Estilo de los cuadros descriptivos (vistozo y bonito) */
+        .cuadro-info { 
+            background: #fff5f6; 
+            border: 1px solid var(--rosa); 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin: 10px 0 20px 0; 
+            font-size: 0.9rem; 
+            line-height: 1.4;
+        }
+        .cuadro-info ul { margin: 8px 0 0 20px; padding: 0; }
+        .cuadro-info strong { color: #d47a87; }
+
+        .resumen-total { background: var(--negro); color: white; padding: 25px; border-radius: 12px; margin-top: 30px; }
+        .fila-resumen { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
+        .total-destacado { font-size: 1.8rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #444; padding-top: 15px; margin-top: 10px; }
+
+        .btn-container { text-align: center; margin: 30px 0; }
+        .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 10px; color: white; transition: 0.3s; }
         .btn-wa { background: var(--verde); }
-        .btn-pdf { background: #444; }
-        .caja-munecotes { background: white; padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px dashed var(--rosa); }
-        #div-otro-evento { display: none; margin-top: 10px; grid-column: 1 / -1; }
+        .btn-pdf { background: #555; }
+        
+        .caja-nombres { background: #fefefe; padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px dashed var(--rosa); }
         .ocultar-pdf { display: none !important; }
     </style>
 </head>
@@ -38,115 +54,116 @@
 <div id="hoja-presupuesto">
     <header>
         <img src="logo.png" alt="El Evento de Pitusa" class="logo">
-        <h1>Presupuesto de Evento</h1>
+        <h1>Presupuesto Personalizado</h1>
     </header>
 
-    <section id="sec-datos">
-        <h2>1. Datos del Evento</h2>
+    <section>
+        <h2>1. Datos Obligatorios</h2>
         <div class="form-grid">
-            <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
-            <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
-            <div><label>Correo Electrónico:*</label> <input type="email" id="email-cliente" required></div>
-            <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
-            <div><label>Tipo de Evento:*</label> 
-                <select id="tipo-evento" onchange="verificarOtroEvento()">
-                    <option value="Cumpleaños">Cumpleaños</option>
-                    <option value="Baby Shower">Baby Shower</option>
-                    <option value="Bautizo">Bautizo</option>
-                    <option value="Comunión">Comunión</option>
-                    <option value="Boda">Boda</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
-            <div id="div-otro-evento"><input type="text" id="otro-evento-texto" placeholder="¿Qué evento es?"></div>
-            <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
-            <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required></div>
-            <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required></div>
-            <div id="div-ubicacion"><label>Ubicación (si no es local):*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona"></div>
+            <div><label>Nombre:</label> <input type="text" id="nombre-cliente" required></div>
+            <div><label>Teléfono:</label> <input type="tel" id="tel-cliente" required></div>
+            <div><label>Correo:</label> <input type="email" id="email-cliente" required></div>
+            <div><label>Fecha:</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
+            <div><label>Horario:</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00"></div>
+            <div><label>Ubicación:</label> <input type="text" id="ubicacion" placeholder="Municipio/Local"></div>
         </div>
-        <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€)</div>
     </section>
 
-    <section class="seccion-resaltada">
-        <h2>2. Alquiler Local Pitusa (Ingenio)</h2>
+    <div class="seccion-contenedor">
+        <h2>2. Local Pitusa (Ingenio)</h2>
         <div class="servicio-item">
-            <span>Tarifa Local</span>
+            <span>Alquiler de Sala</span>
             <select class="calc" id="alquiler-local" onchange="calcular()">
-                <option value="0">No contratar local</option>
+                <option value="0">No contratar sala</option>
                 <option value="160">3 Horas - 160€</option>
                 <option value="190">4 Horas - 190€</option>
             </select>
         </div>
-        <div class="servicio-item"><span>Decoración Completa Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select></div>
-        <div class="info-cuadro">Incluye: Fondo de pared, globos orgánicos, nombre, bandejas y figuras temáticas.</div>
-        <div class="servicio-item"><span>Mesa Dulce Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select></div>
-        <div class="info-cuadro">Incluye: Variedad de chuches temáticas, decoración de mesa, snacks dulces y salados.</div>
-    </section>
 
-    <section class="seccion-resaltada">
-        <h2>3. Hinchables</h2>
-        <div id="hinchables-lista"></div>
-    </section>
+        <div class="servicio-item"><span>Decoración Completa</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select></div>
+        <div class="cuadro-info">
+            <strong>¿Qué incluye?</strong> Fondo de pared (arco o estructura), globos orgánicos, nombre del protagonista, bandejas decorativas y figuras temáticas.
+        </div>
 
-    <section class="seccion-resaltada">
+        <div class="servicio-item"><span>Mesa Dulce Completa</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select></div>
+        <div class="cuadro-info">
+            <strong>¿Qué incluye?</strong> Variedad de golosinas temáticas, decoración personalizada de la mesa, snacks dulces y salados.
+        </div>
+    </div>
+
+    <div class="seccion-contenedor">
+        <h2>3. Castillos Hinchables</h2>
+        <div id="lista-hinchables"></div>
+    </div>
+
+    <div class="seccion-contenedor">
         <h2>4. Animación y Muñecotes</h2>
-        <div class="servicio-item"><span>Pack Sonrisa (2h - 2 mon.)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
-        <div class="servicio-item"><span>Pintacaras + Globoflexia (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monitores - 125€</option><option value="95">1 Monitor - 95€</option></select></div>
+        <div class="servicio-item"><span>Pack Sonrisa (2h - 2 monitores)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Sí - 150€</option></select></div>
         
-        <div style="margin-top:15px; border-top: 1px solid #ccc; padding-top:10px;">
-            <h3>Servicio de Muñecotes</h3>
-            <div class="info-cuadro">
-                Incluye: 45m-1h, fotos y vídeos individual y en grupo dentro del horario, diploma personalizado y dibujos para colorear.
+        <div style="margin-top:20px; border-top: 1px solid #eee; padding-top:15px;">
+            <h3>Servicio de Muñecotes (Personajes)</h3>
+            <div class="cuadro-info">
+                <strong>Este servicio incluye:</strong>
+                <ul>
+                    <li>Duración: Entre 45 min y 1 hora.</li>
+                    <li>📷 Fotos y vídeos individuales y en grupo.</li>
+                    <li>🎁 Diploma personalizado para el/la protagonista.</li>
+                    <li>🎨 Dibujos para colorear de la temática.</li>
+                </ul>
             </div>
+            
             <div class="servicio-item">
-                <span>¿Zona del evento?</span>
-                <select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas de G.C.</option><option value="20">Resto de la Isla (+20€)</option></select>
+                <span>Zona del evento</span>
+                <select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas de G.C. (Normal)</option><option value="20">Resto de la Isla (+20€)</option></select>
             </div>
             <div class="servicio-item">
                 <span>Cantidad de personajes</span>
-                <select id="cantidad-munecotes" onchange="gestionarFilasMunecotes()">
+                <select id="cantidad-munecotes" onchange="crearFilasPersonajes()">
                     <option value="0">Ninguno</option>
                     <option value="120">1 Personaje - 120€</option>
                     <option value="210">2 Personajes - 210€</option>
                     <option value="300">3 Personajes - 300€</option>
                 </select>
             </div>
-            <div id="seleccion-nombres-munecotes" class="caja-munecotes" style="display:none;"><div id="filas-nombres"></div></div>
-            <input type="hidden" id="valor-munecotes-total" class="calc" value="0">
+            <div id="caja-seleccion-nombres" class="caja-nombres" style="display:none;"><div id="contenedor-nombres"></div></div>
+            <input type="hidden" id="total-munecotes-oculto" class="calc" value="0">
         </div>
-    </section>
+    </div>
 
-    <section class="seccion-resaltada">
-        <h2>5. Máquinas y Extras</h2>
-        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
-        <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
-        <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
-        <div class="servicio-item"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
-    </section>
-
-    <section class="seccion-resaltada">
-        <h2>6. Packs de Decoración y Personalización</h2>
+    <div class="seccion-contenedor">
+        <h2>5. Packs de Decoración y Personalización</h2>
+        
         <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
-        <div class="info-cuadro">Incluye: Medio arco de globos y número. Montaje incluido.</div>
+        <div class="cuadro-info"><strong>Incluye:</strong> Medio arco de globos y número. Montaje incluido.</div>
 
         <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
-        <div class="info-cuadro">Incluye: Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches.</div>
+        <div class="cuadro-info"><strong>Incluye:</strong> Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches. Montaje incluido.</div>
 
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
-        <div class="info-cuadro">Incluye: Medio arco de globos, número, cartel temático con nombre, Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Botellas agua, 10 Pomperos, 2 Tarros golosinas, 10 Detalles globos).</div>
-    </section>
+        <div class="cuadro-info">
+            <strong>Incluye:</strong> Medio arco de globos, número, cartel temático con nombre y Mesa Dulce Completa (Pringles, Chocolatinas, Botellas de agua, Pomperos, Golosinas y Detalles con globos). Montaje y colocación.
+        </div>
+    </div>
 
-    <div class="resumen-caja">
-        <div class="fila-total"><span>Servicios:</span><span><span id="res-sub">0</span>€</span></div>
-        <div class="fila-total"><span>Gestión Logística (10%):</span><span><span id="res-ges">0</span>€</span></div>
-        <div id="fila-urgencia" class="fila-total" style="display:none; color: var(--rosa);"><span>Tasa Urgencia:</span><span>50.00€</span></div>
-        <div class="fila-total total-grande"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
+    <div class="seccion-contenedor">
+        <h2>6. Máquinas y Diversión</h2>
+        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
+        <div class="servicio-item"><span>Máquina de Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Máquina de Algodón de Azúcar</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Plataforma Video 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
+    </div>
+
+    <div class="resumen-total">
+        <div class="fila-resumen"><span>Suma de servicios:</span><span><span id="subtotal">0</span>€</span></div>
+        <div class="fila-resumen"><span>Gestión y Logística (10%):</span><span><span id="gestion">0</span>€</span></div>
+        <div id="fila-urgencia" class="fila-resumen" style="display:none; color: var(--rosa);"><span>Tasa de Urgencia (menos de 7 días):</span><span>50.00€</span></div>
+        <div class="fila-resumen total-destacado"><span>TOTAL:</span><span><span id="total-final">0</span>€</span></div>
     </div>
 </div>
 
-<div class="no-print" style="text-align:center; margin-bottom: 50px;">
-    <button onclick="validarYEnviar()" class="btn btn-wa">📲 Enviar WhatsApp</button>
-    <button onclick="validarYPdf()" class="btn btn-pdf">📄 Descargar PDF</button>
+<div class="btn-container no-print">
+    <button onclick="enviarWhatsApp()" class="btn btn-wa">📲 Confirmar por WhatsApp</button>
+    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar Presupuesto PDF</button>
 </div>
 
 <script>
@@ -158,79 +175,88 @@
         {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
 
-    const nombresMunecotes = ["Sonic", "Bella", "Trolls", "Gatita Marie", "Olaf", "Cocomelon", "Minions", "Winnie the Pooh", "Pepa Pig", "Dumbo", "Elsa", "Chase", "Marshall", "Skye", "Gabby Gato", "Rumi", "Bluey", "Buzz Lightyear", "La vaca Lola", "Super Mario", "Simba", "Otro"];
+    const personajes = ["Sonic", "Bella", "Trolls", "Gatita Marie", "Olaf", "Cocomelon", "Minions", "Winnie the Pooh", "Pepa Pig", "Dumbo", "Elsa", "Chase", "Marshall", "Skye", "Gabby Gato", "Bluey", "Super Mario", "Otro"];
 
-    function verificarOtroEvento() {
-        document.getElementById('div-otro-evento').style.display = (document.getElementById('tipo-evento').value === 'Otro') ? 'block' : 'none';
-    }
-
-    function gestionarFilasMunecotes() {
+    function crearFilasPersonajes() {
         const cant = document.getElementById('cantidad-munecotes').selectedIndex;
-        const contenedor = document.getElementById('filas-nombres');
-        contenedor.innerHTML = "";
+        const cont = document.getElementById('contenedor-nombres');
+        cont.innerHTML = "";
         if (cant > 0) {
-            document.getElementById('seleccion-nombres-munecotes').style.display = "block";
+            document.getElementById('caja-seleccion-nombres').style.display = "block";
             for (let i = 1; i <= cant; i++) {
-                let s = `<select class="nombre-mun-sel" style="margin-bottom:5px;"><option value="">-- Personaje ${i} --</option>`;
-                nombresMunecotes.forEach(n => s += `<option value="${n}">${n}</option>`);
-                contenedor.innerHTML += s + `</select>`;
+                let s = `<select class="nombre-sel" style="margin-bottom:8px;"><option value="">-- Elige Personaje ${i} --</option>`;
+                personajes.forEach(p => s += `<option value="${p}">${p}</option>`);
+                cont.innerHTML += s + `</select>`;
             }
-        } else { document.getElementById('seleccion-nombres-munecotes').style.display = "none"; }
+        } else { document.getElementById('caja-seleccion-nombres').style.display = "none"; }
         calcular();
     }
 
     function cargarHinchables() {
-        let hHtml = "";
+        let html = "";
         hinchables.forEach(h => {
-            hHtml += `<div class="servicio-item"><span><strong>${h.n}</strong></span><select class="calc" onchange="calcular()"><option value="0">No incluido</option><option value="${h.p2}">${h.p2}€ (2h)</option><option value="${h.p3}">${h.p3}€ (3h)</option></select></div>`;
+            html += `<div class="servicio-item"><span><strong>${h.n}</strong></span><select class="calc" onchange="calcular()"><option value="0">No incluido</option><option value="${h.p2}">${h.p2}€ (2h)</option><option value="${h.p3}">${h.p3}€ (3h)</option></select></div>`;
         });
-        document.getElementById('hinchables-lista').innerHTML = hHtml;
+        document.getElementById('lista-hinchables').innerHTML = html;
     }
 
     function calcular() {
-        const pBaseMun = parseFloat(document.getElementById('cantidad-munecotes').value);
-        const extraZ = (pBaseMun > 0) ? parseFloat(document.getElementById('zona-munecote').value) : 0;
-        document.getElementById('valor-munecotes-total').value = pBaseMun + extraZ;
+        const pBase = parseFloat(document.getElementById('cantidad-munecotes').value);
+        const pExtra = (pBase > 0) ? parseFloat(document.getElementById('zona-munecote').value) : 0;
+        document.getElementById('total-munecotes-oculto').value = pBase + pExtra;
 
-        let sub = 0;
-        document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
+        let suma = 0;
+        document.querySelectorAll('.calc').forEach(s => suma += parseFloat(s.value));
         
-        const local = document.getElementById('alquiler-local').value;
-        document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
-        
-        const fecha = document.getElementById('fecha-evento').value;
-        let urg = 0;
-        if (fecha) {
-            const diff = (new Date(fecha) - new Date()) / (1000 * 60 * 60 * 24);
-            if (diff >= 0 && diff < 7) { 
-                urg = 50; document.getElementById('div-urgencia').style.display = 'block'; document.getElementById('fila-urgencia').style.display = 'flex';
-            } else { 
-                document.getElementById('div-urgencia').style.display = 'none'; document.getElementById('fila-urgencia').style.display = 'none'; 
-            }
+        const fechaVal = document.getElementById('fecha-evento').value;
+        let tasaUrgencia = 0;
+        if (fechaVal) {
+            const dias = (new Date(fechaVal) - new Date()) / (1000 * 60 * 60 * 24);
+            if (dias >= 0 && dias < 7) { 
+                tasaUrgencia = 50; 
+                document.getElementById('fila-urgencia').style.display = 'flex';
+            } else { document.getElementById('fila-urgencia').style.display = 'none'; }
         }
-        document.getElementById('res-sub').innerText = sub.toFixed(2);
-        document.getElementById('res-ges').innerText = (sub * 0.10).toFixed(2);
-        document.getElementById('res-tot').innerText = (sub * 1.10 + urg).toFixed(2);
+
+        document.getElementById('subtotal').innerText = suma.toFixed(2);
+        document.getElementById('gestion').innerText = (suma * 0.10).toFixed(2);
+        document.getElementById('total-final').innerText = (suma * 1.10 + tasaUrgencia).toFixed(2);
     }
 
-    function validarYEnviar() {
-        const v = id => document.getElementById(id).value;
-        if (!v('nombre-cliente') || !v('fecha-evento')) return alert("Por favor, rellena los datos obligatorios.");
+    function enviarWhatsApp() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        if (!nombre) return alert("Por favor, introduce tu nombre.");
         
-        let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Fecha:* ${v('fecha-evento')}%0A%0A*Servicios:*%0A`;
-        document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0 && s.id !== 'valor-munecotes-total') msg += `- ${s.options[s.selectedIndex].text}%0A`; });
-        msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
-        window.open(`https://wa.me/34652678718?text=${msg}`);
+        let mensaje = `Hola! Me gustaría confirmar este presupuesto para: *${nombre}*%0A*Fecha:* ${document.getElementById('fecha-evento').value}%0A%0A*Servicios seleccionados:*%0A`;
+        document.querySelectorAll('select.calc').forEach(sel => {
+            if (sel.value > 0 && sel.id !== 'total-munecotes-oculto') {
+                mensaje += `- ${sel.options[sel.selectedIndex].text}%0A`;
+            }
+        });
+        mensaje += `%0A*TOTAL FINAL:* ${document.getElementById('total-final').innerText}€`;
+        window.open(`https://wa.me/34652678718?text=${mensaje}`);
     }
 
-    function validarYPdf() {
-        window.scrollTo(0,0);
-        const filas = document.querySelectorAll('.servicio-item');
-        filas.forEach(f => { if (f.querySelector('select')?.value == "0") f.classList.add('ocultar-pdf'); });
-        html2pdf().from(document.getElementById('hoja-presupuesto')).set({ margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4' } }).save().then(() => {
-            filas.forEach(f => f.classList.remove('ocultar-pdf'));
+    function generarPDF() {
+        const elem = document.getElementById('hoja-presupuesto');
+        const items = document.querySelectorAll('.servicio-item, .cuadro-info');
+        
+        // Ocultar lo que no se ha seleccionado para el PDF
+        items.forEach(item => {
+            const sel = item.previousElementSibling?.querySelector('select') || item.querySelector('select');
+            if (sel && sel.value == "0") item.classList.add('ocultar-pdf');
+        });
+
+        html2pdf().from(elem).set({
+            margin: 0.5,
+            filename: 'Presupuesto_Pitusa.pdf',
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        }).save().then(() => {
+            document.querySelectorAll('.ocultar-pdf').forEach(el => el.classList.remove('ocultar-pdf'));
         });
     }
+
     window.onload = cargarHinchables;
 </script>
 </body>
