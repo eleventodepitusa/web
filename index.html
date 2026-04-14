@@ -26,8 +26,19 @@
 
         .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
         
-        .cuadro-info { background: #fff5f6; border: 1px solid var(--rosa); padding: 15px; border-radius: 12px; margin: 5px 0 15px 0; font-size: 0.85rem; line-height: 1.4; }
+        /* Estilo de los cuadros descriptivos (vistozo y llamativo) */
+        .cuadro-info { 
+            background: #fff5f6; 
+            border: 1px solid var(--rosa); 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin: 10px 0 20px 0; 
+            font-size: 0.9rem; 
+            line-height: 1.4;
+        }
         .cuadro-info ul { margin: 8px 0 0 20px; padding: 0; }
+        .cuadro-info li { margin-bottom: 5px; }
+        .cuadro-info strong { color: #d47a87; }
 
         .resumen-total { background: var(--negro); color: white; padding: 25px; border-radius: 12px; margin-top: 30px; }
         .fila-resumen { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
@@ -88,10 +99,14 @@
             </select>
         </div>
         <div class="servicio-item"><span>Decoración Completa Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select></div>
-        <div class="cuadro-info">Incluye: Fondo de pared (arco o estructura), globos orgánicos, nombre del protagonista, bandejas decorativas y figuras temáticas.</div>
+        <div class="cuadro-info">
+            <strong>¿Qué incluye?</strong> Fondo de pared (arco o estructura), globos orgánicos, nombre del protagonista, bandejas decorativas y figuras temáticas.
+        </div>
         
         <div class="servicio-item"><span>Mesa Dulce Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select></div>
-        <div class="cuadro-info">Incluye: Variedad de chuches temáticas, decoración personalizada de la mesa, snacks dulces y salados.</div>
+        <div class="cuadro-info">
+            <strong>¿Qué incluye?</strong> Variedad de chuches temáticas, decoración personalizada de la mesa, snacks dulces y salados.
+        </div>
     </div>
 
     <div class="seccion-contenedor">
@@ -112,7 +127,13 @@
         <div style="margin-top:20px; border-top: 1px solid #eee; padding-top:10px;">
             <h3>Servicio de Muñecotes (Personajes)</h3>
             <div class="cuadro-info">
-                Incluye: 45m-1h, fotos/vídeos individual y grupo, diploma personalizado y dibujos para colorear.
+                <strong>Este servicio incluye:</strong>
+                <ul>
+                    <li>⌚ Duración: Entre 45 min y 1 hora.</li>
+                    <li>📷 Fotos y vídeos individuales y en grupo dentro del horario.</li>
+                    <li>🎁 Diploma personalizado para el/la protagonista.</li>
+                    <li>🎨 Dibujos para colorear de la temática para los invitados.</li>
+                </ul>
             </div>
             <div class="servicio-item"><span>Zona</span><select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas de G.C.</option><option value="20">Resto de la Isla (+20€)</option></select></div>
             <div class="servicio-item"><span>Personajes</span><select id="cantidad-munecotes" onchange="gestionarPersonajes()"><option value="0">Ninguno</option><option value="120">1 Personaje - 120€</option><option value="210">2 Personajes - 210€</option><option value="300">3 Personajes - 300€</option></select></div>
@@ -123,14 +144,21 @@
 
     <div class="seccion-contenedor">
         <h2>5. Packs de Decoración y Personalización</h2>
+        
         <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
-        <div class="cuadro-info">Medio arco de globos y número. Montaje incluido.</div>
+        <div class="cuadro-info">
+            <strong>¿Qué incluye?</strong> Medio arco de globos y número. Montaje incluido.
+        </div>
 
         <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
-        <div class="cuadro-info">Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches.</div>
+        <div class="cuadro-info">
+            <strong>¿Qué incluye?</strong> Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches. Montaje incluido.
+        </div>
 
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
-        <div class="cuadro-info">Medio arco de globos, número, cartel temático con nombre y Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Botellas agua, 10 Pomperos, 2 Tarros golosinas, 10 Detalles con globos). Montaje y colocación.</div>
+        <div class="cuadro-info">
+            <strong>¿Qué incluye?</strong> Medio arco de globos, número, cartel temático con nombre y Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Botellas agua, 10 Pomperos, 2 Tarros golosinas, 10 Detalles con globos). Montaje y colocación.
+        </div>
     </div>
 
     <div class="seccion-contenedor">
@@ -138,11 +166,11 @@
         <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
         <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
         <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
-        <div class="servicio-item"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
+        <div class="servicio-item"><span>Plataforma Video 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
     </div>
 
     <div class="resumen-total">
-        <div class="fila-resumen"><span>Servicios:</span><span><span id="res-sub">0</span>€</span></div>
+        <div class="fila-resumen"><span>Suma de servicios:</span><span><span id="res-sub">0</span>€</span></div>
         <div class="fila-resumen"><span>Gestión (10%):</span><span><span id="res-ges">0</span>€</span></div>
         <div id="fila-urgencia" class="fila-resumen" style="display:none; color: var(--rosa);"><span>Tasa Urgencia:</span><span>50.00€</span></div>
         <div class="fila-resumen total-destacado"><span>TOTAL:</span><span><span id="res-tot">0</span>€</span></div>
@@ -176,7 +204,7 @@
         if (cant > 0) {
             document.getElementById('caja-nombres').style.display = "block";
             for (let i = 1; i <= cant; i++) {
-                let s = `<select class="nombre-sel" style="margin-bottom:8px;"><option value="">-- Personaje ${i} --</option>`;
+                let s = `<select class="nombre-sel" style="margin-bottom:8px;"><option value="">-- Elige Personaje ${i} --</option>`;
                 personajes.forEach(p => s += `<option value="${p}">${p}</option>`);
                 cont.innerHTML += s + `</select>`;
             }
@@ -224,30 +252,33 @@
 
     function validarYEnviar() {
         const nombre = document.getElementById('nombre-cliente').value;
-        if (!nombre || !document.getElementById('fecha-evento').value) return alert("Rellene nombre y fecha obligatorios.");
+        if (!nombre || !document.getElementById('fecha-evento').value) return alert("Por favor, introduce tu nombre y la fecha del evento.");
         
-        let msg = `Hola! Me gustaría confirmar este presupuesto para: *${nombre}*%0A*Fecha:* ${document.getElementById('fecha-evento').value}%0A%0A*Servicios:*%0A`;
+        let mensaje = `Hola! Me gustaría confirmar este presupuesto para: *${nombre}*%0A*Fecha:* ${document.getElementById('fecha-evento').value}%0A%0A*Servicios seleccionados:*%0A`;
         document.querySelectorAll('select.calc').forEach(sel => {
             if (sel.value > 0 && sel.id !== 'total-mun-oculto') {
-                msg += `- ${sel.options[sel.selectedIndex].text}%0A`;
+                mensaje += `- ${sel.options[sel.selectedIndex].text}%0A`;
             }
         });
-        msg += `%0A*TOTAL FINAL:* ${document.getElementById('res-tot').innerText}€`;
-        window.open(`https://wa.me/34652678718?text=${msg}`);
+        mensaje += `%0A*TOTAL FINAL:* ${document.getElementById('res-tot').innerText}€`;
+        window.open(`https://wa.me/34652678718?text=${mensaje}`);
     }
 
     function generarPDF() {
         window.scrollTo(0,0);
         const elem = document.getElementById('hoja-presupuesto');
         const items = document.querySelectorAll('.servicio-item, .cuadro-info');
+        
         items.forEach(item => {
             const sel = item.previousElementSibling?.querySelector('select') || item.querySelector('select');
             if (sel && sel.value == "0") item.classList.add('ocultar-pdf');
         });
 
         html2pdf().from(elem).set({
-            margin: 0.5, filename: 'Presupuesto_Pitusa.pdf',
-            html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter' }
+            margin: 0.5,
+            filename: 'Presupuesto_Pitusa.pdf',
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         }).save().then(() => {
             document.querySelectorAll('.ocultar-pdf').forEach(el => el.classList.remove('ocultar-pdf'));
         });
