@@ -92,7 +92,23 @@
     </section>
 
     <section class="seccion-resaltada">
-        <h2>2. Alquiler Local Pitusa (Ingenio)</h2>
+        <h2>2. Packs de Decoración y Personalización</h2>
+        <div class="servicio-item">
+            <span>Selecciona un Pack</span>
+            <select class="calc" id="pack-decoracion" onchange="calcular()">
+                <option value="0">Sin pack de decoración</option>
+                <option value="120">Pack Básico - 120€</option>
+                <option value="165">Pack Medio - 165€</option>
+                <option value="230">Pack Premium - 230€</option>
+            </select>
+        </div>
+        <div id="detalle-pack" class="info-cuadro" style="display:none;">
+            <div id="texto-pack"></div>
+        </div>
+    </section>
+
+    <section class="seccion-resaltada">
+        <h2>3. Alquiler Local Pitusa (Ingenio)</h2>
         <div class="servicio-item">
             <span>Tarifa Local</span>
             <select class="calc" id="alquiler-local" onchange="calcular()">
@@ -120,12 +136,12 @@
     </section>
 
     <section class="seccion-resaltada">
-        <h2>3. Hinchables</h2>
+        <h2>4. Hinchables</h2>
         <div id="hinchables-lista"></div>
     </section>
 
     <section class="seccion-resaltada">
-        <h2>4. Animación y Muñecotes</h2>
+        <h2>5. Animación y Muñecotes</h2>
         <div class="servicio-item">
             <div><span>Pack Sonrisa (2h - 2 monitores)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select>
@@ -185,10 +201,11 @@
     </section>
 
     <section class="seccion-resaltada">
-        <h2>5. Máquinas</h2>
+        <h2>6. Máquinas y Extras</h2>
         <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
         <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
         <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
     </section>
 
     <div class="resumen-caja">
@@ -251,21 +268,50 @@
     }
 
     function calcular() {
+        // Lógica de Muñecotes
         const precioBaseMun = parseFloat(document.getElementById('cantidad-munecotes').value);
         const extraZona = (precioBaseMun > 0) ? parseFloat(document.getElementById('zona-munecote').value) : 0;
         document.getElementById('valor-munecotes-total').value = precioBaseMun + extraZona;
 
+        // Lógica de Packs de Decoración
+        const packSel = document.getElementById('pack-decoracion');
+        const detallePack = document.getElementById('detalle-pack');
+        const textoPack = document.getElementById('texto-pack');
+        
+        if(packSel.value === "120") {
+            detallePack.style.display = "block";
+            textoPack.innerHTML = "<strong>Pack Básico:</strong> Medio arco y número. Montaje incluido.";
+        } else if(packSel.value === "165") {
+            detallePack.style.display = "block";
+            textoPack.innerHTML = "<strong>Pack Medio:</strong> Medio arco de globos, número, cartel temático, mesa sencilla con 2 tarros de chuches. Montaje incluido.";
+        } else if(packSel.value === "230") {
+            detallePack.style.display = "block";
+            textoPack.innerHTML = "<strong>Pack Premium:</strong> Medio arco de globos, número, cartel temático con nombre, Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Botellas agua, 10 Pomperos, 2 Tarros golosinas, 10 Detalles con globos). Montaje y colocación.";
+        } else {
+            detallePack.style.display = "none";
+        }
+
+        // Suma total
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
+        
         const local = document.getElementById('alquiler-local').value;
         document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
+        
         const fechaIn = document.getElementById('fecha-evento').value;
         let urgencia = 0;
         if (fechaIn) {
             const diff = (new Date(fechaIn) - new Date()) / (1000 * 60 * 60 * 24);
-            if (diff >= 0 && diff < 7) { urgencia = 50; document.getElementById('div-urgencia').style.display = 'block'; document.getElementById('fila-urgencia').style.display = 'flex';
-            } else { document.getElementById('div-urgencia').style.display = 'none'; document.getElementById('fila-urgencia').style.display = 'none'; }
+            if (diff >= 0 && diff < 7) { 
+                urgencia = 50; 
+                document.getElementById('div-urgencia').style.display = 'block'; 
+                document.getElementById('fila-urgencia').style.display = 'flex';
+            } else { 
+                document.getElementById('div-urgencia').style.display = 'none'; 
+                document.getElementById('fila-urgencia').style.display = 'none'; 
+            }
         }
+        
         document.getElementById('res-sub').innerText = sub.toFixed(2);
         document.getElementById('res-ges').innerText = (sub * 0.10).toFixed(2);
         document.getElementById('res-tot').innerText = (sub * 1.10 + urgencia).toFixed(2);
