@@ -45,10 +45,6 @@
 </head>
 <body>
 
-<div class="no-print">
-    <a href="galeria.html" class="btn btn-galeria">📸 Ver Galería de Fotos</a>
-</div>
-
 <div id="hoja-presupuesto">
     <header>
         <img src="logo.png" alt="El Evento de Pitusa" class="logo">
@@ -95,11 +91,11 @@
             </select>
         </div>
         <div class="servicio-item">
-            <div><span>Decoración Completa (Local)</span><span class="info-extra">Invitación, banderín, corona, globos...</span></div>
+            <div><span>Decoración Completa (Local)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select>
         </div>
         <div class="servicio-item">
-            <div><span>Mesa Dulce (Local)</span><span class="info-extra">Chuches, donuts, palomitas...</span></div>
+            <div><span>Mesa Dulce (Local)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select>
         </div>
     </section>
@@ -112,7 +108,7 @@
     <section class="seccion-resaltada">
         <h2>4. Animación y Muñecotes</h2>
         <div class="servicio-item">
-            <div><span>Pack Sonrisa (2h - 2 monitores)</span></div>
+            <div><span>Pack Sonrisa (2h - 2 monitores)</span><span class="info-extra">Juegos, Pintacaras y Globoflexia.</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select>
         </div>
         <div class="servicio-item">
@@ -123,11 +119,22 @@
                 <option value="95">1 Monitor - 95€</option>
             </select>
         </div>
+        <div class="servicio-item">
+            <div><span>Pintacaras O Globoflexia Individual</span></div>
+            <select class="calc" onchange="calcular()">
+                <option value="0">No</option>
+                <option value="50">Añadir (Servicio Individual) - 50€</option>
+            </select>
+        </div>
+        <div class="servicio-item">
+            <div><span>Animación Individual (1h)</span></div>
+            <select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select>
+        </div>
         
         <div style="margin-top:15px; border-top: 1px solid #ccc; pt:10px;">
             <h3>Muñecotes (Personajes)</h3>
             <div class="servicio-item">
-                <span>¿Dónde es el evento?</span>
+                <span>¿Zona del evento?</span>
                 <select id="zona-munecote" onchange="calcular()">
                     <option value="0">Las Palmas de G.C. (Tarifa Normal)</option>
                     <option value="20">Resto de la Isla (+20€ Trayecto)</option>
@@ -142,9 +149,8 @@
                     <option value="300">3 Personajes - 300€</option>
                 </select>
             </div>
-            
             <div id="seleccion-nombres-munecotes" class="caja-munecotes" style="display:none;">
-                <p style="font-size: 0.9rem; margin-bottom: 5px;"><strong>Elige tus personajes:</strong></p>
+                <p style="font-size: 0.9rem; margin-bottom: 5px;"><strong>Selecciona el/los Muñecotes:</strong></p>
                 <div id="filas-nombres"></div>
             </div>
             <input type="hidden" id="valor-munecotes-total" class="calc" value="0">
@@ -166,7 +172,7 @@
     </div>
 </div>
 
-<div class="no-print">
+<div class="no-print" style="text-align:center; margin-bottom: 50px;">
     <button onclick="validarYEnviar()" class="btn btn-wa">📲 Enviar WhatsApp</button>
     <button onclick="validarYPdf()" class="btn btn-pdf">📄 Descargar PDF</button>
 </div>
@@ -180,7 +186,12 @@
         {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
 
-    const nombresMunecotes = ["Stitch", "Angel (Stitch Rosa)", "Mickey", "Minnie", "Pato Donald", "Daisy", "Sonic", "Mario Bros", "Luigi", "Chase (Paw Patrol)", "Skye (Paw Patrol)", "Olaf", "Elsa", "Pikachu", "Spider-Man", "Otro (Consultar)"];
+    const nombresMunecotes = [
+        "Sonic", "Bella", "Trolls", "Gatita Marie", "Olaf", "Cocomelon", 
+        "Minions", "Winnie the Pooh", "Pepa Pig", "Dumbo", "Elsa", 
+        "Chase", "Marshall", "Skye", "Gabby Gato", "Rumi", "Bluey", 
+        "Buzz Lightyear", "La vaca Lola", "Super Mario", "Simba", "Otro (Consultar)"
+    ];
 
     function verificarOtroEvento() {
         const select = document.getElementById('tipo-evento');
@@ -188,22 +199,19 @@
     }
 
     function gestionarFilasMunecotes() {
-        const cant = document.getElementById('cantidad-munecotes').selectedIndex; // 0=ninguno, 1=1per, 2=2per, 3=3per
+        const cant = document.getElementById('cantidad-munecotes').selectedIndex;
         const contenedor = document.getElementById('filas-nombres');
         const caja = document.getElementById('seleccion-nombres-munecotes');
-        
         contenedor.innerHTML = "";
         if (cant > 0) {
             caja.style.display = "block";
             for (let i = 1; i <= cant; i++) {
-                let selectHtml = `<select class="nombre-mun-sel" style="margin-bottom:5px;"><option value="">-- Elige Personaje ${i} --</option>`;
+                let selectHtml = `<select class="nombre-mun-sel" style="margin-bottom:5px;"><option value="">-- Muñecote ${i} --</option>`;
                 nombresMunecotes.forEach(n => selectHtml += `<option value="${n}">${n}</option>`);
                 selectHtml += `</select>`;
                 contenedor.innerHTML += selectHtml;
             }
-        } else {
-            caja.style.display = "none";
-        }
+        } else { caja.style.display = "none"; }
         calcular();
     }
 
@@ -216,17 +224,14 @@
     }
 
     function calcular() {
-        // Calcular precio muñecotes
         const precioBaseMun = parseFloat(document.getElementById('cantidad-munecotes').value);
         const extraZona = (precioBaseMun > 0) ? parseFloat(document.getElementById('zona-munecote').value) : 0;
         document.getElementById('valor-munecotes-total').value = precioBaseMun + extraZona;
 
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
-        
         const local = document.getElementById('alquiler-local').value;
         document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
-
         const fechaIn = document.getElementById('fecha-evento').value;
         let urgencia = 0;
         if (fechaIn) {
@@ -252,24 +257,16 @@
             const v = id => document.getElementById(id).value;
             const sitio = (v('alquiler-local') > 0) ? "Local Pitusa (Ingenio)" : v('ubicacion');
             let tipoEv = v('tipo-evento') === 'Otro' ? v('otro-evento-texto') : v('tipo-evento');
-            
             let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${v('fecha-evento')}%0A*Horario:* ${v('horario')}%0A*Lugar:* ${sitio}%0A%0A*Servicios:*%0A`;
-            
-            // Servicios generales
             document.querySelectorAll('select.calc').forEach(s => { 
                 if(s.value > 0 && s.id !== 'valor-munecotes-total') msg += `- ${s.options[s.selectedIndex].text}%0A`; 
             });
-
-            // Detalle muñecotes
             const pBase = parseFloat(document.getElementById('cantidad-munecotes').value);
             if(pBase > 0) {
                 const zonaNom = document.getElementById('zona-munecote').options[document.getElementById('zona-munecote').selectedIndex].text;
                 msg += `- Pack Muñecotes (${zonaNom})%0A`;
-                document.querySelectorAll('.nombre-mun-sel').forEach(sel => {
-                    if(sel.value) msg += `   • Personaje: ${sel.value}%0A`;
-                });
+                document.querySelectorAll('.nombre-mun-sel').forEach(sel => { if(sel.value) msg += `   • Personaje: ${sel.value}%0A`; });
             }
-            
             msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
             window.open(`https://wa.me/34652678718?text=${msg}`);
         }
@@ -279,10 +276,7 @@
         if (validarCampos()) {
             window.scrollTo(0,0);
             const filas = document.querySelectorAll('.servicio-item');
-            filas.forEach(f => { 
-                const s = f.querySelector('select');
-                if (s && s.value == "0") f.classList.add('ocultar-pdf'); 
-            });
+            filas.forEach(f => { const s = f.querySelector('select'); if (s && s.value == "0") f.classList.add('ocultar-pdf'); });
             html2pdf().from(document.getElementById('hoja-presupuesto')).set({ margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4' } }).save().then(() => {
                 filas.forEach(f => f.classList.remove('ocultar-pdf'));
             });
