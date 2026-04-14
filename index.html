@@ -42,9 +42,8 @@
         .btn-pdf { background: #444; }
         .btn-galeria { background: var(--rosa); }
 
-        /* Estilo Info Icono */
-        .info-icon { cursor: pointer; color: var(--rosa); font-weight: bold; margin-left: 5px; font-size: 1.1rem; border: 1px solid var(--rosa); border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; font-style: normal; }
-        .info-desc { display: none; background: #fff9fa; border: 1px solid var(--rosa); padding: 10px; border-radius: 8px; margin-top: 5px; font-size: 0.85rem; color: #555; margin-bottom: 10px; }
+        .info-cuadro { background: #fff9fa; border: 1px solid var(--rosa); padding: 12px; border-radius: 8px; margin-top: 5px; font-size: 0.85rem; margin-bottom: 10px; }
+        .info-cuadro ul { margin: 5px 0 0 18px; padding: 0; }
         
         .caja-munecotes { background: white; padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px dashed var(--rosa); }
         #div-otro-evento { display: none; margin-top: 10px; grid-column: 1 / -1; }
@@ -104,16 +103,20 @@
         </div>
         
         <div class="servicio-item">
-            <div><span>Decoración Local <i class="info-icon" onclick="toggleInfo('info-deco-local')">i</i></span></div>
+            <div><span>Decoración Completa (Local)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select>
         </div>
-        <div id="info-deco-local" class="info-desc">Incluye: Fondo de pared (arco o estructura), globos orgánicos, nombre del cumpleañero/a, bandejas decorativas y figuras temáticas.</div>
+        <div class="info-cuadro">
+            Incluye: Fondo de pared (arco o estructura), globos orgánicos, nombre del cumpleañero/a, bandejas decorativas y figuras temáticas.
+        </div>
 
         <div class="servicio-item">
-            <div><span>Mesa Dulce Local <i class="info-icon" onclick="toggleInfo('info-mesa-local')">i</i></span></div>
+            <div><span>Mesa Dulce (Local)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select>
         </div>
-        <div id="info-mesa-local" class="info-desc">Incluye: Variedad de chuches temáticas, decoración personalizada de la mesa, snacks dulces y salados.</div>
+        <div class="info-cuadro">
+            Incluye: Variedad de chuches temáticas, decoración personalizada de la mesa, snacks dulces y salados.
+        </div>
     </section>
 
     <section class="seccion-resaltada">
@@ -144,25 +147,33 @@
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select>
         </div>
         
-        <div style="margin-top:15px; border-top: 1px solid #ccc; padding-top:10px;">
+        <div style="margin-top:15px; border-top: 1px solid #ccc; pt:10px;">
             <h3>Muñecotes (Personajes)</h3>
-            <div class="servicio-item">
-                <span>Cantidad de personajes <i class="info-icon" onclick="toggleInfo('info-munecotes')">i</i></span>
-                <select id="cantidad-munecotes" onchange="gestionarFilasMunecotes()">
-                    <option value="0">Ninguno</option>
-                    <option value="120">1 Personaje - 120€</option>
-                    <option value="210">2 Personajes - 210€</option>
-                    <option value="300">3 Personajes - 300€</option>
-                </select>
+            
+            <div class="info-cuadro">
+                <strong>¿Qué incluye este servicio?</strong>
+                <ul>
+                    <li>Duración: Entre 45 min y 1 hora.</li>
+                    <li>📷 <strong>Fotos y vídeos individual y en grupo dentro del horario.</strong></li>
+                    <li>🎁 <strong>Diploma personalizado</strong> para el/la protagonista.</li>
+                    <li>🎨 <strong>Dibujos para colorear</strong> de la temática para los invitados.</li>
+                </ul>
             </div>
-            <div id="info-munecotes" class="info-desc">
-                Incluye: 45m-1h de duración, fotos/vídeos con invitados, diploma personalizado y dibujos para colorear.
-            </div>
+
             <div class="servicio-item">
                 <span>¿Zona del evento?</span>
                 <select id="zona-munecote" onchange="calcular()">
                     <option value="0">Las Palmas de G.C. (Tarifa Normal)</option>
                     <option value="20">Resto de la Isla (+20€ Trayecto)</option>
+                </select>
+            </div>
+            <div class="servicio-item">
+                <span>Cantidad de personajes</span>
+                <select id="cantidad-munecotes" onchange="gestionarFilasMunecotes()">
+                    <option value="0">Ninguno</option>
+                    <option value="120">1 Personaje - 120€</option>
+                    <option value="210">2 Personajes - 210€</option>
+                    <option value="300">3 Personajes - 300€</option>
                 </select>
             </div>
             <div id="seleccion-nombres-munecotes" class="caja-munecotes" style="display:none;">
@@ -176,22 +187,22 @@
     <section class="seccion-resaltada">
         <h2>5. Packs de Decoración y Personalización (Montaje incluido)</h2>
         <div class="servicio-item">
-            <span>Pack Básico <i class="info-icon" onclick="toggleInfo('info-basico')">i</i></span>
+            <div><span>Pack Básico</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select>
         </div>
-        <div id="info-basico" class="info-desc">Medio arco de globos y número. Incluye montaje.</div>
+        <div class="info-cuadro">Medio arco de globos y número.</div>
 
         <div class="servicio-item">
-            <span>Pack Medio <i class="info-icon" onclick="toggleInfo('info-medio')">i</i></span>
+            <div><span>Pack Medio</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select>
         </div>
-        <div id="info-medio" class="info-desc">Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches. Incluye montaje.</div>
+        <div class="info-cuadro">Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches.</div>
 
         <div class="servicio-item">
-            <span>Pack Premium <i class="info-icon" onclick="toggleInfo('info-premium')">i</i></span>
+            <div><span>Pack Premium</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select>
         </div>
-        <div id="info-premium" class="info-desc">Medio arco de globos, número, cartel temático con nombre, Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Botellas agua, 10 Pomperos, 2 Tarros golosinas, 10 Detalles con globos). Montaje y colocación.</div>
+        <div class="info-cuadro">Medio arco de globos, número, cartel temático con nombre, Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Botellas agua, 10 Pomperos, 2 Tarros golosinas, 10 Detalles con globos).</div>
     </section>
 
     <section class="seccion-resaltada">
@@ -230,11 +241,6 @@
         "Chase", "Marshall", "Skye", "Gabby Gato", "Rumi", "Bluey", 
         "Buzz Lightyear", "La vaca Lola", "Super Mario", "Simba", "Otro (Consultar)"
     ];
-
-    function toggleInfo(id) {
-        const desc = document.getElementById(id);
-        desc.style.display = (desc.style.display === 'block') ? 'none' : 'block';
-    }
 
     function verificarOtroEvento() {
         const select = document.getElementById('tipo-evento');
@@ -330,4 +336,11 @@
             const filas = document.querySelectorAll('.servicio-item');
             filas.forEach(f => { const s = f.querySelector('select'); if (s && s.value == "0") f.classList.add('ocultar-pdf'); });
             html2pdf().from(document.getElementById('hoja-presupuesto')).set({ margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4' } }).save().then(() => {
-                filas.forEac
+                filas.forEach(f => f.classList.remove('ocultar-pdf'));
+            });
+        }
+    }
+    window.onload = cargarHinchables;
+</script>
+</body>
+</html>
