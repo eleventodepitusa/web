@@ -109,16 +109,13 @@
     </section>
 
     <section class="seccion-resaltada">
-        <h2>4. Packs de Animación y Personajes</h2>
+        <h2>4. Packs de Animación y Muñecotes</h2>
         <div class="servicio-item">
-            <div>
-                <span>Pack Sonrisa (2h - 2 monitores)</span>
-                <span class="info-extra">Incluye: Juegos, Animación, Pintacaras y Globoflexia.</span>
-            </div>
+            <div><span>Pack Sonrisa (2h - 2 monitores)</span><span class="info-extra">Juegos, Animación, Pintacaras y Globoflexia.</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select>
         </div>
         <div class="servicio-item">
-            <div><span>Pintacaras + Globoflexia (1.5h)</span><span class="info-extra">Opción de 1 o 2 monitores.</span></div>
+            <div><span>Pintacaras + Globoflexia (1.5h)</span></div>
             <select class="calc" onchange="calcular()">
                 <option value="0">No</option>
                 <option value="125">2 Monitores - 125€</option>
@@ -126,15 +123,23 @@
             </select>
         </div>
         <div class="servicio-item">
-            <div><span>Animación Individual (1h)</span><span class="info-extra">1 Monitor.</span></div>
+            <div><span>Animación Individual (1h)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select>
         </div>
         <div class="servicio-item">
             <span>Personajes Muñecotes</span>
-            <select class="calc" onchange="calcular()">
+            <select class="calc" id="munecotes-select" onchange="calcular()">
                 <option value="0">No</option>
                 <option value="120">1 Personaje - 120€</option>
                 <option value="210">2 Personajes - 210€</option>
+                <option value="300">3 Personajes - 300€</option>
+            </select>
+        </div>
+        <div class="servicio-item" id="div-traslado-munecote" style="display:none; background: #fff;">
+            <span>Zona del Evento (Muñecotes)</span>
+            <select class="calc" id="traslado-munecote" onchange="calcular()">
+                <option value="0">Las Palmas de G.C. (Gratis)</option>
+                <option value="20">Fuera de Las Palmas G.C. (+20€ trayecto)</option>
             </select>
         </div>
     </section>
@@ -184,8 +189,14 @@
     function calcular() {
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
+        
         const local = document.getElementById('alquiler-local').value;
         document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
+
+        const mun = document.getElementById('munecotes-select').value;
+        document.getElementById('div-traslado-munecote').style.display = (mun > 0) ? 'flex' : 'none';
+        if (mun == 0) document.getElementById('traslado-munecote').value = 0;
+
         const fechaIn = document.getElementById('fecha-evento').value;
         let urgencia = 0;
         if (fechaIn) {
@@ -207,10 +218,10 @@
     function validarCampos() {
         const v = id => document.getElementById(id).value;
         if (!v('nombre-cliente') || !v('fecha-evento') || !v('horario') || !v('n-ninos') || !v('n-adultos')) {
-            alert("Rellene todos los campos con asterisco (*)"); return false;
+            alert("Faltan campos obligatorios (*)"); return false;
         }
         if (v('alquiler-local') == 0 && !v('ubicacion')) {
-            alert("Indique la Ubicación para eventos externos."); return false;
+            alert("Indique la Ubicación exacta."); return false;
         }
         return true;
     }
@@ -220,8 +231,13 @@
             const v = id => document.getElementById(id).value;
             const sitio = (v('alquiler-local') > 0) ? "Local Pitusa (Ingenio)" : v('ubicacion');
             let tipoEv = v('tipo-evento') === 'Otro' ? v('otro-evento-texto') : v('tipo-evento');
-            let msg = `✨ *NUEVO PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${v('fecha-evento')}%0A*Horario:* ${v('horario')}%0A*Lugar:* ${sitio}%0A*Asistentes:* ${v('n-ninos')} niños / ${v('n-adultos')} adultos%0A%0A*Servicios:*%0A`;
-            document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; });
+            
+            let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${v('fecha-evento')}%0A*Horario:* ${v('horario')}%0A*Lugar:* ${sitio}%0A*Asistentes:* ${v('n-ninos')} niños / ${v('n-adultos')} adultos%0A%0A*Servicios:*%0A`;
+            
+            document.querySelectorAll('select.calc').forEach(s => { 
+                if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; 
+            });
+            
             msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
             window.open(`https://wa.me/34652678718?text=${msg}`);
         }
