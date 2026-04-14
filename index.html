@@ -65,6 +65,7 @@
         <div class="form-grid">
             <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
             <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
+            <div><label>Correo Electrónico:*</label> <input type="email" id="email-cliente" required></div>
             <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
             <div><label>Tipo de Evento:*</label> 
                 <select id="tipo-evento" onchange="verificarOtroEvento()">
@@ -263,7 +264,7 @@
 
     function validarCampos() {
         const v = id => document.getElementById(id).value;
-        if (!v('nombre-cliente') || !v('fecha-evento') || !v('horario') || !v('n-ninos') || !v('n-adultos')) {
+        if (!v('nombre-cliente') || !v('tel-cliente') || !v('email-cliente') || !v('fecha-evento') || !v('horario') || !v('n-ninos') || !v('n-adultos')) {
             alert("Rellene los campos obligatorios (*)"); return false;
         }
         return true;
@@ -274,7 +275,7 @@
             const v = id => document.getElementById(id).value;
             const sitio = (v('alquiler-local') > 0) ? "Local Pitusa (Ingenio)" : v('ubicacion');
             let tipoEv = v('tipo-evento') === 'Otro' ? v('otro-evento-texto') : v('tipo-evento');
-            let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${v('fecha-evento')}%0A*Horario:* ${v('horario')}%0A*Lugar:* ${sitio}%0A%0A*Servicios:*%0A`;
+            let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Email:* ${v('email-cliente')}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${v('fecha-evento')}%0A*Horario:* ${v('horario')}%0A*Lugar:* ${sitio}%0A%0A*Servicios:*%0A`;
             
             document.querySelectorAll('select.calc').forEach(s => { 
                 if(s.value > 0 && s.id !== 'valor-munecotes-total') msg += `- ${s.options[s.selectedIndex].text}%0A`; 
