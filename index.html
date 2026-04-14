@@ -30,8 +30,9 @@
         .btn-pdf { background: #555; }
         .btn-galeria { background: var(--rosa); }
         .caja-nombres { background: #fefefe; padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px dashed var(--rosa); display: none; }
-        /* Estilo para que el PDF no corte secciones */
-        .seccion-contenedor { page-break-inside: avoid; }
+        
+        /* Clase especial para ocultar elementos en el PDF */
+        .pdf-hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -47,7 +48,7 @@
     </div>
 
     <section id="datos-obligatorios">
-        <h2>1. Datos Obligatorios</h2>
+        <h2>1. Datos del Cliente</h2>
         <div class="form-grid">
             <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
             <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
@@ -75,30 +76,30 @@
         <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Reserva con menos de 7 días.</div>
     </section>
 
-    <div class="seccion-contenedor">
+    <div class="seccion-contenedor" data-section="local">
         <h2>2. Alquiler Local Ingenio</h2>
-        <div class="servicio-item"><span>Alquiler Sala</span><select class="calc" id="alquiler-local" onchange="calcular()"><option value="0">No</option><option value="160">3 Horas - 160€</option><option value="190">4 Horas - 190€</option></select></div>
-        <div class="servicio-item"><span>Decoración Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select></div>
+        <div class="servicio-item" data-val="alquiler-local"><span>Alquiler Sala</span><select class="calc" id="alquiler-local" onchange="calcular()"><option value="0">No</option><option value="160">3 Horas - 160€</option><option value="190">4 Horas - 190€</option></select></div>
+        <div class="servicio-item" data-val="deco-local"><span>Decoración Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select></div>
         <div class="cuadro-info">✔️ Fondo de pared, globos orgánicos, nombre, bandejas y figuras temáticas.</div>
-        <div class="servicio-item"><span>Mesa Dulce Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select></div>
+        <div class="servicio-item" data-val="mesa-local"><span>Mesa Dulce Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select></div>
         <div class="cuadro-info">✔️ Chuches temáticas, decoración de mesa, snacks dulces y salados.</div>
     </div>
 
-    <div class="seccion-contenedor">
+    <div class="seccion-contenedor" data-section="hinchables">
         <h2>3. Castillos Hinchables</h2>
         <div id="lista-hinchables"></div>
     </div>
 
-    <div class="seccion-contenedor">
+    <div class="seccion-contenedor" data-section="animacion">
         <h2>4. Animación y Muñecotes</h2>
-        <div class="servicio-item"><span>Pack Sonrisa (2h - 2 monitores)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
-        <div class="servicio-item"><span>Pintacaras + Globoflexia (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monitores - 125€</option><option value="95">1 Monitor - 95€</option></select></div>
-        <div class="servicio-item"><span>Pintacaras Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
-        <div class="servicio-item"><span>Globoflexia Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
+        <div class="servicio-item" data-val="pack-sonrisa"><span>Pack Sonrisa (2h - 2 monitores)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
+        <div class="servicio-item" data-val="pintacaras"><span>Pintacaras + Globoflexia (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monitores - 125€</option><option value="95">1 Monitor - 95€</option></select></div>
+        <div class="servicio-item" data-val="pinta-ind"><span>Pintacaras Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
+        <div class="servicio-item" data-val="globo-ind"><span>Globoflexia Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
 
-        <div style="margin-top:15px;">
+        <div style="margin-top:15px;" id="sub-munecotes">
             <h3>Muñecotes (Personajes)</h3>
-            <div class="cuadro-info">
+            <div class="cuadro-info no-print-item">
                 <strong>¿Qué incluye este servicio?</strong><br>
                 <ul>
                     <li>Duración: Entre 45 min y 1 hora.</li>
@@ -108,7 +109,7 @@
                 </ul>
             </div>
             <div class="servicio-item"><span>¿Zona del evento?</span><select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas de G.C. (Toda la Capital)</option><option value="20">Resto de la Isla (+20€)</option></select></div>
-            <div class="servicio-item"><span>Cantidad de personajes</span><select id="cantidad-munecotes" onchange="gestionarNombres()">
+            <div class="servicio-item" data-val="cant-mun"><span>Cantidad de personajes</span><select id="cantidad-munecotes" onchange="gestionarNombres()">
                 <option value="0">Ninguno</option>
                 <option value="120">1 Personaje - 120€</option>
                 <option value="210">2 Personajes - 210€</option>
@@ -119,22 +120,22 @@
         </div>
     </div>
 
-    <div class="seccion-contenedor">
+    <div class="seccion-contenedor" data-section="deco-packs">
         <h2>5. Packs de Decoración</h2>
-        <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
+        <div class="servicio-item" data-val="pack-bas"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
         <div class="cuadro-info">✔️ Medio arco y número. Montaje incluido.</div>
-        <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
+        <div class="servicio-item" data-val="pack-med"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
         <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches. Montaje incluido.</div>
-        <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
+        <div class="servicio-item" data-val="pack-pre"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
         <div class="cuadro-info">✔️ Arco, número, cartel con nombre y Mesa Dulce completa (Pringles, Chocolatinas, Aguas, Pomperos, 2 Tarros, Detalles globos). Montaje y colocación.</div>
     </div>
 
-    <div class="seccion-contenedor">
+    <div class="seccion-contenedor" data-section="maquinas">
         <h2>6. Máquinas</h2>
-        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
-        <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
-        <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
-        <div class="servicio-item"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
+        <div class="servicio-item" data-val="espuma"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
+        <div class="servicio-item" data-val="palomitas"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item" data-val="algodon"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item" data-val="plataforma"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
     </div>
 
     <div class="resumen-total">
@@ -255,31 +256,55 @@
     }
 
     function generarPDF() {
-        const elemento = document.getElementById('hoja-presupuesto');
-        const nota = document.getElementById('nota-confirmacion');
-        
-        nota.style.display = 'block';
+        const doc = document.getElementById('hoja-presupuesto');
+        const items = doc.querySelectorAll('.servicio-item');
+        const secciones = doc.querySelectorAll('.seccion-contenedor');
+        const descripciones = doc.querySelectorAll('.cuadro-info');
 
-        const opciones = {
-            margin: [0.2, 0.2],
-            filename: 'Presupuesto_Pitusa.pdf',
+        // 1. Ocultar servicios no seleccionados y descripciones innecesarias
+        items.forEach(item => {
+            const sel = item.querySelector('select');
+            if (sel && sel.value == "0") {
+                item.classList.add('pdf-hidden');
+                if (item.nextElementSibling && item.nextElementSibling.classList.contains('cuadro-info')) {
+                    item.nextElementSibling.classList.add('pdf-hidden');
+                }
+            }
+        });
+
+        // Caso especial: Muñecotes (si no hay personajes, ocultar descripción y zona)
+        if (document.getElementById('cantidad-munecotes').value == "0") {
+            document.getElementById('sub-munecotes').classList.add('pdf-hidden');
+        } else {
+            // Si hay muñecotes, ocultamos la descripción larga para ahorrar espacio en el PDF si quieres
+            // document.querySelector('#sub-munecotes .cuadro-info').classList.add('pdf-hidden');
+        }
+
+        // 2. Ocultar secciones enteras si no tienen nada contratado
+        secciones.forEach(sec => {
+            const contratados = sec.querySelectorAll('.servicio-item:not(.pdf-hidden)');
+            if (contratados.length === 0) {
+                sec.classList.add('pdf-hidden');
+            }
+        });
+
+        // 3. Generar PDF
+        document.getElementById('nota-confirmacion').style.display = 'block';
+        const opt = { 
+            margin: 0.5, 
+            filename: 'Presupuesto_Pitusa.pdf', 
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { 
-                scale: 2, 
-                useCORS: true, 
-                logging: false,
-                letterRendering: true,
-                scrollY: 0
-            },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            html2canvas: { scale: 2 }, 
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } 
         };
 
-        // El retraso asegura que el DOM se procese correctamente antes de capturar
-        html2pdf().set(opciones).from(elemento).save().then(() => {
-            nota.style.display = 'none';
+        html2pdf().from(doc).set(opt).save().then(() => {
+            // 4. Restaurar todo como estaba en la pantalla
+            document.querySelectorAll('.pdf-hidden').forEach(el => el.classList.remove('pdf-hidden'));
+            document.getElementById('nota-confirmacion').style.display = 'none';
         });
     }
-
+    
     window.onload = cargarH;
 </script>
 </body>
