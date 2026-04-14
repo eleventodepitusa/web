@@ -17,60 +17,103 @@
         h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.1rem; margin-top: 25px; background: var(--gris-claro); padding: 10px; }
 
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-        input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; font-size: 14px; }
+        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; font-size: 14px; }
         
-        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; font-size: 0.95rem; }
+        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; }
 
         .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
+        
+        .ocultar-pdf { display: none !important; }
+
         .resumen-caja { background: var(--negro); color: white; padding: 25px; border-radius: 10px; margin-top: 30px; }
         .fila-total { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; }
         .total-grande { font-size: 1.6rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #555; padding-top: 10px; }
 
-        .nota-pdf { font-size: 0.85rem; color: #555; margin-top: 25px; line-height: 1.4; border: 1px dashed #ccc; padding: 15px; }
+        .nota-pdf { font-size: 0.85rem; color: #555; margin-top: 25px; border: 1px dashed #ccc; padding: 15px; }
+        .urgente-pdf-box { display: none; background: #333; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 15px; font-weight: bold; }
+
         .no-print { text-align: center; margin: 20px 0; }
-        .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; display: inline-block; text-decoration: none; color: white; }
+        .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; text-decoration: none; color: white; display: inline-block; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #444; }
+        .btn-galeria { background: var(--rosa); }
     </style>
 </head>
 <body>
 
+<div class="no-print">
+    <a href="galeria.html" class="btn btn-galeria">📸 Ver Galería de Fotos</a>
+</div>
+
 <div id="hoja-presupuesto">
     <header>
         <img src="logo.png" alt="El Evento de Pitusa" class="logo">
+        <div id="urgente-pdf-box" class="urgente-pdf-box">⚡ PRIORIDAD ALTA: Gestión en menos de 24h</div>
         <h1>Presupuesto de Evento</h1>
     </header>
 
-    <section>
+    <section id="sec-datos">
         <h2>1. Datos del Cliente y Evento</h2>
         <div class="form-grid">
-            <div><label>Nombre Completo</label><input type="text" id="nombre-cliente" placeholder="Para dirigirnos a usted"></div>
-            <div><label>Teléfono</label><input type="tel" id="telefono-cliente"></div>
-            <div><label>Tipo de Evento</label><select id="tipo-evento"><option value="">Seleccionar...</option><option value="Cumpleaños">Cumpleaños</option><option value="Comunión">Comunión</option><option value="Boda">Boda</option></select></div>
-            <div><label>Fecha</label><input type="date" id="fecha-evento" onchange="calcular()"></div>
-            <div id="div-urgencia" class="aviso-urgencia" style="grid-column: 1 / -1;">⚠️ TASA URGENCIA (+50€): Gestión prioritaria en menos de 24h.</div>
+            <div><label>Nombre:</label> <input type="text" id="nombre-cliente" placeholder="Su nombre"></div>
+            <div><label>Teléfono:</label> <input type="tel" id="tel-cliente"></div>
+            <div><label>Fecha:</label> <input type="date" id="fecha-evento" onchange="calcular()"></div>
+            <div><label>Evento:</label> <select id="tipo-evento"><option value="Cumpleaños">Cumpleaños</option><option value="Comunión">Comunión</option><option value="Boda">Boda</option><option value="Bautizo">Bautizo</option></select></div>
+            <div><label>Horario:</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00"></div>
+            <div id="div-ubicacion"><label>Ubicación:</label> <input type="text" id="ubicacion" placeholder="Dirección del evento"></div>
+            <div><label>Nº Niños:</label> <input type="number" id="n-ninos"></div>
+            <div><label>Nº Adultos:</label> <input type="number" id="n-adultos"></div>
         </div>
+        <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Respuesta prioritaria.</div>
     </section>
 
     <section>
-        <h2>2. Alquiler de Local</h2>
+        <h2>2. Alquiler de Local (Opcional)</h2>
         <div class="servicio-item">
             <span>Horas de Alquiler</span>
-            <select class="calc" id="horas-alquiler" onchange="calcular()">
-                <option value="0">No alquilar local</option>
-                <option value="100">3 Horas - 100€</option>
-                <option value="150">5 Horas - 150€</option>
+            <select class="calc" id="alquiler-local" onchange="calcular()">
+                <option value="0">No, evento externo</option>
+                <option value="120">Alquiler Mañana (4h) - 120€</option>
+                <option value="150">Alquiler Tarde (5h) - 150€</option>
                 <option value="250">Día Completo - 250€</option>
             </select>
         </div>
-        <div class="servicio-item"><span>Servicio de Limpieza</span><select class="calc" onchange="calcular()"><option value="0">No (Entrega limpio)</option><option value="40">Sí - 40€</option></select></div>
-        <div class="servicio-item"><span>Uso de Cocina/Cantina</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="30">Sí - 30€</option></select></div>
+        <div class="servicio-item"><span>Servicio de Limpieza</span><select class="calc" onchange="calcular()"><option value="0">No incluido</option><option value="40">Sí - 40€</option></select></div>
     </section>
 
     <section>
-        <h2>3. Hinchables y Animación</h2>
+        <h2>3. Hinchables</h2>
         <div id="hinchables-lista"></div>
-        <div class="servicio-item"><span>Pack Animación</span><select class="calc" onchange="calcular()"><option value="0">Ninguno</option><option value="150">Pack Sonrisa - 150€</option></select></div>
+    </section>
+
+    <section>
+        <h2>4. Animación y Muñecotes</h2>
+        <div class="servicio-item">
+            <span>Packs Animación</span>
+            <select class="calc" onchange="calcular()">
+                <option value="0">Ninguno</option>
+                <option value="150">Pack Sonrisa (2h) - 150€</option>
+                <option value="125">Pintacaras + Globos (1.5h - 2 mon.) - 125€</option>
+                <option value="95">Pintacaras + Globos (1.5h - 1 mon.) - 95€</option>
+                <option value="70">Individual (1h) - 70€</option>
+            </select>
+        </div>
+        <div class="servicio-item">
+            <span>Personajes Muñecotes</span>
+            <select class="calc" onchange="calcular()">
+                <option value="0">Ninguno</option>
+                <option value="120">1 a elegir - 120€</option>
+                <option value="210">2 a elegir - 210€</option>
+                <option value="300">3 a elegir - 300€</option>
+            </select>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Máquinas y Otros</h2>
+        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
+        <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
     </section>
 
     <div class="resumen-caja">
@@ -82,12 +125,18 @@
 </div>
 
 <div class="no-print">
-    <button onclick="enviarWA()" class="btn btn-wa">📲 Enviar a Pitusa</button>
-    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF</button>
+    <button onclick="enviarWA()" class="btn btn-wa">📲 Enviar WhatsApp</button>
+    <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF Limpio</button>
 </div>
 
 <script>
-    const hinchables = [{n: "Campanilla (3x4)", p2: 150, p3: 180}, {n: "Tobogán (8x4)", p2: 190, p3: 220}];
+    const hinchables = [
+        {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
+        {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
+        {n: "Rampa II / Ojo de Buey (6x4)", p2: 170, p3: 200},
+        {n: "Tobogán (8x4)", p2: 190, p3: 220},
+        {n: "Pista Americana (12x4)", p2: 260, p3: 300}
+    ];
 
     function cargarHinchables() {
         let html = "";
@@ -100,18 +149,24 @@
     function calcular() {
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
+        
+        // Lógica de ocultar Ubicación si elige Local
+        const local = document.getElementById('alquiler-local').value;
+        document.getElementById('div-ubicacion').style.display = (local > 0) ? 'none' : 'block';
+
         const fechaIn = document.getElementById('fecha-evento').value;
         let urgencia = 0;
-        
         if (fechaIn) {
             const diff = (new Date(fechaIn) - new Date()) / (1000 * 60 * 60 * 24);
             if (diff >= 0 && diff < 7) {
                 urgencia = 50;
                 document.getElementById('div-urgencia').style.display = 'block';
                 document.getElementById('fila-urgencia').style.display = 'flex';
+                document.getElementById('urgente-pdf-box').style.display = 'block';
             } else {
                 document.getElementById('div-urgencia').style.display = 'none';
                 document.getElementById('fila-urgencia').style.display = 'none';
+                document.getElementById('urgente-pdf-box').style.display = 'none';
             }
         }
         document.getElementById('res-sub').innerText = sub.toFixed(2);
@@ -121,18 +176,28 @@
 
     function enviarWA() {
         const nombre = document.getElementById('nombre-cliente').value;
-        const total = document.getElementById('res-tot').innerText;
-        if(!nombre) return alert("Por favor, introduce tu nombre");
-        
-        let msg = `✨ *Nuevo Presupuesto* ✨%0A*Cliente:* ${nombre}%0A*Total:* ${total}€%0A%0A*Servicios:*%0A`;
+        const fecha = document.getElementById('fecha-evento').value;
+        if(!nombre || !fecha) return alert("Rellena nombre y fecha");
+        let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${nombre}%0A*Fecha:* ${fecha}%0A%0A*Servicios:*%0A`;
         document.querySelectorAll('select.calc').forEach(s => { if(s.value > 0) msg += `- ${s.options[s.selectedIndex].text}%0A`; });
+        msg += `%0A*TOTAL:* ${document.getElementById('res-tot').innerText}€`;
         window.open(`https://wa.me/34652678718?text=${msg}`);
     }
 
     function generarPDF() {
         window.scrollTo(0,0);
-        html2pdf().from(document.getElementById('hoja-presupuesto')).set({ margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2, useCORS: true } }).save();
+        const filas = document.querySelectorAll('.servicio-item');
+        filas.forEach(f => {
+            const select = f.querySelector('select');
+            if (select && select.value == "0") f.classList.add('ocultar-pdf');
+        });
+
+        const opt = { margin: 0.2, filename: 'Presupuesto_Pitusa.pdf', html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'a4' } };
+        html2pdf().from(document.getElementById('hoja-presupuesto')).set(opt).save().then(() => {
+            filas.forEach(f => f.classList.remove('ocultar-pdf'));
+        });
     }
+
     window.onload = cargarHinchables;
 </script>
 </body>
