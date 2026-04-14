@@ -30,7 +30,6 @@
         .btn-pdf { background: #555; }
         .btn-galeria { background: var(--rosa); }
         .caja-nombres { background: #fefefe; padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px dashed var(--rosa); display: none; }
-        .ocultar-pdf { display: none !important; }
     </style>
 </head>
 <body>
@@ -48,11 +47,24 @@
     <section id="datos-obligatorios">
         <h2>1. Datos Obligatorios</h2>
         <div class="form-grid">
-            <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required placeholder="Nombre completo"></div>
-            <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required placeholder="Nº de contacto"></div>
-            <div><label>Correo:*</label> <input type="email" id="email-cliente" required placeholder="Tu email"></div>
+            <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
+            <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
+            <div><label>Correo:*</label> <input type="email" id="email-cliente" required></div>
             <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
-            <div><label>Tipo de Evento:*</label> <select id="tipo-evento" required><option value="">-- Elige evento --</option><option>Cumpleaños</option><option>Bautizo</option><option>Comunión</option><option>Boda</option><option>Otro</option></select></div>
+            <div><label>Tipo de Evento:*</label> 
+                <select id="tipo-evento" onchange="toggleOtroEvento()" required>
+                    <option value="">-- Seleccionar --</option>
+                    <option>Cumpleaños</option>
+                    <option>Bautizo</option>
+                    <option>Comunión</option>
+                    <option>Boda</option>
+                    <option>Baby Shower</option>
+                    <option>Fiesta Privada</option>
+                    <option>Evento Corporativo</option>
+                    <option value="OTRO">Otro (Especificar)</option>
+                </select>
+                <input type="text" id="otro-evento-especificar" placeholder="¿Qué tipo de evento?" style="display:none; margin-top:5px;">
+            </div>
             <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 11:00 a 14:00" required></div>
             <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required min="1"></div>
             <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required min="0"></div>
@@ -84,12 +96,7 @@
 
         <div style="margin-top:15px;">
             <h3>Muñecotes (Personajes)</h3>
-            <div class="cuadro-info">
-                🕒 Duración: 45 min a 1 hora.<br>
-                📷 Fotos y vídeos individual y en grupo dentro del horario.<br>
-                🎁 Diploma personalizado para el/la protagonista.<br>
-                🎨 Dibujos para colorear de la temática.
-            </div>
+            <div class="cuadro-info">🕒 Incluye Fotos, Vídeos, Diploma y Dibujos temáticos.</div>
             <div class="servicio-item"><span>Zona</span><select id="zona-munecote" onchange="calcular()"><option value="0">Las Palmas Capital</option><option value="20">Resto de la Isla (+20€)</option></select></div>
             <div class="servicio-item"><span>Personajes</span><select id="cantidad-munecotes" onchange="gestionarNombres()">
                 <option value="0">Ninguno</option>
@@ -107,9 +114,9 @@
         <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
         <div class="cuadro-info">✔️ Medio arco de globos y número.</div>
         <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
-        <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa sencilla con 2 tarros de chuches.</div>
+        <div class="cuadro-info">✔️ Medio arco de globos, número, cartel temático y mesa con chuches.</div>
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
-        <div class="cuadro-info">✔️ Arco, número, cartel y Mesa Dulce completa (10 Pringles, 10 Chocolatinas, 10 Aguas, 10 Pomperos, 2 Tarros, 10 Detalles globos).</div>
+        <div class="cuadro-info">✔️ Arco, número, cartel y Mesa Dulce completa.</div>
     </div>
 
     <div class="seccion-contenedor">
@@ -143,10 +150,16 @@
         {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
         {n: "Rampa II (6x4)", p2: 170, p3: 200},
         {n: "Tobogán (8x4)", p2: 190, p3: 220},
+        {n: "Ojo de Buey", p2: 180, p3: 210},
         {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
 
     const personajes = ["Sonic", "Bella", "Trolls", "Gatita Marie", "Olaf", "Cocomelon", "Minions", "Winnie the Pooh", "Pepa Pig", "Dumbo", "Elsa", "Chase", "Marshall", "Skye", "Gabby Gato", "Bluey", "Super Mario", "Otro"];
+
+    function toggleOtroEvento() {
+        const sel = document.getElementById('tipo-evento').value;
+        document.getElementById('otro-evento-especificar').style.display = (sel === "OTRO") ? "block" : "none";
+    }
 
     function gestionarNombres() {
         const cant = document.getElementById('cantidad-munecotes').selectedIndex;
@@ -155,7 +168,7 @@
         if (cant > 0) {
             document.getElementById('caja-nombres').style.display = "block";
             for (let i = 1; i <= cant; i++) {
-                let s = `<select class="nombre-sel" style="margin-bottom:8px;" required><option value="">-- Elige Personaje ${i} --</option>`;
+                let s = `<select class="nombre-sel" style="margin-bottom:8px;" required><option value="">-- Personaje ${i} --</option>`;
                 personajes.forEach(p => s += `<option value="${p}">${p}</option>`);
                 cont.innerHTML += s + `</select>`;
             }
@@ -208,9 +221,11 @@
         inputs.forEach(i => { if(i.required && !i.value) faltan = true; });
         if (faltan) return alert("Por favor, rellene todos los campos obligatorios (*)");
         
+        const tipoEv = v('tipo-evento') === "OTRO" ? v('otro-evento-especificar') : v('tipo-evento');
         const urg = document.getElementById('div-urgencia').style.display === 'block';
+        
         let msg = urg ? "🚨🚨 *URGENTE* 🚨🚨%0A" : "✨ *PRESUPUESTO PITUSA* ✨%0A";
-        msg += `👤 *Cliente:* ${v('nombre-cliente')}%0A📞 *Tel:* ${v('tel-cliente')}%0A📧 *Email:* ${v('email-cliente')}%0A📅 *Fecha:* ${v('fecha-evento')}%0A⏰ *Horario:* ${v('horario')}%0A🎂 *Evento:* ${v('tipo-evento')}%0A👦 *Niños:* ${v('n-ninos')} | *Adultos:* ${v('n-adultos')}%0A📍 *Lugar:* ${v('alquiler-local') > 0 ? 'Local Ingenio' : v('ubicacion')}%0A%0A*SERVICIOS:*%0A`;
+        msg += `👤 *Cliente:* ${v('nombre-cliente')}%0A📞 *Tel:* ${v('tel-cliente')}%0A📧 *Email:* ${v('email-cliente')}%0A📅 *Fecha:* ${v('fecha-evento')}%0A⏰ *Horario:* ${v('horario')}%0A🎂 *Evento:* ${tipoEv}%0A👦 *Niños:* ${v('n-ninos')} | *Adultos:* ${v('n-adultos')}%0A📍 *Lugar:* ${v('alquiler-local') > 0 ? 'Local Ingenio' : v('ubicacion')}%0A%0A*SERVICIOS:*%0A`;
         
         document.querySelectorAll('select.calc').forEach(sel => {
             if (sel.value > 0 && sel.id !== 'total-mun-oculto') {
@@ -218,8 +233,10 @@
             }
         });
 
-        if(v('cantidad-munecotes') > 0) {
-            msg += `*Muñecotes:*%0A`;
+        // CORRECCIÓN: Inclusión del precio de muñecotes en el mensaje
+        const cantMun = document.getElementById('cantidad-munecotes');
+        if(cantMun.value > 0) {
+            msg += `*Muñecotes (${cantMun.options[cantMun.selectedIndex].text}):*%0A`;
             document.querySelectorAll('.nombre-sel').forEach(s => { if(s.value) msg += `  • ${s.value}%0A`; });
             msg += `  (Zona: ${document.getElementById('zona-munecote').options[document.getElementById('zona-munecote').selectedIndex].text})%0A`;
         }
