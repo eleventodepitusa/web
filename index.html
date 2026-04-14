@@ -36,10 +36,12 @@
         .btn { padding: 15px 30px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem; margin: 5px; text-decoration: none; color: white; display: inline-block; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #444; }
-        .btn-galeria { background: var(--rosa); }
+
+        .info-munecotes { background: #fff9fa; border: 1px solid var(--rosa); padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; }
+        .info-munecotes ul { margin: 5px 0 0 18px; padding: 0; }
+        .info-munecotes li { margin-bottom: 3px; }
+
         .info-extra { font-size: 0.8rem; color: #666; display: block; margin-top: 2px; }
-        
-        #div-otro-evento { display: none; margin-top: 10px; grid-column: 1 / -1; }
         .caja-munecotes { background: white; padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px dashed var(--rosa); }
     </style>
 </head>
@@ -108,7 +110,7 @@
     <section class="seccion-resaltada">
         <h2>4. Animación y Muñecotes</h2>
         <div class="servicio-item">
-            <div><span>Pack Sonrisa (2h - 2 monitores)</span><span class="info-extra">Juegos, Pintacaras y Globoflexia.</span></div>
+            <div><span>Pack Sonrisa (2h - 2 monitores)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select>
         </div>
         <div class="servicio-item">
@@ -120,19 +122,27 @@
             </select>
         </div>
         <div class="servicio-item">
-            <div><span>Pintacaras O Globoflexia Individual</span></div>
-            <select class="calc" onchange="calcular()">
-                <option value="0">No</option>
-                <option value="50">Añadir (Servicio Individual) - 50€</option>
-            </select>
+            <div><span>Pintacaras Individual (1h)</span></div>
+            <select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select>
         </div>
         <div class="servicio-item">
-            <div><span>Animación Individual (1h)</span></div>
+            <div><span>Globoflexia Individual (1h)</span></div>
             <select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select>
         </div>
         
         <div style="margin-top:15px; border-top: 1px solid #ccc; pt:10px;">
             <h3>Muñecotes (Personajes)</h3>
+            
+            <div class="info-munecotes">
+                <strong>¿Qué incluye este servicio?</strong>
+                <ul>
+                    <li>Duración: Entre 45 min y 1 hora.</li>
+                    <li>Sesión de fotos y vídeos (individuales y en grupo).</li>
+                    <li>🎁 <strong>Diploma personalizado</strong> para el/la protagonista.</li>
+                    <li>🎨 <strong>Dibujos para colorear</strong> de la temática para los invitados.</li>
+                </ul>
+            </div>
+
             <div class="servicio-item">
                 <span>¿Zona del evento?</span>
                 <select id="zona-munecote" onchange="calcular()">
@@ -258,9 +268,11 @@
             const sitio = (v('alquiler-local') > 0) ? "Local Pitusa (Ingenio)" : v('ubicacion');
             let tipoEv = v('tipo-evento') === 'Otro' ? v('otro-evento-texto') : v('tipo-evento');
             let msg = `✨ *PRESUPUESTO PITUSA* ✨%0A*Cliente:* ${v('nombre-cliente')}%0A*Evento:* ${tipoEv}%0A*Fecha:* ${v('fecha-evento')}%0A*Horario:* ${v('horario')}%0A*Lugar:* ${sitio}%0A%0A*Servicios:*%0A`;
+            
             document.querySelectorAll('select.calc').forEach(s => { 
                 if(s.value > 0 && s.id !== 'valor-munecotes-total') msg += `- ${s.options[s.selectedIndex].text}%0A`; 
             });
+
             const pBase = parseFloat(document.getElementById('cantidad-munecotes').value);
             if(pBase > 0) {
                 const zonaNom = document.getElementById('zona-munecote').options[document.getElementById('zona-munecote').selectedIndex].text;
