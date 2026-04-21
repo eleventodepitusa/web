@@ -44,7 +44,7 @@
     </header>
 
     <div class="btn-container no-print">
-        <a href="https://eleventodepitusa.com/galeria" target="_blank" class="btn btn-galeria">🖼️ Ver Galería de Fotos</a>
+        <a href="galeria.html" class="btn btn-galeria">🖼️ Ver Galería de Fotos</a>
     </div>
 
     <section id="datos-obligatorios">
@@ -259,36 +259,14 @@
         const doc = document.getElementById('hoja-presupuesto');
         const items = doc.querySelectorAll('.servicio-item');
         const secciones = doc.querySelectorAll('.seccion-contenedor');
-        const descripciones = doc.querySelectorAll('.cuadro-info');
-
-        // 1. Ocultar servicios no seleccionados y descripciones innecesarias
+        
         items.forEach(item => {
             const sel = item.querySelector('select');
             if (sel && sel.value == "0") {
                 item.classList.add('pdf-hidden');
-                if (item.nextElementSibling && item.nextElementSibling.classList.contains('cuadro-info')) {
-                    item.nextElementSibling.classList.add('pdf-hidden');
-                }
             }
         });
 
-        // Caso especial: Muñecotes (si no hay personajes, ocultar descripción y zona)
-        if (document.getElementById('cantidad-munecotes').value == "0") {
-            document.getElementById('sub-munecotes').classList.add('pdf-hidden');
-        } else {
-            // Si hay muñecotes, ocultamos la descripción larga para ahorrar espacio en el PDF si quieres
-            // document.querySelector('#sub-munecotes .cuadro-info').classList.add('pdf-hidden');
-        }
-
-        // 2. Ocultar secciones enteras si no tienen nada contratado
-        secciones.forEach(sec => {
-            const contratados = sec.querySelectorAll('.servicio-item:not(.pdf-hidden)');
-            if (contratados.length === 0) {
-                sec.classList.add('pdf-hidden');
-            }
-        });
-
-        // 3. Generar PDF
         document.getElementById('nota-confirmacion').style.display = 'block';
         const opt = { 
             margin: 0.5, 
@@ -297,15 +275,11 @@
             html2canvas: { scale: 2 }, 
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } 
         };
-
-        html2pdf().from(doc).set(opt).save().then(() => {
-            // 4. Restaurar todo como estaba en la pantalla
-            document.querySelectorAll('.pdf-hidden').forEach(el => el.classList.remove('pdf-hidden'));
-            document.getElementById('nota-confirmacion').style.display = 'none';
-        });
+        html2pdf().set(opt).from(doc).save();
     }
-    
+
     window.onload = cargarH;
 </script>
+
 </body>
 </html>
