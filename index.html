@@ -127,7 +127,6 @@
     const hinchables = [
         {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
         {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
-        {n: "Sonrisa/Aventura/Rampa II (5x4)", p2: 160, p3: 190},
         {n: "Rampa II/Ojo de Buey (6x4)", p2: 170, p3: 200},
         {n: "Tobogán (8x4)", p2: 190, p3: 220},
         {n: "Pista Americana (12x4)", p2: 260, p3: 300}
@@ -203,7 +202,6 @@
             }
         });
         
-        // Añadir nombres de personajes si existen
         document.querySelectorAll('.personaje-sel').forEach((p, index) => {
             if(p.value) servs += `   • Personaje ${index+1}: ${p.value}\n`;
         });
