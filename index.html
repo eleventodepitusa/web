@@ -14,8 +14,7 @@
         h1 { font-size: 1.6rem; color: var(--negro); text-transform: uppercase; margin: 10px 0; }
         h2 { color: var(--negro); border-left: 5px solid var(--rosa); padding-left: 10px; font-size: 1.1rem; margin-top: 25px; background: #fff5f6; padding: 10px; border-radius: 0 5px 5px 0; }
         
-        /* Línea rosa decorativa en el recuadro de datos */
-        .seccion-datos { border: 2px solid var(--rosa); border-radius: 15px; padding: 20px; background-color: white; position: relative; }
+        .seccion-datos { border: 2px solid var(--rosa); border-radius: 15px; padding: 20px; background-color: white; }
         .seccion-contenedor { border: 1.5px solid #eee; border-radius: 15px; padding: 20px; background-color: white; margin-top: 20px; }
         
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
@@ -74,8 +73,7 @@
     <div class="seccion-contenedor">
         <h2>🎨 4. Animación Infantil</h2>
         <div class="servicio-item"><span>Pack Sonrisa (2h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
-        <div class="cuadro-info">✔️ Pintacaras, globoflexia, animación y juegos dinámicos.</div>
-        
+        <div class="cuadro-info">✔️ Pintacaras, globoflexia, animación y juegos.</div>
         <div class="servicio-item"><span>Pintacaras + Globoflexia (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monit. - 125€</option><option value="95">1 Monit. - 95€</option></select></div>
         <div class="servicio-item"><span>Pintacaras Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Sí - 70€</option></select></div>
         <div class="servicio-item"><span>Globoflexia Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Sí - 70€</option></select></div>
@@ -98,7 +96,7 @@
         <div class="cuadro-info">✔️ Medio arco de globos, número gigante y cartel con nombre personalizado.</div>
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
         <div class="cuadro-info">✔️ Arco completo, nombre, y Mesa Dulce (Pringles, Chocolates, Aguas, Pomperos).</div>
-        <div class="servicio-item"><span>Bellypainting</span><select onchange="if(this.value==='INFO') alert('Te daremos info por WhatsApp')"><option value="0">No</option><option value="INFO">Solicitar Info y Precios</option></select></div>
+        <div class="servicio-item"><span>Bellypainting</span><select onchange="if(this.value==='INFO') alert('Solicitaremos info por WhatsApp')"><option value="0">No</option><option value="INFO">Solicitar Info y Precios</option></select></div>
     </div>
 
     <div class="seccion-contenedor">
@@ -118,7 +116,7 @@
 </div>
 
 <div class="btn-container">
-    <button onclick="validarYEnviar()" class="btn btn-wa">📲 WhatsApp</button>
+    <button onclick="validarYEnviar()" class="btn btn-wa">📲 Enviar por WhatsApp</button>
     <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF</button>
 </div>
 
@@ -126,7 +124,9 @@
     const hinchables = [
         {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
         {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
-        {n: "Tobogán (8x4)", p2: 190, p3: 220}
+        {n: "Rampa II/Ojo de Buey (6x4)", p2: 170, p3: 200},
+        {n: "Tobogán (8x4)", p2: 190, p3: 220},
+        {n: "Pista Americana (12x4)", p2: 260, p3: 300}
     ];
 
     function cargarH() {
@@ -172,17 +172,14 @@
             const span = document.createElement('span');
             span.className = 'pdf-text-value';
             span.innerText = val || "---";
-            
             if(val === "No" || val === "Ninguno" || val === "") {
                 if(c.closest('.servicio-item')) c.closest('.servicio-item').classList.add('pdf-hidden');
             }
-            
             c.style.display = 'none';
             c.parentNode.insertBefore(span, c);
             temporales.push({span, control: c});
         });
 
-        // Ocultar cuadros de info si su servicio no está
         document.querySelectorAll('.cuadro-info').forEach(cuadro => {
             const anterior = cuadro.previousElementSibling;
             if(anterior && anterior.classList.contains('pdf-hidden')) cuadro.classList.add('pdf-hidden');
@@ -201,9 +198,15 @@
         });
     }
 
-    function validarYEnviar() { alert("Conectando con WhatsApp..."); }
+    function validarYEnviar() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        const total = document.getElementById('res-tot').innerText;
+        if(!nombre) return alert("Por favor, introduce tu nombre.");
+        const texto = `Hola, soy ${nombre}. He calculado mi presupuesto en la web y el total es de ${total}€. Me gustaría recibir más información.`;
+        window.open(`https://wa.me/34652678718?text=${encodeURIComponent(texto)}`);
+    }
+    
     window.onload = cargarH;
 </script>
-
 </body>
 </html>
