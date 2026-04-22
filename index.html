@@ -30,6 +30,7 @@
         .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; text-decoration: none; display: inline-block; font-size: 14px; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #555; }
+        .btn-galeria { background: var(--rosa); }
         
         .pdf-hidden { display: none !important; }
         .pdf-text-value { font-weight: bold; color: #000; display: block; margin-top: 5px; }
@@ -43,12 +44,26 @@
         <h1>Presupuesto del Evento</h1>
     </header>
 
+    <div class="btn-container no-print">
+        <a href="galeria.html" class="btn btn-galeria">🖼️ Ver Galería de Fotos</a>
+    </div>
+
     <section class="seccion-datos">
         <h2>👤 1. Datos del Cliente</h2>
         <div class="form-grid">
             <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
             <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
+            <div><label>Correo:*</label> <input type="email" id="email-cliente" required></div>
             <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
+            <div><label>Tipo de Evento:*</label> 
+                <select id="tipo-evento" onchange="toggleOtroEvento()" required>
+                    <option value="">-- Seleccionar --</option>
+                    <option>Cumpleaños</option><option>Bautizo</option><option>Comunión</option><option>Boda</option><option>Baby Shower</option><option>Fiesta Privada</option><option value="OTRO">Otro</option>
+                </select>
+                <input type="text" id="otro-evento-especificar" placeholder="¿Qué tipo?" style="display:none; margin-top:5px;">
+            </div>
+            <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required></div>
+            <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required></div>
             <div><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio/Zona" required></div>
         </div>
         <div id="div-urgencia" style="display:none; color: var(--urgente); font-weight:bold; margin-top:15px; border: 2px solid var(--urgente); padding: 10px; border-radius: 8px; font-size: 0.85rem;">
@@ -115,7 +130,7 @@
     </div>
 </div>
 
-<div class="btn-container">
+<div class="btn-container no-print">
     <button onclick="validarYEnviar()" class="btn btn-wa">📲 Enviar por WhatsApp</button>
     <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF</button>
 </div>
@@ -172,7 +187,7 @@
             const span = document.createElement('span');
             span.className = 'pdf-text-value';
             span.innerText = val || "---";
-            if(val === "No" || val === "Ninguno" || val === "") {
+            if(val === "No" || val === "Ninguno" || val === "-- Seleccionar --" || val === "") {
                 if(c.closest('.servicio-item')) c.closest('.servicio-item').classList.add('pdf-hidden');
             }
             c.style.display = 'none';
@@ -204,6 +219,11 @@
         if(!nombre) return alert("Por favor, introduce tu nombre.");
         const texto = `Hola, soy ${nombre}. He calculado mi presupuesto en la web y el total es de ${total}€. Me gustaría recibir más información.`;
         window.open(`https://wa.me/34652678718?text=${encodeURIComponent(texto)}`);
+    }
+
+    function toggleOtroEvento() {
+        const sel = document.getElementById('tipo-evento').value;
+        document.getElementById('otro-evento-especificar').style.display = (sel === "OTRO") ? "block" : "none";
     }
     
     window.onload = cargarH;
