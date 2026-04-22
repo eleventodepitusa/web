@@ -16,22 +16,20 @@
         .seccion-contenedor { border: 1.5px solid var(--rosa); border-radius: 15px; padding: 20px; background-color: white; margin-top: 20px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         input, select { padding: 12px; border: 1px solid #ddd; border-radius: 8px; width: 100%; box-sizing: border-box; font-size: 14px; background: #fff; }
-        input:required { border-left: 4px solid var(--rosa); }
-        .aviso-urgencia { display: none; background: #fff5f5; color: var(--urgente); padding: 15px; border-radius: 8px; border: 2px solid var(--urgente); margin-top: 15px; font-weight: bold; }
         .servicio-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
         .resumen-total { background: var(--negro); color: white; padding: 25px; border-radius: 12px; margin-top: 30px; }
         .fila-resumen { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.1rem; }
         .total-destacado { font-size: 1.8rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #444; padding-top: 15px; margin-top: 10px; }
-        .nota-pdf { display: none; margin-top: 20px; padding: 15px; border: 2px solid var(--rosa); border-radius: 10px; font-weight: bold; text-align: center; background: #fff5f6; }
+        .nota-pdf { display: none; margin-top: 20px; padding: 15px; border: 2px solid var(--rosa); border-radius: 10px; font-weight: bold; text-align: center; background: #fff5f6; color: #333; }
         .btn-container { text-align: center; margin: 30px 0; }
         .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; text-decoration: none; display: inline-block; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #555; }
         .btn-galeria { background: var(--rosa); }
-        
-        /* Estilos para el PDF */
+
+        /* Ajustes para el PDF */
         .pdf-hidden { display: none !important; }
-        .pdf-value { font-weight: bold; color: var(--negro); border: none; background: transparent; padding: 0; }
+        .pdf-text-value { font-weight: bold; color: #000; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -49,60 +47,41 @@
     <section id="datos-obligatorios">
         <h2>1. Datos del Cliente</h2>
         <div class="form-grid">
-            <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" required></div>
-            <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente" required></div>
-            <div><label>Correo:*</label> <input type="email" id="email-cliente" required></div>
-            <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()" required></div>
+            <div><label>Nombre:*</label> <input type="text" id="nombre-cliente" placeholder="Nombre completo"></div>
+            <div><label>Teléfono:*</label> <input type="tel" id="tel-cliente"></div>
+            <div><label>Correo:*</label> <input type="email" id="email-cliente"></div>
+            <div><label>Fecha:*</label> <input type="date" id="fecha-evento" onchange="calcular()"></div>
             <div><label>Tipo de Evento:*</label> 
-                <select id="tipo-evento" required>
+                <select id="tipo-evento">
                     <option value="">-- Seleccionar --</option>
                     <option>Cumpleaños</option>
                     <option>Bautizo</option>
                     <option>Comunión</option>
                     <option>Boda</option>
-                    <option>Baby Shower</option>
                     <option>Fiesta Privada</option>
-                    <option>Evento Corporativo</option>
                 </select>
             </div>
-            <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 10:00" required></div>
-            <div><label>Nº Niños:*</label> <input type="number" id="n-ninos" required min="1"></div>
-            <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required min="0"></div>
-            <div id="div-ubicacion"><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona" required></div>
+            <div><label>Horario:*</label> <input type="text" id="horario" placeholder="Ej: 17:00 a 20:00"></div>
+            <div><label>Nº Niños:*</label> <input type="number" id="n-ninos"></div>
+            <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos"></div>
+            <div><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio/Zona"></div>
         </div>
-        <div id="div-urgencia" class="aviso-urgencia">⚠️ TASA DE URGENCIA ACTIVADA (+50€): Reserva con menos de 7 días.</div>
+        <div id="div-urgencia" class="aviso-urgencia" style="display:none; color:red; font-weight:bold; margin-top:10px;">⚠️ TASA DE URGENCIA (+50€)</div>
     </section>
 
     <div class="seccion-contenedor">
-        <h2>2. Alquiler Local Ingenio</h2>
-        <div class="servicio-item"><span>Alquiler Sala</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="160">3 Horas - 160€</option><option value="190">4 Horas - 190€</option></select></div>
-        <div class="servicio-item"><span>Decoración Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select></div>
-        <div class="servicio-item"><span>Mesa Dulce Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select></div>
-    </div>
-
-    <div class="seccion-contenedor">
-        <h2>3. Castillos Hinchables</h2>
-        <div id="lista-hinchables"></div>
-    </div>
-
-    <div class="seccion-contenedor">
-        <h2>4. Animación y Muñecotes</h2>
-        <div class="servicio-item"><span>Pack Sonrisa (2h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
-        <div class="servicio-item"><span>Pintacaras + Globoflexia</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monit. - 125€</option><option value="95">1 Monit. - 95€</option></select></div>
-        <div class="servicio-item"><span>Personajes Muñecotes</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">1 Personaje - 120€</option><option value="210">2 Personajes - 210€</option><option value="300">3 Personajes - 300€</option></select></div>
-    </div>
-
-    <div class="seccion-contenedor">
-        <h2>5. Máquinas y Packs</h2>
-        <div class="servicio-item"><span>Pack Premium Decoración</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Añadir - 230€</option></select></div>
-        <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
-        <div class="servicio-item"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2 Horas - 270€</option><option value="300">3 Horas - 300€</option></select></div>
+        <h2>2. Servicios Seleccionados</h2>
+        <div id="servicios-lista">
+            <div class="servicio-item"><span>Alquiler Sala Ingenio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="160">3 Horas - 160€</option><option value="190">4 Horas - 190€</option></select></div>
+            <div class="servicio-item"><span>Pack Sonrisa (Animación)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
+            <div class="servicio-item"><span>Castillo Hinchable (Mediano)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="160">2 Horas - 160€</option><option value="190">3 Horas - 190€</option></select></div>
+            <div class="servicio-item"><span>Personajes Muñecotes</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">1 Personaje - 120€</option><option value="210">2 Personajes - 210€</option></select></div>
+        </div>
     </div>
 
     <div class="resumen-total">
         <div class="fila-resumen"><span>Suma de servicios:</span><span><span id="sub-val">0</span>€</span></div>
         <div class="fila-resumen"><span>Gestión Logística (10%):</span><span><span id="ges-val">0</span>€</span></div>
-        <div id="fila-urgencia" class="fila-resumen" style="display:none; color: var(--rosa);"><span>🚨 TASA URGENCIA:</span><span>50.00€</span></div>
         <div class="fila-resumen total-destacado"><span>TOTAL FINAL:</span><span><span id="res-tot">0</span>€</span></div>
     </div>
 
@@ -112,85 +91,57 @@
 </div>
 
 <div class="btn-container">
-    <button onclick="validarYEnviar()" class="btn btn-wa">📲 Confirmar por WhatsApp</button>
+    <button onclick="validarYEnviar()" class="btn btn-wa">📲 WhatsApp</button>
     <button onclick="generarPDF()" class="btn btn-pdf">📄 Descargar PDF</button>
 </div>
 
 <script>
-    const hinchables = [
-        {n: "Campanilla/Stitch (3x4)", p2: 150, p3: 180},
-        {n: "Sonrisa/Aventura/Rampa (5x4)", p2: 160, p3: 190},
-        {n: "Tobogán (8x4)", p2: 190, p3: 220}
-    ];
-
-    function cargarH() {
-        let html = "";
-        hinchables.forEach(h => {
-            html += `<div class="servicio-item"><span><strong>${h.n}</strong></span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="${h.p2}">${h.p2}€ (2h)</option><option value="${h.p3}">${h.p3}€ (3h)</option></select></div>`;
-        });
-        document.getElementById('lista-hinchables').innerHTML = html;
-    }
-
     function calcular() {
         let sub = 0;
         document.querySelectorAll('.calc').forEach(s => sub += parseFloat(s.value));
-        const fecha = document.getElementById('fecha-evento').value;
-        let urg = 0;
-        if (fecha) {
-            const dias = (new Date(fecha) - new Date()) / 86400000;
-            if (dias >= 0 && dias < 7) { 
-                urg = 50; 
-                document.getElementById('div-urgencia').style.display = 'block';
-                document.getElementById('fila-urgencia').style.display = 'flex';
-            } else { 
-                document.getElementById('div-urgencia').style.display = 'none';
-                document.getElementById('fila-urgencia').style.display = 'none';
-            }
-        }
         document.getElementById('sub-val').innerText = sub.toFixed(2);
         document.getElementById('ges-val').innerText = (sub * 0.10).toFixed(2);
-        document.getElementById('res-tot').innerText = (sub * 1.10 + urg).toFixed(2);
+        document.getElementById('res-tot').innerText = (sub * 1.10).toFixed(2);
     }
 
     function generarPDF() {
         const elemento = document.getElementById('hoja-presupuesto');
-        const controles = document.querySelectorAll('input, select');
+        const inputs = elemento.querySelectorAll('input, select');
         const temporales = [];
 
-        // PASO 1: Cambiar inputs/selects por texto para que el PDF los lea rellenos
-        controles.forEach(c => {
+        // Convertir campos en texto para el PDF
+        inputs.forEach(i => {
+            const val = i.tagName === 'SELECT' ? i.options[i.selectedIndex].text : i.value;
             const span = document.createElement('span');
-            span.className = 'pdf-value';
-            span.innerText = c.tagName === 'SELECT' ? c.options[c.selectedIndex].text : c.value;
-            if (span.innerText === "No" || span.innerText === "-- Seleccionar --" || span.innerText === "") {
-                if (c.closest('.servicio-item')) c.closest('.servicio-item').classList.add('pdf-hidden');
+            span.className = 'pdf-text-value';
+            span.innerText = val || "---";
+            
+            // Ocultar servicios no elegidos en el PDF
+            if(val === "No" || val === "-- Seleccionar --") {
+                if(i.closest('.servicio-item')) i.closest('.servicio-item').classList.add('pdf-hidden');
             }
-            c.style.display = 'none';
-            c.parentNode.insertBefore(span, c);
-            temporales.push({span, control: c});
+
+            i.style.display = 'none';
+            i.parentNode.insertBefore(span, i);
+            temporales.push({span, input: i});
         });
 
-        // Ocultar botones y mostrar nota
         document.querySelector('.btn-container').classList.add('pdf-hidden');
         document.getElementById('nota-confirmacion').style.display = 'block';
 
-        // Ocultar secciones vacías
-        document.querySelectorAll('.seccion-contenedor').forEach(s => {
-            if (!s.querySelector('.servicio-item:not(.pdf-hidden)')) s.classList.add('pdf-hidden');
-        });
-
         const opt = {
-            margin: 0.5,
-            filename: 'Presupuesto_Pitusa.pdf',
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            margin:       0.3,
+            filename:     'Presupuesto_Pitusa.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 3, width: 800 }, // Forzamos el ancho para que no salga en blanco
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
         };
 
         html2pdf().set(opt).from(elemento).save().then(() => {
-            // PASO 2: Revertir todo para que la web siga normal
+            // Restaurar la web
             temporales.forEach(t => {
                 t.span.remove();
-                t.control.style.display = 'block';
+                t.input.style.display = 'block';
             });
             document.querySelectorAll('.pdf-hidden').forEach(el => el.classList.remove('pdf-hidden'));
             document.getElementById('nota-confirmacion').style.display = 'none';
@@ -198,8 +149,7 @@
         });
     }
 
-    function validarYEnviar() { calcular(); alert("Conectando con WhatsApp..."); }
-    window.onload = cargarH;
+    function validarYEnviar() { alert("Enviando..."); }
 </script>
 
 </body>
