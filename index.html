@@ -23,12 +23,11 @@
         .total-destacado { font-size: 1.8rem; color: var(--rosa); font-weight: bold; border-top: 1px solid #444; padding-top: 15px; margin-top: 10px; }
         .nota-pdf { display: none; margin-top: 20px; padding: 15px; border: 2px solid var(--rosa); border-radius: 10px; font-weight: bold; text-align: center; background: #fff5f6; }
         .btn-container { text-align: center; margin: 30px 0; }
-        .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; text-decoration: none; display: inline-block; }
+        .btn { padding: 15px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin: 10px; color: white; text-decoration: none; display: inline-block; font-size: 14px; }
         .btn-wa { background: var(--verde); }
         .btn-pdf { background: #555; }
         .btn-galeria { background: var(--rosa); }
         .caja-nombres { background: #fefefe; padding: 10px; border-radius: 10px; margin-top: 10px; border: 1px dashed var(--rosa); display: none; }
-        
         .pdf-hidden { display: none !important; }
         .pdf-text-value { font-weight: bold; color: #000; font-size: 14px; }
     </style>
@@ -64,16 +63,18 @@
             <div><label>Nº Adultos:*</label> <input type="number" id="n-adultos" required></div>
             <div id="div-ubicacion"><label>Ubicación:*</label> <input type="text" id="ubicacion" placeholder="Municipio y zona" required></div>
         </div>
-        <div id="div-urgencia" class="aviso-urgencia" style="display:none; color: var(--urgente); font-weight:bold; margin-top:15px;">⚠️ TASA DE URGENCIA ACTIVADA (+50€)</div>
+        <div id="div-urgencia" class="aviso-urgencia" style="display:none; color: var(--urgente); font-weight:bold; margin-top:15px; border: 2px solid var(--urgente); padding: 10px; border-radius: 8px;">
+            ⚠️ TASA DE URGENCIA (+50€): Se aplica por reserva con menos de 7 días de antelación debido a la gestión logística y prioridad de montaje.
+        </div>
     </section>
 
     <div class="seccion-contenedor">
         <h2>2. Alquiler Local Ingenio</h2>
         <div class="servicio-item"><span>Alquiler Sala</span><select class="calc" id="alquiler-local" onchange="calcular()"><option value="0">No</option><option value="160">3 Horas - 160€</option><option value="190">4 Horas - 190€</option></select></div>
         <div class="servicio-item"><span>Decoración Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Sí - 140€</option></select></div>
-        <div class="cuadro-info">✔️ Fondo de pared, globos orgánicos, nombre, bandejas y figuras temáticas.</div>
+        <div class="cuadro-info">✔️ Fondo de pared circular/cuadrado, globos orgánicos, nombre del cumpleañero/a, bandejas y figuras temáticas.</div>
         <div class="servicio-item"><span>Mesa Dulce Local</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="80">Sí - 80€</option></select></div>
-        <div class="cuadro-info">✔️ Chuches temáticas, decoración de mesa, snacks dulces y salados.</div>
+        <div class="cuadro-info">✔️ Variedad de chuches temáticas, decoración personalizada, snacks dulces y salados.</div>
     </div>
 
     <div class="seccion-contenedor">
@@ -84,11 +85,15 @@
     <div class="seccion-contenedor">
         <h2>4. Animación y Muñecotes</h2>
         <div class="servicio-item"><span>Pack Sonrisa (2h - 2 monitores)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="150">Añadir - 150€</option></select></div>
+        <div class="cuadro-info">✔️ Juegos dinámicos, bailes, música y mucha diversión para los peques.</div>
         <div class="servicio-item"><span>Pintacaras + Globoflexia (1.5h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="125">2 Monit. - 125€</option><option value="95">1 Monit. - 95€</option></select></div>
+        <div class="servicio-item"><span>Pintacaras Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
+        <div class="servicio-item"><span>Globoflexia Individual (1h)</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="70">Añadir - 70€</option></select></div>
         <div class="servicio-item"><span>Zona del personaje</span><select id="zona-munecote" onchange="calcular()"><option value="0">Capital (Gratis)</option><option value="20">Resto Isla (+20€)</option></select></div>
         <div class="servicio-item"><span>Cantidad personajes</span><select id="cantidad-munecotes" onchange="gestionarNombres()">
             <option value="0">Ninguno</option><option value="120">1 Personaje - 120€</option><option value="210">2 Personajes - 210€</option><option value="300">3 Personajes - 300€</option>
         </select></div>
+        <div class="cuadro-info">✔️ Incluye entrada triunfal, sesión de fotos, baile con el personaje y momento tarta.</div>
         <div id="caja-nombres" class="caja-nombres"><div id="nombres-cont"></div></div>
         <input type="hidden" id="total-mun-oculto" class="calc" value="0">
     </div>
@@ -96,16 +101,21 @@
     <div class="seccion-contenedor">
         <h2>5. Packs Decoración y Otros</h2>
         <div class="servicio-item"><span>Pack Básico</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="120">Sí - 120€</option></select></div>
-        <div class="cuadro-info">✔️ Medio arco y número. Montaje incluido.</div>
+        <div class="cuadro-info">✔️ Medio arco de globos, número gigante. Montaje incluido.</div>
+        <div class="servicio-item"><span>Pack Medio</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="165">Sí - 165€</option></select></div>
+        <div class="cuadro-info">✔️ Medio arco de globos, número gigante y cartel personalizado con el nombre.</div>
         <div class="servicio-item"><span>Pack Premium</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="230">Sí - 230€</option></select></div>
-        <div class="cuadro-info">✔️ Arco, número, cartel nombre y Mesa Dulce (Pringles, Chocolates, Aguas, Pomperos).</div>
-        <div class="servicio-item"><span>Bellypainting</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="60">Añadir - 60€</option></select></div>
+        <div class="cuadro-info">✔️ Arco completo, número, cartel nombre y Mesa Dulce personalizada (Pringles, Chocolates, Aguas, Pomperos).</div>
+        <div class="servicio-item"><span>Bellypainting</span><select onchange="if(this.value==='INFO') alert('¡Genial! Al confirmar por WhatsApp te daremos todos los detalles y precios del Bellypainting.')">
+            <option value="0">No</option><option value="INFO">Solicitar Info</option>
+        </select></div>
     </div>
 
     <div class="seccion-contenedor">
-        <h2>6. Máquinas</h2>
+        <h2>6. Máquinas y Plataforma</h2>
         <div class="servicio-item"><span>Cañón de Espuma</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="280">Público - 280€</option><option value="230">Privado - 230€</option></select></div>
-        <div class="servicio-item"><span>Máquina Palomitas/Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Máquina Palomitas</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
+        <div class="servicio-item"><span>Máquina Algodón</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="140">Añadir - 140€</option></select></div>
         <div class="servicio-item"><span>Plataforma 360°</span><select class="calc" onchange="calcular()"><option value="0">No</option><option value="270">2h - 270€</option><option value="300">3h - 300€</option></select></div>
     </div>
 
@@ -233,8 +243,10 @@
     }
 
     function validarYEnviar() {
+        const nombre = document.getElementById('nombre-cliente').value;
         const total = document.getElementById('res-tot').innerText;
-        window.open(`https://wa.me/34652678718?text=Hola, quiero confirmar mi presupuesto de ${total}€`);
+        if(!nombre) return alert("Por favor, introduce tu nombre.");
+        window.open(`https://wa.me/34652678718?text=Hola, soy ${nombre}. He calculado mi presupuesto en la web y es de ${total}€. ¡Quiero reservar!`);
     }
 
     function toggleOtroEvento() {
